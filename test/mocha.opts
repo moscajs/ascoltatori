@@ -1,0 +1,7 @@
+--require chai
+--require sinon
+--reporter dot
+--ui bdd
+--growl
+--colors
+--globals s
