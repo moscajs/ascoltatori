@@ -2,7 +2,14 @@
 var ascoltatori = require("../index");
 var expect = require("chai").expect;
 
+function wrap(done) {
+  return function() {
+    done();
+  };
+}
+
 describe(ascoltatori, function() {
+
   beforeEach(function() {
     ascoltatori.reset();
   });
@@ -16,17 +23,38 @@ describe(ascoltatori, function() {
   });
 
   it("should support 'on/emit' combination for pub/sub", function(done) {
-    ascoltatori.on("hello", done);
+    ascoltatori.on("hello", wrap(done));
     ascoltatori.emit("hello");
   });
 
   it("should support 'pub/sub combination for pub/sub", function(done) {
-    ascoltatori.sub("hello", done);
+    ascoltatori.sub("hello", wrap(done));
     ascoltatori.pub("hello");
   });
 
   it("should support 'publish/subscribe combination for pub/sub", function(done) {
-    ascoltatori.subscribe("hello", done);
+    ascoltatori.subscribe("hello", wrap(done));
     ascoltatori.publish("hello");
+  });
+
+  it("should support wildcards", function(done) {
+    ascoltatori.on("hello/*", wrap(done));
+    ascoltatori.emit("hello/42");
+  });
+
+  it("should publish the topic name", function(done) {
+    ascoltatori.on("hello/*", function(topic) {
+      expect(topic).to.equal("hello/42");
+      done();
+    });
+    ascoltatori.emit("hello/42");
+  });
+
+  it("should publish the passed argument", function(done) {
+    ascoltatori.on("hello/*", function(topic, value) {
+      expect(value).to.equal(42);
+      done();
+    });
+    ascoltatori.emit("hello/123", 42);
   });
 });
