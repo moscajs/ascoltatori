@@ -1,6 +1,7 @@
 
 var EventEmitter = require('events').EventEmitter;
 var Set = require("./lib/set");
+var util = require("./lib/util");
 
 var globalEventEmitter = new EventEmitter();
 var globalSet = new Set();
@@ -43,10 +44,8 @@ var ascoltatori = {
   }
 };
 
-ascoltatori.pub = ascoltatori.emit;
-ascoltatori.publish = ascoltatori.emit;
-ascoltatori.sub = ascoltatori.on;
-ascoltatori.subscribe = ascoltatori.on;
+util.aliasAscoltatore(ascoltatori);
 
 module.exports = ascoltatori;
 module.exports.Set = Set;
+module.exports.util = util;
