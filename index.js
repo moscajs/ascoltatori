@@ -19,6 +19,7 @@ var ascoltatori = {
           globalEventEmitter.on(e, callback);
         }
       };
+      callback._ascoltatori_global_handler = handler;
       globalSet.forEach(handler);
       globalEventEmitter.on("newTopic", handler);
     } else {
@@ -37,6 +38,19 @@ var ascoltatori = {
     var args = Array.prototype.slice.call(arguments);
     args.unshift(topic);
     globalEventEmitter.emit.apply(globalEventEmitter, args);
+  },
+  removeListener: function(topic, callback) {
+    console.log(callback._ascoltatori_global_handler);
+    if(callback._ascoltatori_global_handler !== undefined) {
+      globalEventEmitter.removeListener("newTopic", callback._ascoltatori_global_handler);
+      globalSet.forEach(function(e) {
+        if(e.match(regexp)) {
+          globalEventEmitter.removeListener(e, callback._ascoltatori_global_handler);
+        }
+      });
+    } else {
+      globalEventEmitter.removeListener(topic, callback);
+    }
   },
   reset: function() {
     globalSet.clear();

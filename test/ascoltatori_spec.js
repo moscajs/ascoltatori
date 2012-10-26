@@ -57,4 +57,28 @@ describe(ascoltatori, function() {
     });
     ascoltatori.emit("hello/123", 42);
   });
+
+  it("should have have a removeListener function", function() {
+    expect(ascoltatori).to.respondTo("removeListener");
+  });
+
+  it("should remove a listener", function(done) {
+    funcToRemove = function(topic, value) {
+      throw "this should never run";
+    };
+    ascoltatori.on("hello", funcToRemove);
+    ascoltatori.removeListener("hello", funcToRemove);
+    ascoltatori.on("hello", wrap(done));
+    ascoltatori.emit("hello");
+  });
+
+  it("should remove a listener for global searches", function(done) {
+    funcToRemove = function(topic, value) {
+      throw "this should never run";
+    };
+    ascoltatori.on("hello/*", funcToRemove);
+    ascoltatori.removeListener("hello/*", funcToRemove);
+    ascoltatori.on("hello/42", wrap(done));
+    ascoltatori.emit("hello/42");
+  });
 });

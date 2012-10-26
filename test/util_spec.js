@@ -37,6 +37,7 @@ describe(util, function() {
       mock.expects("alias").withArgs(obj, "emit", "publish").once();
       mock.expects("alias").withArgs(obj, "on", "subscribe").once();
       mock.expects("alias").withArgs(obj, "on", "sub").once();
+      mock.expects("alias").withArgs(obj, "removeListener", "unsubscribe").once();
       util.aliasAscoltatore(obj);
       mock.verify();
     });
