@@ -40,7 +40,6 @@ var ascoltatori = {
     globalEventEmitter.emit.apply(globalEventEmitter, args);
   },
   removeListener: function(topic, callback) {
-    console.log(callback._ascoltatori_global_handler);
     if(callback._ascoltatori_global_handler !== undefined) {
       globalEventEmitter.removeListener("newTopic", callback._ascoltatori_global_handler);
       globalSet.forEach(function(e) {
