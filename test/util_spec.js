@@ -1,7 +1,5 @@
 
-var util = require("../").util;
-var expect = require("chai").expect;
-var sinon = require("sinon");
+var util = ascoltatori.util;
 
 describe(util, function() {
 

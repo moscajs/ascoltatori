@@ -1,6 +1,5 @@
 
-var expect = require("chai").expect;
-var Set = require("../").Set;
+var Set = ascoltatori.Set;
 
 describe(Set, function() {
 
