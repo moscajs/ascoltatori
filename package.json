@@ -4,7 +4,7 @@
   "description": "The pub/sub library for node backed by Redis, RabbitMQ, ZeroMQ or just plain node!",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha --recursive test"
+    "test": "make test"
   },
   "repository": {
     "type": "git",
