@@ -18,18 +18,18 @@ module.exports = function() {
   });
 
   it("should support 'on/emit' combination for pub/sub", function(done) {
-    this.instance.on("hello", wrap(done));
-    this.instance.emit("hello");
+    this.instance.on("hello3", wrap(done));
+    this.instance.emit("hello3");
   });
 
   it("should support 'pub/sub combination for pub/sub", function(done) {
-    this.instance.sub("hello", wrap(done));
-    this.instance.pub("hello");
+    this.instance.sub("hello1", wrap(done));
+    this.instance.pub("hello1");
   });
 
   it("should support 'publish/subscribe combination for pub/sub", function(done) {
-    this.instance.subscribe("hello", wrap(done));
-    this.instance.publish("hello");
+    this.instance.subscribe("hello2", wrap(done));
+    this.instance.publish("hello2");
   });
 
   it("should support wildcards", function(done) {
@@ -58,7 +58,7 @@ module.exports = function() {
   });
 
   it("should remove a listener", function(done) {
-    funcToRemove = function(topic, value) {
+    var funcToRemove = function(topic, value) {
       throw "this should never run";
     };
     this.instance.on("hello", funcToRemove);
@@ -68,12 +68,12 @@ module.exports = function() {
   });
 
   it("should remove a listener for global searches", function(done) {
-    funcToRemove = function(topic, value) {
+    var funcToRemove = function(topic, value) {
       throw "this should never run";
     };
     this.instance.on("hello/*", funcToRemove);
     this.instance.removeListener("hello/*", funcToRemove);
     this.instance.on("hello/42", wrap(done));
     this.instance.emit("hello/42");
-  });
+ });
 };
