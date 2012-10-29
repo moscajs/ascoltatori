@@ -9,71 +9,97 @@ function wrap(done) {
 
 module.exports = function() {
 
-  it("should have have an on function", function() {
-    expect(this.instance).to.respondTo("on");
+  it("should have have a subscribe function", function() {
+    var that = this;
+    expect(that.instance).to.respondTo("subscribe");
   });
 
-  it("should have have an emit function", function() {
-    expect(this.instance).to.respondTo("emit");
+  it("should have have an publish function", function() {
+    var that = this;
+    expect(that.instance).to.respondTo("publish");
   });
 
-  it("should support 'on/emit' combination for pub/sub", function(done) {
-    this.instance.on("hello3", wrap(done));
-    this.instance.emit("hello3");
+  it("should support a publish/subscribe pattern", function(done) {
+    var that = this;
+    that.instance.subscribe("hello", wrap(done), function() {
+      that.instance.publish("hello");
+    });
   });
 
   it("should support 'pub/sub combination for pub/sub", function(done) {
-    this.instance.sub("hello1", wrap(done));
-    this.instance.pub("hello1");
+    var that = this;
+    that.instance.sub("hello", wrap(done), function() {
+      that.instance.pub("hello");
+    });
   });
 
-  it("should support 'publish/subscribe combination for pub/sub", function(done) {
-    this.instance.subscribe("hello2", wrap(done));
-    this.instance.publish("hello2");
+  it("should not raise an exception if pub is called without a done callback", function() {
+    var that = this;
+    that.instance.pub("hello");
+  });
+
+  it("should not raise an exception if pub is called without a done callback", function() {
+    var that = this;
+    that.instance.sub("hello", function() {});
   });
 
   it("should support wildcards", function(done) {
-    this.instance.on("hello/*", wrap(done));
-    this.instance.emit("hello/42");
+    var that = this;
+    that.instance.sub("hello/*", wrap(done), function() {
+      that.instance.pub("hello/42");
+    });
   });
 
   it("should publish the topic name", function(done) {
-    this.instance.on("hello/*", function(topic) {
+    var that = this;
+    that.instance.sub("hello/*", function(topic) {
       expect(topic).to.equal("hello/42");
       done();
+    }, function() {
+      that.instance.pub("hello/42");
     });
-    this.instance.emit("hello/42");
   });
 
   it("should publish the passed argument", function(done) {
-    this.instance.on("hello/*", function(topic, value) {
+    var that = this;
+    that.instance.sub("hello/*", function(topic, value) {
       expect(value).to.equal(42);
       done();
+    }, function() {
+      that.instance.pub("hello/123", 42);
     });
-    this.instance.emit("hello/123", 42);
   });
 
   it("should have have a removeListener function", function() {
-    expect(this.instance).to.respondTo("removeListener");
+    var that = this;
+    expect(that.instance).to.respondTo("removeListener");
   });
 
   it("should remove a listener", function(done) {
+    var that = this;
     var funcToRemove = function(topic, value) {
-      throw "this should never run";
+      throw "that should never run";
     };
-    this.instance.on("hello", funcToRemove);
-    this.instance.removeListener("hello", funcToRemove);
-    this.instance.on("hello", wrap(done));
-    this.instance.emit("hello");
+    that.instance.sub("hello", funcToRemove, function() {
+      that.instance.removeListener("hello", funcToRemove, function() {
+        that.instance.sub("hello", wrap(done), function() {
+          that.instance.pub("hello");
+        });
+      });
+    });
   });
 
   it("should remove a listener for global searches", function(done) {
+    var that = this;
     var funcToRemove = function(topic, value) {
-      throw "this should never run";
+      throw "that should never run";
     };
-    this.instance.on("hello/*", funcToRemove);
-    this.instance.removeListener("hello/*", funcToRemove);
-    this.instance.on("hello/42", wrap(done));
-    this.instance.emit("hello/42");
- });
+    that.instance.sub("hello/*", funcToRemove, function() {
+      that.instance.removeListener("hello/*", funcToRemove, function() {
+        that.instance.sub("hello/42", wrap(done), function() {
+          that.instance.pub("hello/42");
+        });
+      });
+    });
+  });
 };
