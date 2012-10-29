@@ -4,9 +4,8 @@ describe(ascoltatori, function() {
 
   behave_like_an_ascoltatore();
 
-  beforeEach(function(done) {
+  beforeEach(function() {
     this.instance = new ascoltatori.RedisAscoltatore(redisSettings);
-    this.instance.ensureConnected(done);
   });
 
   afterEach(function() {
