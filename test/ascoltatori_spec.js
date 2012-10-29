@@ -24,20 +24,20 @@ describe(ascoltatori, function() {
     expect(ascoltatori.use(ascoltatore)).to.have.be.equal(ascoltatori);
   });
 
-  it("should delegate to the use ascoltatore for 'emit'", function() {
+  it("should delegate to the use ascoltatore for 'pub'", function() {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
-    var spy = this.sandbox.spy(ascoltatore, "emit");
+    var spy = this.sandbox.spy(ascoltatore, "publish");
     ascoltatori.use(ascoltatore);
-    ascoltatori.emit("hello");
+    ascoltatori.publish("hello");
     expect(spy).to.have.been.calledWith("hello");
   });
 
-  it("should delegate to _global for 'on'", function() {
+  it("should delegate to _global for 'subscribe'", function() {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
-    var spy = this.sandbox.spy(ascoltatore, "on");
+    var spy = this.sandbox.spy(ascoltatore, "subscribe");
     var func = function(argument) {}
     ascoltatori.use(ascoltatore);
-    ascoltatori.on("hello", func);
+    ascoltatori.subscribe("hello", func);
     expect(spy).to.have.been.calledWith("hello", func);
   });
 
@@ -46,7 +46,7 @@ describe(ascoltatori, function() {
     var spy = this.sandbox.spy(ascoltatore, "removeListener");
     var func = function(argument) {}
     ascoltatori.use(ascoltatore);
-    ascoltatori.on("hello", func);
+    ascoltatori.sub("hello", func);
     ascoltatori.removeListener("hello", func);
     expect(spy).to.have.been.calledWith("hello", func);
   });

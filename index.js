@@ -4,7 +4,7 @@ var util = require("./lib/util");
 var MemoryAscoltatore = require('./lib/memory_ascoltatore');
 
 module.exports.use = function use(ascoltatore) {
-  ["emit", "on", "removeListener", "reset"].forEach(function(f) {
+  ["publish", "subscribe", "removeListener", "reset"].forEach(function(f) {
     module.exports[f] = ascoltatore[f].bind(ascoltatore);
   });
 

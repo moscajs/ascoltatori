@@ -31,10 +31,8 @@ describe(util, function() {
     it("should alias all pub/sub method for each ascoltatore", function() {
       var obj = {};
       var mock = sinon.mock(util);
-      mock.expects("alias").withArgs(obj, "emit", "pub").once();
-      mock.expects("alias").withArgs(obj, "emit", "publish").once();
-      mock.expects("alias").withArgs(obj, "on", "subscribe").once();
-      mock.expects("alias").withArgs(obj, "on", "sub").once();
+      mock.expects("alias").withArgs(obj, "publish", "pub").once();
+      mock.expects("alias").withArgs(obj, "subscribe", "sub").once();
       mock.expects("alias").withArgs(obj, "removeListener", "unsubscribe").once();
       util.aliasAscoltatore(obj);
       mock.verify();
