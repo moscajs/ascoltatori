@@ -1,11 +1,6 @@
 
 var expect = require("chai").expect;
-
-function wrap(done) {
-  return function() {
-    done();
-  };
-}
+var wrap = require("../lib/util").wrap;
 
 module.exports = function() {
 
