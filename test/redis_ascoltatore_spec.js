@@ -6,7 +6,7 @@ describe(ascoltatori, function() {
   behave_like_an_ascoltatore();
 
   beforeEach(function() {
-    this.instance = new ascoltatori.RedisAscoltatore(redisSettings);
+    this.instance = new ascoltatori.RedisAscoltatore(redisSettings());
   });
 
   afterEach(function() {
@@ -14,7 +14,7 @@ describe(ascoltatori, function() {
   });
 
   it("should sync two instances", function(done) {
-    var other = new ascoltatori.RedisAscoltatore(redisSettings);
+    var other = new ascoltatori.RedisAscoltatore(redisSettings());
     this.instance.subscribe("hello", wrap(done), function() {
       other.publish("hello");
     });

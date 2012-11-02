@@ -17,5 +17,6 @@ module.exports.use(new MemoryAscoltatore());
 
 module.exports.MemoryAscoltatore = MemoryAscoltatore;
 module.exports.RedisAscoltatore = require("./lib/redis_ascoltatore");
+module.exports.ZeromqAscoltatore = require("./lib/zeromq_ascoltatore");
 module.exports.Set = Set;
 module.exports.util = util;
