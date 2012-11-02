@@ -97,4 +97,8 @@ module.exports = function() {
       });
     });
   });
+
+  it("should emit the ready event", function(done) {
+    this.instance.on("ready", done);
+  });
 };
