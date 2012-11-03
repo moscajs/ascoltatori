@@ -21,5 +21,12 @@ global.zeromqSettings = function(remote_ports) {
   };
 };
 
+global.rabbitSettings = function() {
+  return {
+    amqp: require("amqp"),
+    exchange: "ascolatore" + global.nextPort()
+  };
+};
+
 var sinonChai = require("sinon-chai");
 chai.use(sinonChai);
