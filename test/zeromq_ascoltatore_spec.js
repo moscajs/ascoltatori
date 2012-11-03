@@ -1,9 +1,6 @@
-var behave_like_an_ascoltatore = require("./behave_like_an_ascoltatore");
-var wrap = require("../lib/util").wrap;
-
 describe(ascoltatori, function() {
 
-  behave_like_an_ascoltatore();
+  behaveLikeAnAscoltatore();
 
   beforeEach(function(done) {
     this.instance = new ascoltatori.ZeromqAscoltatore(zeromqSettings());
@@ -17,14 +14,22 @@ describe(ascoltatori, function() {
   it("should sync two instances", function(done) {
     var instance = this.instance;
     var other = new ascoltatori.ZeromqAscoltatore(zeromqSettings());
-    other.on("ready", function() {
-      instance.connect(other._opts.port, function() {
-        other.connect(instance._opts.port, function() {
-          instance.subscribe("world", wrap(done), function() {
-            other.publish("world");
-          });
-        });
-      });
-    });
+    async.series([
+      function(cb) {
+        other.on("ready", cb);
+      },
+      function(cb) {
+        instance.connect(other._opts.port, cb);
+      },
+      function(cb) {
+        other.connect(instance._opts.port, cb);
+      },
+      function(cb) {
+        instance.subscribe("world", wrap(done), cb);
+      },
+      function(cb) {
+        other.publish("world", null, cb);
+      }
+    ]);
   });
 });

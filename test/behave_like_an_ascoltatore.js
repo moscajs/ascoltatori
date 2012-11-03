@@ -1,6 +1,4 @@
 
-var expect = require("chai").expect;
-var wrap = require("../lib/util").wrap;
 
 module.exports = function() {
 
@@ -75,13 +73,20 @@ module.exports = function() {
     var funcToRemove = function(topic, value) {
       throw "that should never run";
     };
-    that.instance.sub("hello", funcToRemove, function() {
-      that.instance.removeListener("hello", funcToRemove, function() {
-        that.instance.sub("hello", wrap(done), function() {
-          that.instance.pub("hello");
-        });
-      });
-    });
+    async.series([
+      function (cb) {
+        that.instance.sub("hello", funcToRemove, cb);
+      },
+      function (cb) {
+        that.instance.removeListener("hello", funcToRemove, cb);
+      },
+      function (cb) {
+        that.instance.sub("hello", wrap(done), cb);
+      }, 
+      function (cb) {
+        that.instance.pub("hello", null, cb);
+      }
+    ]);
   });
 
   it("should remove a listener for global searches", function(done) {
@@ -89,13 +94,20 @@ module.exports = function() {
     var funcToRemove = function(topic, value) {
       throw "that should never run";
     };
-    that.instance.sub("hello/*", funcToRemove, function() {
-      that.instance.removeListener("hello/*", funcToRemove, function() {
-        that.instance.sub("hello/42", wrap(done), function() {
-          that.instance.pub("hello/42");
-        });
-      });
-    });
+    async.series([
+      function(cb) {
+        that.instance.sub("hello/*", funcToRemove, cb);
+      },
+      function(cb) {
+        that.instance.removeListener("hello/*", funcToRemove, cb);
+      },
+      function(cb) {
+        that.instance.sub("hello/42", wrap(done), cb);
+      },
+      function(cb) {
+        that.instance.pub("hello/42", null, cb);
+      }
+    ]);
   });
 
   it("should emit the ready event", function(done) {

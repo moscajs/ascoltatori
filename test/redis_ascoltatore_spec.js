@@ -1,9 +1,7 @@
-var behave_like_an_ascoltatore = require("./behave_like_an_ascoltatore");
-var wrap = require("../lib/util").wrap;
 
 describe(ascoltatori, function() {
 
-  behave_like_an_ascoltatore();
+  behaveLikeAnAscoltatore();
 
   beforeEach(function(done) {
     this.instance = new ascoltatori.RedisAscoltatore(redisSettings());
@@ -17,10 +15,16 @@ describe(ascoltatori, function() {
   it("should sync two instances", function(done) {
     var other = new ascoltatori.RedisAscoltatore(redisSettings());
     var that = this;
-    other.on("ready", function() {
-      that.instance.subscribe("hello", wrap(done), function() {
-        other.publish("hello");
-      });
-    });
+    async.series([
+      function(cb){
+        other.on("ready", cb);
+      },
+      function(cb) {
+        that.instance.subscribe("hello", wrap(done), cb);
+      },
+      function(cb) {
+        other.publish("hello", null, cb);
+      }
+    ]);
   });
 });

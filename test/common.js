@@ -1,7 +1,7 @@
 global.sinon = require("sinon");
 global.chai = require("chai");
 global.expect = require("chai").expect;
-global.ascoltatori = require("../");
+global.async = require("async");
 
 global.redisSettings = function() {
   return {
@@ -28,5 +28,11 @@ global.rabbitSettings = function() {
   };
 };
 
+global.behaveLikeAnAscoltatore = require("./behave_like_an_ascoltatore");
+
+global.wrap = require("../lib/util").wrap;
+
 var sinonChai = require("sinon-chai");
 chai.use(sinonChai);
+
+global.ascoltatori = require("../");
