@@ -36,6 +36,10 @@ module.exports = function() {
     that.instance.sub("hello", function() {});
   });
 
+  it("should accept a done callback in pub", function(done) {
+    this.instance.pub("hello", null, done);
+  });
+
   it("should support wildcards", function(done) {
     var that = this;
     that.instance.sub("hello/*", wrap(done), function() {
@@ -108,6 +112,20 @@ module.exports = function() {
         that.instance.pub("hello/42", null, cb);
       }
     ]);
+  });
+
+  it("should support at least 10 listeners", function(done) {
+    var that = this;
+    var step = function(cb) {
+      that.instance.sub("hello", function() {
+        cb();
+      });
+    };
+    var a = [];
+    for(var i = 11; i > 0; i--) a.push(step);
+    a.push(function(cb) { that.instance.publish("hello", null, cb) });
+
+    async.parallel(a, wrap(done));
   });
 
   it("should emit the ready event", function(done) {

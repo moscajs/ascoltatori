@@ -1,4 +1,4 @@
-describe(ascoltatori, function() {
+describe(ascoltatori.RabbitAscoltatore, function() {
 
   behaveLikeAnAscoltatore();
 
