@@ -117,15 +117,19 @@ module.exports = function() {
   it("support at least 10 listeners", function(done) {
     var instance = this.instance;
 
+    var counter = 11;
+    var callback = function() {
+      if(--counter == 0) {
+        done();
+      }
+    };
+
     var a = [];
-    for(var i = 11; i > 0; i--) {
-      a.push(instance.sub.bind(instance, "hello"));
+    for(var i = counter; i > 0; i--) {
+      a.push(instance.sub.bind(instance, "hello", callback));
     }
 
-    async.parallel(a, wrap(done));
-    setTimeout(function() {
-      instance.publish("hello", null);
-    }, 5);
+    async.parallel(a, instance.publish.bind(instance, "hello", null));
   });
 
   it("should emit the ready event", function(done) {
