@@ -2,19 +2,27 @@
 var ascoltatori = require("../");
 var async = require("async");
 var runner = require("./runner");
+var settings = require("./settings");
 
-function bench(type, options, counter, done) {
-  var instance = new type(options);
+function setup(type, options, counter, done) {
+  var instance = new type(options());
+  instance.on("ready", function() { done(null, counter, instance) });
+}
 
+function teardown(instance, callback) {
+  instance.reset(callback);
+}
+
+function bench(counter, instance, done) {
   var callback = function() {
-    if(--counter == 0) {
-      done();
+    if(--counter === 0) {
+      done(null, instance);
     }
   };
 
   var a = [];
   for(var i = counter; i > 0; i--) {
-    a.push(instance.sub.bind(instance, "hello", callback));
+    a.push(instance.subscribe.bind(instance, "hello", callback));
   }
 
   async.parallel(a, instance.publish.bind(instance, "hello", null));
@@ -22,15 +30,13 @@ function bench(type, options, counter, done) {
 
 var argv = require('optimist').
   usage('Usage: $0 -c CLASS -r RUNS -o FILE -l LISTENERS').
-  demand(['c','r', 'o', "l"]).
+  demand(['c','r', "l"]).
   alias("c", "class").
   alias("r", "runs").
-  alias("o", "output").
   alias("l", "listeners").
   alias("d", "header").
   describe("c", "use the specified class MemoryAscoltatore, RedisAscoltatore, RabbitAscoltatore, ZeromqAscoltatore").
   describe("r", "the number of runs of this bench").
-  describe("o", "the output file").
   describe("l", "the listeners to attach to use in each bench").
   describe("d", "write the header of the CSV sequence").
   boolean("header").
@@ -47,7 +53,7 @@ function toCSV() {
   });
 }
 
-runner(argv.output, async.apply(bench, ascoltatori[argv.class], {}, argv.listeners), argv.runs, function(results) {
+runner(async.apply(setup, ascoltatori[argv.class], settings[argv.class], argv.listeners), bench, teardown, argv.runs, function(results) {
   if(argv.header) {
     console.log(toCSV("class", "mean", "standard deviation", "runs", "listeners"));
   }
