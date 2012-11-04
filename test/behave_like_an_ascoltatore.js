@@ -123,7 +123,9 @@ module.exports = function() {
     }
 
     async.parallel(a, wrap(done));
-    instance.publish("hello", null);
+    setTimeout(function() {
+      instance.publish("hello", null);
+    }, 5);
   });
 
   it("should emit the ready event", function(done) {
