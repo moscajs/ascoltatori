@@ -114,18 +114,16 @@ module.exports = function() {
     ]);
   });
 
-  it("should support at least 10 listeners", function(done) {
-    var that = this;
-    var step = function(cb) {
-      that.instance.sub("hello", function() {
-        cb();
-      });
-    };
+  it("support at least 10 listeners", function(done) {
+    var instance = this.instance;
+
     var a = [];
-    for(var i = 11; i > 0; i--) a.push(step);
+    for(var i = 11; i > 0; i--) {
+      a.push(instance.sub.bind(instance, "hello"));
+    }
 
     async.parallel(a, wrap(done));
-    that.instance.publish("hello", null);
+    instance.publish("hello", null);
   });
 
   it("should emit the ready event", function(done) {
