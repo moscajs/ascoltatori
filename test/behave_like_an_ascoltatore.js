@@ -123,9 +123,9 @@ module.exports = function() {
     };
     var a = [];
     for(var i = 11; i > 0; i--) a.push(step);
-    a.push(function(cb) { that.instance.publish("hello", null, cb) });
 
     async.parallel(a, wrap(done));
+    that.instance.publish("hello", null);
   });
 
   it("should emit the ready event", function(done) {
