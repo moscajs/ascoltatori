@@ -6,26 +6,32 @@ var settings = require("./settings");
 
 function setup(type, options, counter, done) {
   var instance = new type(options());
-  instance.on("ready", function() { done(null, counter, instance) });
+  var pass = {};
+  instance.on("ready", function() { 
+    var callback = function() {
+      if(--counter === 0) {
+        pass.complete(null, instance);
+      }
+    };
+
+    var a = [];
+    for(var i = counter; i > 0; i--) {
+      a.push(instance.subscribe.bind(instance, "hello", callback));
+    }
+
+    async.parallel(a, function() {
+      done(null, pass, instance);
+    });
+  });
 }
 
 function teardown(instance, callback) {
   instance.reset(callback);
 }
 
-function bench(counter, instance, done) {
-  var callback = function() {
-    if(--counter === 0) {
-      done(null, instance);
-    }
-  };
-
-  var a = [];
-  for(var i = counter; i > 0; i--) {
-    a.push(instance.subscribe.bind(instance, "hello", callback));
-  }
-
-  async.parallel(a, instance.publish.bind(instance, "hello", null));
+function bench(pass, instance, done) {
+  pass.complete = done;
+  instance.publish("hello", null);
 }
 
 var argv = require('optimist').
@@ -58,4 +64,7 @@ runner(async.apply(setup, ascoltatori[argv.class], settings[argv.class], argv.li
     console.log(toCSV("class", "mean", "standard deviation", "runs", "listeners"));
   }
   console.log(toCSV(argv.class, results.mean, results.standardDeviation, argv.runs, argv.listeners));
+  setTimeout(function() {
+    process.exit(0);
+  }, 10);
 });
