@@ -19,7 +19,7 @@ module.exports = function() {
     });
   });
 
-  it("should support 'pub/sub combination for pub/sub", function(done) {
+  it("should support 'pub/sub' combination for pub/sub", function(done) {
     var that = this;
     that.instance.sub("hello", wrap(done), function() {
       that.instance.pub("hello");

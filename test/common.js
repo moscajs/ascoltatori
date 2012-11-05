@@ -28,6 +28,16 @@ global.rabbitSettings = function() {
   };
 };
 
+global.mqttSettings = function() {
+  return {
+    mqtt: require("mqttjs"),
+    host: "127.0.0.1",
+    port: 5883
+  }
+};
+
+require("./mqtt_server")(5883);
+
 global.behaveLikeAnAscoltatore = require("./behave_like_an_ascoltatore");
 
 global.wrap = require("../lib/util").wrap;

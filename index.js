@@ -19,5 +19,6 @@ module.exports.MemoryAscoltatore = MemoryAscoltatore;
 module.exports.RedisAscoltatore = require("./lib/redis_ascoltatore");
 module.exports.ZeromqAscoltatore = require("./lib/zeromq_ascoltatore");
 module.exports.RabbitAscoltatore = require("./lib/rabbit_ascoltatore");
+module.exports.MQTTAscoltatore= require("./lib/mqtt_ascoltatore");
 module.exports.Set = Set;
 module.exports.util = util;
