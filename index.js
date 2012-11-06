@@ -1,5 +1,5 @@
 
-var Set = require("./lib/set");
+var SubsCounter = require("./lib/subs_counter");
 var util = require("./lib/util");
 var MemoryAscoltatore = require('./lib/memory_ascoltatore');
 
@@ -20,5 +20,5 @@ module.exports.RedisAscoltatore = require("./lib/redis_ascoltatore");
 module.exports.ZeromqAscoltatore = require("./lib/zeromq_ascoltatore");
 module.exports.RabbitAscoltatore = require("./lib/rabbit_ascoltatore");
 module.exports.MQTTAscoltatore= require("./lib/mqtt_ascoltatore");
-module.exports.Set = Set;
+module.exports.SubsCounter = SubsCounter;
 module.exports.util = util;
