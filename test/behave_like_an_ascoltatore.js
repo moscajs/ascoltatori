@@ -135,4 +135,25 @@ module.exports = function() {
   it("should emit the ready event", function(done) {
     this.instance.on("ready", done);
   });
+
+  it("should support removing a single listener", function(done) {
+    var that = this;
+    var funcToRemove = function(topic, value) {
+      throw "that should never run";
+    };
+    async.series([
+      function (cb) {
+        that.instance.sub("hello", wrap(done), cb);
+      }, 
+      function (cb) {
+        that.instance.sub("hello", funcToRemove, cb);
+      },
+      function (cb) {
+        that.instance.removeListener("hello", funcToRemove, cb);
+      },
+      function (cb) {
+        that.instance.pub("hello", null, cb);
+      }
+    ]);
+  });
 };
