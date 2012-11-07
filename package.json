@@ -1,6 +1,6 @@
 {
   "name": "ascoltatori",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The pub/sub library for node backed by Redis, RabbitMQ, ZeroMQ or just plain node!",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "pubsub",
     "rabbitmq",
     "zeromq",
-    "0mq"
+    "0mq",
+    "mqtt"
   ],
   "author": "Matteo Collina <hello@matteocollina.com>",
   "license": "MIT",
