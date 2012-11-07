@@ -36,6 +36,11 @@ RabbitAscoltatore, ZeromqAscoltatore, MQTTAscoltatore.
 In the test/common.js file you can find all the options for
 all the ascoltatori.
 
+All ascoltatori supports the use of a wildcards, so everything
+should work smoothly on every broker.
+You might find some differences, and in that case file a bug
+report, so I can fix them.
+
 ## Dependencies
 
 This library does not depend directly on redis, amqp (RabbitMQ),
