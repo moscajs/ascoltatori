@@ -36,6 +36,37 @@ RabbitAscoltatore, ZeromqAscoltatore, MQTTAscoltatore.
 In the test/common.js file you can find all the options for
 all the ascoltatori.
 
+## Dependencies
+
+This library does not depend directly on redis, amqp (RabbitMQ),
+zmq, MQTT.js, but rather it encourages you to pass them to the
+ascoltatori via an options object, like so (for Redis):
+
+```
+var ascoltatori = require('ascoltatori');
+
+var ascoltatore = new ascoltatori.RedisAscoltatore({
+  redis: require('redis'),
+  db: 12,
+  port: 424242,
+  host: 192.168.42.42
+});
+
+ascoltatore.subscribe("hello/*", function() {
+  // this will print { '0': "hello/42", '1': "a message" }
+  console.log(arguments); 
+  process.exit(0);
+});
+
+ascoltatore.publish("hello/42", "a message", function() {
+  console.log("message published");
+});
+
+```
+
+If you feel one more option is missing, feel free to fork this library,
+add it, and then send a pull request.
+
 ## Install
 
 ```
