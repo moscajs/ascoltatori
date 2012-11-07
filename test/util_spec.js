@@ -33,7 +33,7 @@ describe(util, function() {
       var mock = sinon.mock(util);
       mock.expects("alias").withArgs(obj, "publish", "pub").once();
       mock.expects("alias").withArgs(obj, "subscribe", "sub").once();
-      mock.expects("alias").withArgs(obj, "removeListener", "unsubscribe").once();
+      mock.expects("alias").withArgs(obj, "unsubscribe", "unsub").once();
       util.aliasAscoltatore(obj);
       mock.verify();
     });

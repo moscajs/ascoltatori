@@ -67,9 +67,14 @@ module.exports = function() {
     });
   });
 
-  it("should have have a removeListener function", function() {
+  it("should have have an unsubscribe function", function() {
     var that = this;
-    expect(that.instance).to.respondTo("removeListener");
+    expect(that.instance).to.respondTo("unsubscribe");
+  });
+
+  it("should have have an unsub function", function() {
+    var that = this;
+    expect(that.instance).to.respondTo("unsub");
   });
 
   it("should remove a listener", function(done) {
@@ -82,7 +87,7 @@ module.exports = function() {
         that.instance.sub("hello", funcToRemove, cb);
       },
       function (cb) {
-        that.instance.removeListener("hello", funcToRemove, cb);
+        that.instance.unsub("hello", funcToRemove, cb);
       },
       function (cb) {
         that.instance.sub("hello", wrap(done), cb);
@@ -103,7 +108,7 @@ module.exports = function() {
         that.instance.sub("hello/*", funcToRemove, cb);
       },
       function(cb) {
-        that.instance.removeListener("hello/*", funcToRemove, cb);
+        that.instance.unsub("hello/*", funcToRemove, cb);
       },
       function(cb) {
         that.instance.sub("hello/42", wrap(done), cb);
@@ -149,7 +154,7 @@ module.exports = function() {
         that.instance.sub("hello", funcToRemove, cb);
       },
       function (cb) {
-        that.instance.removeListener("hello", funcToRemove, cb);
+        that.instance.unsub("hello", funcToRemove, cb);
       },
       function (cb) {
         that.instance.pub("hello", null, cb);
