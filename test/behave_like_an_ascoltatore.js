@@ -141,6 +141,21 @@ module.exports = function() {
     this.instance.on("ready", done);
   });
 
+  it("should support at least 12 listeners as an EventEmitter", function(done) {
+    var counter = 11;
+    var callback = function() {
+      if(--counter == 0) {
+        done();
+      }
+    };
+
+    var a = [];
+    for(var i = counter; i > 0; i--) {
+      a.push(this.instance.on.bind(this.instance, "ready", callback));
+    }
+    async.parallel(a);
+  });
+
   it("should support removing a single listener", function(done) {
     var that = this;
     var funcToRemove = function(topic, value) {
