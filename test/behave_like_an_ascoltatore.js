@@ -176,4 +176,23 @@ module.exports = function() {
       }
     ]);
   });
+
+  it("should have have a close function", function() {
+    var that = this;
+    expect(that.instance).to.respondTo("close");
+  });
+
+  it("should throw an error if publishing when the ascoltatore has been closed", function() {
+    this.instance.close();
+    expect(function() {
+      this.instance.publish("hello", "world");
+    }).to.throw;
+  });
+
+  it("should throw an error if subscribing when the ascoltatore has been closed", function() {
+    this.instance.close();
+    expect(function() {
+      this.instance.subscribe("hello");
+    }).to.throw;
+  });
 };

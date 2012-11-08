@@ -6,7 +6,7 @@ describe(ascoltatori, function() {
   behave_like_an_ascoltatore();
 
   beforeEach(function() {
-    ascoltatori.reset();
+    ascoltatori.use(new ascoltatori.MemoryAscoltatore);
     this.instance = ascoltatori;
     this.sandbox = sinon.sandbox.create();
   });
@@ -51,11 +51,11 @@ describe(ascoltatori, function() {
     expect(spy).to.have.been.calledWith("hello", func);
   });
 
-  it("should delegate to _global for 'reset'", function() {
+  it("should delegate to _global for 'close'", function() {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
-    var spy = this.sandbox.spy(ascoltatore, "reset");
+    var spy = this.sandbox.spy(ascoltatore, "close");
     ascoltatori.use(ascoltatore);
-    ascoltatori.reset()
+    ascoltatori.close()
     expect(spy).to.have.been.called;
   });
 });

@@ -8,7 +8,7 @@ describe(ascoltatori.RabbitAscoltatore, function() {
   });
 
   afterEach(function() {
-    this.instance.reset();
+    this.instance.close();
   });
 
   it("should sync two instances", function(done) {

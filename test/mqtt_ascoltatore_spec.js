@@ -9,7 +9,7 @@ describe(ascoltatori.MQTTAscoltatore, function() {
   });
 
   afterEach(function(done) {
-    this.instance.reset(done);
+    this.instance.close(done);
     delete this.instance;
   });
 
