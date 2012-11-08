@@ -105,13 +105,13 @@ module.exports = function() {
     };
     async.series([
       function(cb) {
+        that.instance.sub("hello/42", wrap(done), cb);
+      },
+      function(cb) {
         that.instance.sub("hello/*", funcToRemove, cb);
       },
       function(cb) {
         that.instance.unsub("hello/*", funcToRemove, cb);
-      },
-      function(cb) {
-        that.instance.sub("hello/42", wrap(done), cb);
       },
       function(cb) {
         that.instance.pub("hello/42", null, cb);
