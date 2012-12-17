@@ -1,4 +1,3 @@
-var assert = require("assert");
 
 describe(ascoltatori.RedisAscoltatore, function() {
 
@@ -29,11 +28,25 @@ describe(ascoltatori.RedisAscoltatore, function() {
     ]);
   });
 
-  it('should get the redis client already created', function alreadyCreated(){
+  it('should get the redis client for publish already created', function (done) {
     var opts = redisSettings();
     var initialConnection = opts.redis.createClient(opts.port, opts.host, opts);
-    opts.client = initialConnection;
-    var other = new ascoltatori.RedisAscoltatore(opts);
-    assert.equal(initialConnection, other._client_conn);
-  })
+    opts.client_conn = initialConnection;
+    var that = this;
+    that.instance = new ascoltatori.RedisAscoltatore(opts);
+    that.instance.subscribe("hello", wrap(done), function() {
+      that.instance.publish("hello");
+    });
+  });
+
+  it('should get the redis client for subscribing already created', function (done) {
+    var opts = redisSettings();
+    var initialConnection = opts.redis.createClient(opts.port, opts.host, opts);
+    opts.sub_conn = initialConnection;
+    var that = this;
+    that.instance = new ascoltatori.RedisAscoltatore(opts);
+    that.instance.subscribe("hello", wrap(done), function() {
+      that.instance.publish("hello");
+    });
+  });
 });
