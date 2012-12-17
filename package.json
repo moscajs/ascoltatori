@@ -31,8 +31,8 @@
     "zmq": "~2.2.0",
     "amqp": "~0.1.4",
     "optimist": "~0.3.5",
-    "microtime": "~0.3.3",
-    "mqttjs": "git://github.com/mcollina/MQTT.js.git#fix-global-leaks"
+    "mqttjs": "git://github.com/mcollina/MQTT.js.git#fix-global-leaks",
+    "async_bench": "0.0.1"
   },
   "dependencies": {
     "async": "~0.1.22"

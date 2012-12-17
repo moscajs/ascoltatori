@@ -1,7 +1,7 @@
 
 var ascoltatori = require("../");
 var async = require("async");
-var runner = require("./runner");
+var runner = require("async_bench");
 var settings = require("./settings");
 
 function setup(type, options, counter, done) {
@@ -26,7 +26,7 @@ function setup(type, options, counter, done) {
 }
 
 function teardown(instance, callback) {
-  instance.reset(callback);
+  instance.close(callback);
 }
 
 function bench(pass, instance, done) {
@@ -59,12 +59,19 @@ function toCSV() {
   });
 }
 
-runner(async.apply(setup, ascoltatori[argv.class], settings[argv.class], argv.listeners), bench, teardown, argv.runs, function(results) {
-  if(argv.header) {
-    console.log(toCSV("class", "mean", "standard deviation", "runs", "listeners"));
+runner({
+  preHeat: argv.runs,
+  runs: argv.runs,
+  setup: async.apply(setup, ascoltatori[argv.class], settings[argv.class], argv.listeners),
+  bench: bench,
+  teardown: teardown,
+  complete: function (err, results) {
+    if(argv.header) {
+      console.log(toCSV("class", "mean", "standard deviation", "median", "mode", "runs", "listeners"));
+    }
+    console.log(toCSV(argv.class, results.mean, results.stdDev, results.median, results.mode, argv.runs, argv.listeners));
+    setTimeout(function() {
+      process.exit(0);
+    }, 10)
   }
-  console.log(toCSV(argv.class, results.mean, results.standardDeviation, argv.runs, argv.listeners));
-  setTimeout(function() {
-    process.exit(0);
-  }, 10);
 });
