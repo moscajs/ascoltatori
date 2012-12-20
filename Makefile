@@ -7,7 +7,7 @@ ci:
 bench-clean:
 	rm -rf ./benchmarks/results
 
-bench-setup:
+bench-setup: bench-clean
 	mkdir -p ./benchmarks/results
 
 RUNS=1000
