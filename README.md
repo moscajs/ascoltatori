@@ -4,7 +4,7 @@ ascoltatori
 [![Build
 Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori)
 
-The pub/sub library for node backed by Redis, AMPQ (RabbitMQ), ZeroMQ,
+The pub/sub library for node backed by Redis, AMQP (RabbitMQ), ZeroMQ,
 MQTT (Mosquitto) or just plain node!
 
 Ascoltatori is an italian word which means listeners.
