@@ -1,9 +1,9 @@
-describe(ascoltatori.RabbitAscoltatore, function() {
+describe(ascoltatori.AMQPAscoltatore, function() {
 
   behaveLikeAnAscoltatore();
 
   beforeEach(function(done) {
-    this.instance = new ascoltatori.RabbitAscoltatore(rabbitSettings());
+    this.instance = new ascoltatori.AMQPAscoltatore(rabbitSettings());
     this.instance.on("ready", done);
   });
 
@@ -12,7 +12,7 @@ describe(ascoltatori.RabbitAscoltatore, function() {
   });
 
   it("should sync two instances", function(done) {
-    var other = new ascoltatori.RabbitAscoltatore(this.instance._opts);
+    var other = new ascoltatori.AMQPAscoltatore(this.instance._opts);
     var that = this;
     async.series([
       function(cb){

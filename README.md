@@ -34,7 +34,7 @@ ascoltatore.publish("hello/42", "a message", function() {
 ```
 
 See the tests for more examples regarding RedisAscoltatore,
-RabbitAscoltatore, ZeromqAscoltatore, MQTTAscoltatore.
+AMQPAscoltatore, ZeromqAscoltatore, MQTTAscoltatore.
 
 In the test/common.js file you can find all the options for
 all the ascoltatori.
@@ -46,7 +46,7 @@ report, so I can fix them.
 
 ## Dependencies
 
-This library does not depend directly on redis, amqp (RabbitMQ),
+This library does not depend directly on redis, AMQP (RabbitMQ),
 zmq, MQTT.js, but rather it encourages you to pass them to the
 ascoltatori via an options object, like so (for Redis):
 
