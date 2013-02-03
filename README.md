@@ -30,7 +30,6 @@ ascoltatore.subscribe("hello/*", function() {
 ascoltatore.publish("hello/42", "a message", function() {
   console.log("message published");
 });
-
 ```
 
 See the tests for more examples regarding RedisAscoltatore,
@@ -43,6 +42,35 @@ All ascoltatori supports the use of a wildcards, so everything
 should work smoothly on every broker.
 You might find some differences, and in that case file a bug
 report, so I can fix them.
+
+### Domain support
+
+__Ascoltatori__ properly supports the [node.js domain API](http://nodejs.org/api/domain.html).
+To use it, you have to call the `registerDomain` function on your
+_Ascoltatore_, and it will take care of routing the exceptions to the
+given domain. Look at this example:
+```
+var ascoltatori = require('ascoltatori');
+var domain      = require("domain");
+
+var d = domain.create();
+d.on("error", function() {
+  console.log(arguments); 
+  process.exit(0);
+});
+
+var ascoltatore = new ascoltatori.MemoryAscoltatore();
+ascoltatore.registerDomain(d);
+
+ascoltatore.subscribe("*", function() {
+  throw new Error();
+});
+
+ascoltatore.publish("hello/42", "a message", function() {
+  console.log("message published");
+});
+```
+
 
 ## Dependencies
 

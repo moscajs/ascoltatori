@@ -1,4 +1,6 @@
 
+var domain = require("domain");
+var _ = require("underscore");
 
 module.exports = function() {
 
@@ -194,5 +196,48 @@ module.exports = function() {
     expect(function() {
       this.instance.subscribe("hello");
     }).to.throw;
+  });
+
+  // this is due to a bug in mocha
+  // https://github.com/visionmedia/mocha/issues/513
+  describe("wrapping uncaughtException", function() {
+    var uncaughtExceptionHandler;
+    var dm;
+
+    beforeEach(function(done) {
+      dm = domain.create();
+      uncaughtExceptionHandler = _.last(process.listeners("uncaughtException"));
+      process.removeListener("uncaughtException", uncaughtExceptionHandler); 
+      done();
+    });
+
+    afterEach(function(done) {
+      process.on("uncaughtException", uncaughtExceptionHandler);
+      dm.dispose();
+      done();
+    });
+
+    it("should support domains", function(done) {
+      var that = this;
+
+      dm.on("error", function(err) {
+        done();
+      });
+
+      that.instance.registerDomain(dm);
+
+      that.instance.subscribe("throw", function() {
+        throw new Error("ahaha");
+      }, function() {
+        // we need to properly wait that the subscribe
+        // has happened correctly
+
+        // the nextTick hack is needed to skip out
+        // of mocha control
+        process.nextTick(function() {
+          that.instance.publish("throw");
+        });
+      });
+    });
   });
 };
