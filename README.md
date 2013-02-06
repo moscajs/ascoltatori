@@ -4,10 +4,16 @@ ascoltatori
 [![Build
 Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori)
 
-The pub/sub library for node backed by Redis, AMQP (RabbitMQ), ZeroMQ,
-MQTT (Mosquitto) or just plain node!
+__Ascoltatori__ is the publish/subscribe library that support every
+broker/protocol out there.
+This currently includes:
+ * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of
+   the [AMQP](http://www.amqp.org/) protocol.
+ * [Redis](http://redis.io/)
+ * [Mosquitto](http://mosquitto.org/) and all implementations of the
+   [MQTT](http://mqtt.org/) protocol.
 
-Ascoltatori is an italian word which means listeners.
+> Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.
 
 ## Usage
