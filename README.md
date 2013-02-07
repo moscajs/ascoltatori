@@ -7,14 +7,13 @@ Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/m
 __Ascoltatori__ is the publish/subscribe library that support every
 broker/protocol out there.
 This currently includes:
-
- * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of
-   the [AMQP](http://www.amqp.org/) protocol.
- * [Redis](http://redis.io/)
- * [Mosquitto](http://mosquitto.org/) and all implementations of the
-   [MQTT](http://mqtt.org/) protocol.
- * [ZeroMQ](http://www.zeromq.org/) without a central broker, so
-   Ascoltatori can also be used in a P2P fashion.
+* [RabbitMQ](http://www.rabbitmq.com/) and all implementations of
+  the [AMQP](http://www.amqp.org/) protocol.
+* [Redis](http://redis.io/)
+* [Mosquitto](http://mosquitto.org/) and all implementations of the
+  [MQTT](http://mqtt.org/) protocol.
+* [ZeroMQ](http://www.zeromq.org/) without a central broker, so
+  Ascoltatori can also be used in a P2P fashion.
 
 > Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.
