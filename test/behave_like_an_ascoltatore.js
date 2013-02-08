@@ -222,6 +222,13 @@ module.exports = function() {
     }).to.throw;
   });
 
+  it("should close using a callback", function(done) {
+    var that = this;
+    this.instance.publish("hello", "world", function() {
+      that.instance.close(done);
+    });
+  });
+
   // this is due to a bug in mocha
   // https://github.com/visionmedia/mocha/issues/513
   describe("wrapping uncaughtException", function() {
