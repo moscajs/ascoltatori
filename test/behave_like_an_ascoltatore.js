@@ -82,13 +82,15 @@ module.exports = function() {
 
   it("should emit a 'newTopic' event on new topics", function(done) {
     var that = this;
-    that.instance.on("newTopic", function() {
-      done();
-    });
 
     // a subscription is needed, otherwise in a multiprocess
     // environment you won't receive them
     that.instance.sub("*", wrap(null), function() {
+
+      that.instance.on("newTopic", function() {
+        done();
+      });
+
       that.instance.pub("hello/42");
     });
   });

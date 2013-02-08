@@ -7,8 +7,8 @@ describe(ascoltatori.AMQPAscoltatore, function() {
     this.instance.on("ready", done);
   });
 
-  afterEach(function() {
-    this.instance.close();
+  afterEach(function(done) {
+    this.instance.close(done);
   });
 
   it("should sync two instances", function(done) {
