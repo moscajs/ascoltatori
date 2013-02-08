@@ -8,8 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mcollina/ascoltatori"
+    "url": "https://github.com/mcollina/ascoltatori.git"
   },
+  "bugs": {
+    "url" : "http://github.com/mcollina/ascoltatori/issues"
+  }
   "keywords": [
     "publish",
     "subscribe",
