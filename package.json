@@ -41,6 +41,6 @@
     "underscore": "~1.4.4"
   },
   "dependencies": {
-    "async": "~0.1.22"
+    "async": "~0.2.4"
   }
 }
