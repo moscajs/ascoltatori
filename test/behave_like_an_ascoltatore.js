@@ -69,6 +69,30 @@ module.exports = function() {
     });
   });
 
+  it("should not publish to 'newTopic' on new topics", function(done) {
+    var that = this;
+    that.instance.sub("newTopic", function() {
+      done(new Error("this should never be called"));
+    });
+
+    that.instance.sub("*", wrap(done), function() {
+      that.instance.pub("hello/42");
+    });
+  });
+
+  it("should emit a 'newTopic' event on new topics", function(done) {
+    var that = this;
+    that.instance.on("newTopic", function() {
+      done();
+    });
+
+    // a subscription is needed, otherwise in a multiprocess
+    // environment you won't receive them
+    that.instance.sub("*", wrap(null), function() {
+      that.instance.pub("hello/42");
+    });
+  });
+
   it("should have have an unsubscribe function", function() {
     var that = this;
     expect(that.instance).to.respondTo("unsubscribe");
