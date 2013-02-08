@@ -229,6 +229,15 @@ module.exports = function() {
     });
   });
 
+  it("should allow the close method to be called twice", function(done) {
+    var that = this;
+    async.series([
+      this.instance.publish.bind(this.instance, "hello", "world"),
+      this.instance.close.bind(this.instance),
+      this.instance.close.bind(this.instance)
+    ], done);
+  });
+
   // this is due to a bug in mocha
   // https://github.com/visionmedia/mocha/issues/513
   describe("wrapping uncaughtException", function() {
