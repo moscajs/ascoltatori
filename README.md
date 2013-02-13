@@ -6,7 +6,7 @@ Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/m
 
 __Ascoltatori__ is the publish/subscribe library that support every
 broker/protocol out there.
-This currently includes:
+This list currently includes:
 
 * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of
   the [AMQP](http://www.amqp.org/) protocol.
