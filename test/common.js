@@ -30,7 +30,7 @@ global.rabbitSettings = function() {
 
 global.mqttSettings = function() {
   return {
-    mqtt: require("mqttjs"),
+    mqtt: require("mqtt"),
     host: "127.0.0.1",
     port: 5883
   }
