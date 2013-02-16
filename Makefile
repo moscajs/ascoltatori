@@ -41,4 +41,10 @@ bench-$(RUNS): bench-setup
 
 bench: bench-clean bench-1 bench-10 bench-100 bench-1000
 
+docs-clean:
+	rm -rf docs
+
+docs: docs-clean
+	./node_modules/.bin/dox-foundation --source lib --target docs
+
 .PHONY: test
