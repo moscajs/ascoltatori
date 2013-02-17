@@ -45,6 +45,6 @@ docs-clean:
 	rm -rf docs
 
 docs: docs-clean
-	./node_modules/.bin/dox-foundation --source lib --target docs
+	./node_modules/.bin/dox-foundation --source lib --target docs --title Ascoltatori
 
 .PHONY: test
