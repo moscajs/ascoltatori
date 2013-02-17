@@ -45,6 +45,7 @@
     "dox-foundation": "~0.4.4"
   },
   "dependencies": {
-    "async": "~0.2.4"
+    "async": "~0.2.4",
+    "debug": "~0.7.2"
   }
 }

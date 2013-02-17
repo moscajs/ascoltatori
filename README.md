@@ -26,7 +26,6 @@ An Ascoltatore is therefore a single listener.
 
 ## Usage
 
-
 __Ascoltatori__ is built to be extremely easy to use, and can provide a
 useful abstraction for every compatible pub/sub broker.
 In this way you can choose whatever broker suits you.
@@ -123,6 +122,22 @@ add it, and then send a pull request.
 ```
 npm install ascoltatori
 ```
+
+## Debugging
+
+__Ascoltatori__ supports the clever
+[debug](https://github.com/visionmedia/debug) package, so it is able to
+trigger the logging based on an external enviroment variable, like so:
+```
+$: DEBUG=mqtt-ascoltatore node exaples/mqtt_topic_bridge.js
+```
+
+The following debug flags are supported, one for each ascoltatore:
+* `amqp-ascoltatore`
+* `memory-ascoltatore`
+* `mqtt-ascoltatore`
+* `redis-ascoltatore`
+* `zeromq-ascoltatore`
 
 ## Contributing to Ascoltatori
 
