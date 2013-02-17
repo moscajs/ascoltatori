@@ -49,7 +49,10 @@ docs: docs-clean
 
 publish-docs: docs
 	git stash	
+	cp -R docs /tmp/ascolatori-docs
 	git checkout gh-pages
+	git pull origin gh-pages
+	cp -R /tmp/ascolatori-docs docs
 	git add docs
 	git commit -m "Updated docs"
 	git push origin
