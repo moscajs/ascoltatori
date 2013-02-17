@@ -16,10 +16,16 @@ This list currently includes:
 * [ZeroMQ](http://www.zeromq.org/) without a central broker, so
   Ascoltatori can also be used in a P2P fashion.
 
+The source code of __Ascoltatori__ had been annotated with
+[dox](https://github.com/visionmedia/dox)
+and the generated documentation is available at:
+http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html
+
 > Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.
 
 ## Usage
+
 
 __Ascoltatori__ is built to be extremely easy to use, and can provide a
 useful abstraction for every compatible pub/sub broker.

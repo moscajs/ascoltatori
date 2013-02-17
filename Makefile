@@ -47,4 +47,13 @@ docs-clean:
 docs: docs-clean
 	./node_modules/.bin/dox-foundation --source lib --target docs --title Ascoltatori
 
+publish-docs: docs
+	git stash	
+	git checkout gh-pages
+	git add docs
+	git commit -m "Updated docs"
+	git push origin
+	git checkout master
+	git stash apply
+
 .PHONY: test
