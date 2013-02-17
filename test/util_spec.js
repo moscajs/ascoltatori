@@ -23,10 +23,6 @@ describe(util, function() {
     expect(function() { util.alias("a", "c") }).to.throw("'a' is not a function");
   });
 
-  it("should expose node util.format method", function() {
-    expect(util.format).to.be.eql(require('util').format);
-  });
-
   describe("aliasAscoltatore", function() {
     it("should alias all pub/sub method for each ascoltatore", function() {
       var obj = {};
@@ -44,5 +40,13 @@ describe(util, function() {
       expect(util.aliasAscoltatore(obj)).to.equal(obj);
       stub.restore();
     });
+  });
+
+  it("should build two different unique identifiers", function() {
+    expect(util.buildIdentifier()).to.not.be.equal(util.buildIdentifier());
+  });
+
+  it("should include the process PID in the unique identifier", function() {
+    expect(util.buildIdentifier()).to.be.include(String(process.pid));
   });
 });
