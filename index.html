@@ -41,7 +41,9 @@ This list currently includes:</p>
 <li>
 <a href="http://www.rabbitmq.com/">RabbitMQ</a> and all implementations of
 the <a href="http://www.amqp.org/">AMQP</a> protocol.</li>
-<li><a href="http://redis.io/">Redis</a></li>
+<li>
+<a href="http://redis.io/">Redis</a>, the fabulous key/value store by
+<a href="https://github.com/antirez">@antirez</a>.</li>
 <li>
 <a href="http://mosquitto.org/">Mosquitto</a> and all implementations of the
 <a href="http://mqtt.org/">MQTT</a> protocol.</li>
@@ -66,16 +68,17 @@ In this way you can choose whatever broker suits you.</p>
 
 <pre><code>var ascoltatori = require('ascoltatori');
 
-var ascoltatore = new ascoltatori.MemoryAscoltatore();
+ascoltatori.build(function (ascoltatore) {
 
-ascoltatore.subscribe("hello/*", function() {
-  // this will print { '0': "hello/42", '1': "a message" }
-  console.log(arguments); 
-  process.exit(0);
-});
+  ascoltatore.subscribe("hello/*", function() {
+    // this will print { '0': "hello/42", '1': "a message" }
+    console.log(arguments); 
+    process.exit(0);
+  });
 
-ascoltatore.publish("hello/42", "a message", function() {
-  console.log("message published");
+  ascoltatore.publish("hello/42", "a message", function() {
+    console.log("message published");
+  });
 });
 </code></pre>
 
@@ -106,15 +109,17 @@ d.on("error", function() {
   process.exit(0);
 });
 
-var ascoltatore = new ascoltatori.MemoryAscoltatore();
-ascoltatore.registerDomain(d);
+ascoltatori.build(function (ascoltatore) {
 
-ascoltatore.subscribe("*", function() {
-  throw new Error();
-});
+  ascoltatore.registerDomain(d);
 
-ascoltatore.publish("hello/42", "a message", function() {
-  console.log("message published");
+  ascoltatore.subscribe("hello/*", function() {
+    throw new Error();
+  });
+
+  ascoltatore.publish("hello/42", "a message", function() {
+    console.log("message published");
+  });
 });
 </code></pre>
 
@@ -126,21 +131,25 @@ ascoltatori via an options object, like so (for Redis):</p>
 
 <pre><code>var ascoltatori = require('ascoltatori');
 
-var ascoltatore = new ascoltatori.RedisAscoltatore({
+var settings = {
+  type: 'redis',
   redis: require('redis'),
   db: 12,
   port: 424242,
   host: 192.168.42.42
-});
+};
 
-ascoltatore.subscribe("hello/*", function() {
-  // this will print { '0': "hello/42", '1': "a message" }
-  console.log(arguments); 
-  process.exit(0);
-});
+ascoltatori.build(settings, function (ascoltatore) {
 
-ascoltatore.publish("hello/42", "a message", function() {
-  console.log("message published");
+  ascoltatore.subscribe("hello/*", function() {
+    // this will print { '0': "hello/42", '1': "a message" }
+    console.log(arguments); 
+    process.exit(0);
+  });
+
+  ascoltatore.publish("hello/42", "a message", function() {
+    console.log("message published");
+  });
 });
 
 </code></pre>
@@ -153,7 +162,25 @@ add it, and then send a pull request.</p>
 <pre><code>npm install ascoltatori
 </code></pre>
 
-<h2>Contributing to Ascoltatori</h2>
+<h2>Debugging</h2>
+
+<p><strong>Ascoltatori</strong> supports the clever
+<a href="https://github.com/visionmedia/debug">debug</a> package, so it is able to
+trigger the logging based on an external enviroment variable, like so:</p>
+
+<pre><code>$: DEBUG=mqtt-ascoltatore node exaples/mqtt_topic_bridge.js
+</code></pre>
+
+<p>The following debug flags are supported, one for each ascoltatore:</p>
+
+<ul>
+<li><code>amqp-ascoltatore</code></li>
+<li><code>memory-ascoltatore</code></li>
+<li><code>mqtt-ascoltatore</code></li>
+<li><code>redis-ascoltatore</code></li>
+<li><code>zeromq-ascoltatore</code></li>
+<li><code>prefix-ascoltatore</code></li>
+</ul><h2>Contributing to Ascoltatori</h2>
 
 <ul>
 <li>Check out the latest master to make sure the feature hasn't been
