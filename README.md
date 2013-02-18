@@ -10,7 +10,8 @@ This list currently includes:
 
 * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of
   the [AMQP](http://www.amqp.org/) protocol.
-* [Redis](http://redis.io/)
+* [Redis](http://redis.io/), the fabulous key/value store by
+  [@antirez](https://github.com/antirez).
 * [Mosquitto](http://mosquitto.org/) and all implementations of the
   [MQTT](http://mqtt.org/) protocol.
 * [ZeroMQ](http://www.zeromq.org/) without a central broker, so
