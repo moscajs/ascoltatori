@@ -25,7 +25,20 @@ describe(ascoltatori.MQTTAscoltatore, function() {
       },
       function(cb) {
         other.publish("hello", null, cb);
+      },
+      function(cb) {
+        other.close(cb);
       }
     ]);
+  });
+
+  it("should send the MQTT keepalive", function(done) {
+    var timer = new Date();
+    for(var c in mqttServer.clients) {
+      mqttServer.clients[c].once("pingreq", function() {
+        expect(new Date() - timer).to.be.below(1000);
+        done();
+      });
+    }
   });
 });
