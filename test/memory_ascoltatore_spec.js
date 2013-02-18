@@ -1,9 +1,9 @@
 
-describe(ascoltatori.MemoryAscoltatore, function() {
+describe(ascoltatori.MemoryAscoltatore, function () {
 
   behaveLikeAnAscoltatore();
 
-  beforeEach(function(done) {
+  beforeEach(function (done) {
     this.instance = new ascoltatori.MemoryAscoltatore();
     this.instance.on("ready", done);
   });

@@ -1,33 +1,33 @@
-describe(ascoltatori.ZeromqAscoltatore, function() {
+describe(ascoltatori.ZeromqAscoltatore, function () {
 
   behaveLikeAnAscoltatore();
 
-  beforeEach(function(done) {
+  beforeEach(function (done) {
     this.instance = new ascoltatori.ZeromqAscoltatore(zeromqSettings());
     this.instance.on("ready", done);
   });
 
-  afterEach(function(done) {
+  afterEach(function (done) {
     this.instance.close(done);
   });
 
-  it("should sync two instances", function(done) {
+  it("should sync two instances", function (done) {
     var instance = this.instance;
     var other = new ascoltatori.ZeromqAscoltatore(zeromqSettings());
     async.series([
-      function(cb) {
+      function (cb) {
         other.on("ready", cb);
       },
-      function(cb) {
+      function (cb) {
         instance.connect(other._opts.port, cb);
       },
-      function(cb) {
+      function (cb) {
         other.connect(instance._opts.port, cb);
       },
-      function(cb) {
+      function (cb) {
         instance.subscribe("world", wrap(done), cb);
       },
-      function(cb) {
+      function (cb) {
         other.publish("world", null, cb);
       }
     ]);

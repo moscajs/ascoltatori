@@ -59,4 +59,7 @@ publish-docs: docs
 	git checkout master
 	git stash apply
 
+jslint:
+	find lib -name "*.js" -print0 | xargs -0 jslint --indent 2 --nomen --node
+
 .PHONY: test

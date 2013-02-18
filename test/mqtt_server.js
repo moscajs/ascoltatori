@@ -3,19 +3,19 @@ var util = require('util');
 
 
 module.exports = function (port) {
-  return mqtt.createServer(function(client) {
+  return mqtt.createServer(function (client) {
     var self = this;
 
     if (!self.clients) self.clients = {};
 
-    client.on('connect', function(packet) {
+    client.on('connect', function (packet) {
       self.clients[packet.client] = client;
       client.id = packet.client;
       client.subscriptions = [];
       client.connack({returnCode: 0});
     });
 
-    client.on('subscribe', function(packet) {
+    client.on('subscribe', function (packet) {
       var granted = [];
 
       for (var i = 0; i < packet.subscriptions.length; i++) {
@@ -30,7 +30,7 @@ module.exports = function (port) {
       client.suback({messageId: packet.messageId, granted: granted});
     });
 
-    client.on('publish', function(packet) {
+    client.on('publish', function (packet) {
       for (var k in self.clients) {
         var c = self.clients[k]
         , publish = false;
@@ -49,13 +49,13 @@ module.exports = function (port) {
       }
     });
 
-    client.on('unsubscribe', function(packet) {
+    client.on('unsubscribe', function (packet) {
 
       for (var i = 0; i < packet.unsubscriptions.length; i++) {
         var topic = packet.unsubscriptions[i]
         , reg = new RegExp(topic.replace('+', '[^\/]+').replace('#', '.+$'));
 
-        client.subscriptions = client.subscriptions.filter(function(s) {
+        client.subscriptions = client.subscriptions.filter(function (s) {
           return s !== reg;
         });
       }
@@ -63,19 +63,19 @@ module.exports = function (port) {
       client.unsuback({messageId: packet.messageId});
     });
 
-    client.on('pingreq', function(packet) {
+    client.on('pingreq', function (packet) {
       client.pingresp();
     });
 
-    client.on('disconnect', function(packet) {
+    client.on('disconnect', function (packet) {
       client.stream.end();
     });
 
-    client.on('close', function(packet) {
+    client.on('close', function (packet) {
       delete self.clients[client.id];
     });
 
-    client.on('error', function(e) {
+    client.on('error', function (e) {
       client.stream.end();
       console.log(e);
     });

@@ -3,32 +3,32 @@ global.chai = require("chai");
 global.expect = require("chai").expect;
 global.async = require("async");
 
-global.redisSettings = function() {
+global.redisSettings = function () {
   return {
     redis: require('redis')
   };
 };
 
 var portCounter = 50042;
-global.nextPort = function() {
+global.nextPort = function () {
   return ++portCounter;
 };
 
-global.zeromqSettings = function(remote_ports) {
+global.zeromqSettings = function (remote_ports) {
   return {
     zmq: require("zmq"),
     port: "tcp://127.0.0.1:" + global.nextPort()
   };
 };
 
-global.rabbitSettings = function() {
+global.rabbitSettings = function () {
   return {
     amqp: require("amqp"),
     exchange: "ascolatore" + global.nextPort()
   };
 };
 
-global.mqttSettings = function() {
+global.mqttSettings = function () {
   return {
     mqtt: require("mqtt"),
     host: "127.0.0.1",
