@@ -58,4 +58,103 @@ describe(ascoltatori, function () {
     ascoltatori.close()
     expect(spy).to.have.been.called;
   });
+
+  describe(".build", function () {
+
+    var toClose = [];
+
+    afterEach(function (done) {
+      async.parallel(toClose.map(function (a) {
+        return function (cb) {
+          a.once("ready", function() {
+            a.close(cb);
+          });
+        };
+      }), done);
+    });
+
+    it("should create a new MQTTAscoltatore", function () {
+      var settings = mqttSettings();
+      settings.type = "mqtt";
+      var a = ascoltatori.build(settings);
+      toClose.push(a);
+      expect(a).to.be.instanceOf(ascoltatori.MQTTAscoltatore);
+    });
+
+    it("should create a new RedisAscoltatore", function () {
+      var settings = redisSettings();
+      settings.type = "redis";
+      var a = ascoltatori.build(settings);
+      toClose.push(a);
+      expect(a).to.be.instanceOf(ascoltatori.RedisAscoltatore);
+    });
+
+    it("should create a new AMQPAscoltatore", function () {
+      var settings = rabbitSettings();
+      settings.type = "amqp";
+      var a = ascoltatori.build(settings);
+      toClose.push(a);
+      expect(a).to.be.instanceOf(ascoltatori.AMQPAscoltatore);
+    });
+
+    it("should create a new ZeromqAscoltatore", function () {
+      var settings = zeromqSettings();
+      settings.type = "zmq";
+      var a = ascoltatori.build(settings);
+      toClose.push(a);
+      expect(a).to.be.instanceOf(ascoltatori.ZeromqAscoltatore);
+    });
+
+    it("should create a new MemoryAscolatore", function () {
+      var a = ascoltatori.build();
+      toClose.push(a);
+      expect(a).to.be.instanceOf(ascoltatori.MemoryAscoltatore);
+    });
+
+    it("should wrap it with a prefix", function (done) {
+      var settings = redisSettings();
+      settings.type = "redis";
+      settings.prefix = "/hello";
+
+      var a = ascoltatori.build(settings);
+      toClose.push(a);
+
+      settings = redisSettings();
+      settings.type = "redis";
+      var b = ascoltatori.build(settings);
+      toClose.push(b);
+
+      async.series([
+        function (cb) {
+          a.on("ready", cb);
+        },
+        function (cb) {
+          b.on("ready", cb);
+        },
+        function (cb) {
+          b.subscribe("/hello/world", wrap(done), cb);
+        },
+        function (cb) {
+          a.publish("/world", true);
+        }
+      ]);
+    });
+
+    it("should provide a callback function for being ready", function (done) {
+      ascoltatori.build(function (a) { 
+        toClose.push(a);
+        expect(a).to.be.instanceOf(ascoltatori.MemoryAscoltatore);
+        done();
+      });
+    });
+
+    it("should provide a callback function for being ready with settings", function (done) {
+      var settings = redisSettings();
+      settings.type = "redis";
+      ascoltatori.build(settings, function (a) { 
+        toClose.push(a);
+        done();
+      });
+    });
+  });
 });

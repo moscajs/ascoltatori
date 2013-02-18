@@ -33,16 +33,17 @@ In this way you can choose whatever broker suits you.
 ```
 var ascoltatori = require('ascoltatori');
 
-var ascoltatore = new ascoltatori.MemoryAscoltatore();
+ascoltatori.build(function (ascoltatore) {
 
-ascoltatore.subscribe("hello/*", function() {
-  // this will print { '0': "hello/42", '1': "a message" }
-  console.log(arguments); 
-  process.exit(0);
-});
+  ascoltatore.subscribe("hello/*", function() {
+    // this will print { '0': "hello/42", '1': "a message" }
+    console.log(arguments); 
+    process.exit(0);
+  });
 
-ascoltatore.publish("hello/42", "a message", function() {
-  console.log("message published");
+  ascoltatore.publish("hello/42", "a message", function() {
+    console.log("message published");
+  });
 });
 ```
 
@@ -73,18 +74,19 @@ d.on("error", function() {
   process.exit(0);
 });
 
-var ascoltatore = new ascoltatori.MemoryAscoltatore();
-ascoltatore.registerDomain(d);
+ascoltatori.build(function (ascoltatore) {
 
-ascoltatore.subscribe("*", function() {
-  throw new Error();
-});
+  ascoltatore.registerDomain(d);
 
-ascoltatore.publish("hello/42", "a message", function() {
-  console.log("message published");
+  ascoltatore.subscribe("hello/*", function() {
+    throw new Error();
+  });
+
+  ascoltatore.publish("hello/42", "a message", function() {
+    console.log("message published");
+  });
 });
 ```
-
 
 ## Dependencies
 
@@ -95,21 +97,25 @@ ascoltatori via an options object, like so (for Redis):
 ```
 var ascoltatori = require('ascoltatori');
 
-var ascoltatore = new ascoltatori.RedisAscoltatore({
+var settings = {
+  type: 'redis',
   redis: require('redis'),
   db: 12,
   port: 424242,
   host: 192.168.42.42
-});
+};
 
-ascoltatore.subscribe("hello/*", function() {
-  // this will print { '0': "hello/42", '1': "a message" }
-  console.log(arguments); 
-  process.exit(0);
-});
+ascoltatori.build(settings, function (ascoltatore) {
 
-ascoltatore.publish("hello/42", "a message", function() {
-  console.log("message published");
+  ascoltatore.subscribe("hello/*", function() {
+    // this will print { '0': "hello/42", '1': "a message" }
+    console.log(arguments); 
+    process.exit(0);
+  });
+
+  ascoltatore.publish("hello/42", "a message", function() {
+    console.log("message published");
+  });
 });
 
 ```
@@ -138,6 +144,7 @@ The following debug flags are supported, one for each ascoltatore:
 * `mqtt-ascoltatore`
 * `redis-ascoltatore`
 * `zeromq-ascoltatore`
+* `prefix-ascoltatore`
 
 ## Contributing to Ascoltatori
 
