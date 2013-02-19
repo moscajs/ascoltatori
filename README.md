@@ -140,12 +140,12 @@ $: DEBUG=mqtt-ascoltatore node exaples/mqtt_topic_bridge.js
 ```
 
 The following debug flags are supported, one for each ascoltatore:
-* `amqp-ascoltatore`
-* `memory-ascoltatore`
-* `mqtt-ascoltatore`
-* `redis-ascoltatore`
-* `zeromq-ascoltatore`
-* `prefix-ascoltatore`
+* `ascoltatori:amqp`
+* `ascoltatori:memory`
+* `ascoltatori:mqtt`
+* `ascoltatori:prefix`
+* `ascoltatori:redis`
+* `ascoltatori:zmq`
 
 ## Contributing to Ascoltatori
 
