@@ -26,10 +26,11 @@ code {
 <ul>
 <li><code>port</code>, the optional port to connect to;</li>
 <li><code>host</code>, the optional host to connect to;</li>
+<li><code>db</code>, the database to connect to (defaults to 0);</li>
 <li><code>password</code>, the optional password to use;</li>
+<li><code>sub_conn</code>, the optional redis connection to use for the sub and psub commands;</li>
+<li><code>pub_conn</code>, the optional redis connection to use for the pub command;</li>
 <li><code>redis</code>, the redis module (it will automatically be required if not present).</li>
-<li><code>sub_conn</code>, the optional redis connection to use for the sub and psub commands.</li>
-<li><code>pub_conn</code>, the optional redis connection to use for the pub command.</li>
 </ul></div><pre><code class="language-javascript">function RedisAscoltatore(opts) {
   AbstractAscoltatore.call(this);
 
