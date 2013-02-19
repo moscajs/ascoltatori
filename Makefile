@@ -56,6 +56,7 @@ publish-docs: docs
 	rm -rf docs
 	cp -R /tmp/ascoltatori-docs docs
 	git add docs
+	git add -u
 	git commit -m "Updated docs"
 	git push origin
 	git checkout master
