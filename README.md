@@ -136,7 +136,7 @@ __Ascoltatori__ supports the clever
 [debug](https://github.com/visionmedia/debug) package, so it is able to
 trigger the logging based on an external enviroment variable, like so:
 ```
-$: DEBUG=mqtt-ascoltatore node exaples/mqtt_topic_bridge.js
+$: DEBUG=ascoltatori:mqtt node exaples/mqtt_topic_bridge.js
 ```
 
 The following debug flags are supported, one for each ascoltatore:
