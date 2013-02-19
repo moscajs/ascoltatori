@@ -49,6 +49,7 @@ docs: docs-clean
 
 publish-docs: docs
 	git stash	
+	rm -rf /tmp/ascoltatori-docs
 	cp -R docs /tmp/ascoltatori-docs
 	git checkout gh-pages
 	git pull origin gh-pages
