@@ -62,10 +62,10 @@ module.exports = function () {
   it("should publish the passed argument", function (done) {
     var that = this;
     that.instance.sub("hello/*", function (topic, value) {
-      expect(value).to.equal(42);
+      expect(value).to.equal("42");
       done();
     }, function () {
-      that.instance.pub("hello/123", 42);
+      that.instance.pub("hello/123", "42");
     });
   });
 
