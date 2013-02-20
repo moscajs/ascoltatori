@@ -282,4 +282,33 @@ module.exports = function () {
       });
     });
   });
+
+  it("should not deliver message twice for double subscription", function (done) {
+    var that = this;
+
+    var count = 2;
+
+    var d = function () {
+      count--;
+      if (count === 0) {
+        done();
+      }
+    };
+
+    var sub = function (cb) {
+      var called = false;
+      that.instance.sub("hello", function () {
+        expect(called).to.be.false;
+        called = true;
+        d();
+      }, cb);
+    };
+
+    async.series([
+      sub, sub,
+      function (cb) {
+        that.instance.pub("hello", "ahha", cb);
+      }
+    ]);
+  });
 };
