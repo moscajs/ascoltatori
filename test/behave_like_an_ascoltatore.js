@@ -192,7 +192,7 @@ module.exports = function () {
     async.series([
       function (cb) {
         that.instance.sub("hello", wrap(done), cb);
-      }, 
+      },
       function (cb) {
         that.instance.sub("hello", funcToRemove, cb);
       },

@@ -34,10 +34,12 @@ global.mqttSettings = function () {
     host: "127.0.0.1",
     port: 5883,
     keepalive: 1
-  }
+  };
 };
 
-global.mqttServer = require("./mqtt_server")(5883);
+var mosca = require("mosca");
+
+global.mqttServer = new mosca.Server({ port: 5883 });
 
 global.behaveLikeAnAscoltatore = require("./behave_like_an_ascoltatore");
 

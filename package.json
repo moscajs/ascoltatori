@@ -42,7 +42,8 @@
     "mqtt": "~0.1.8",
     "async_bench": "0.0.1",
     "underscore": "~1.4.4",
-    "dox-foundation": "~0.4.4"
+    "dox-foundation": "~0.4.4",
+    "mosca": "~0.1.0"
   },
   "dependencies": {
     "async": "~0.2.4",

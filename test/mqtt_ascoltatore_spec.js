@@ -34,11 +34,11 @@ describe(ascoltatori.MQTTAscoltatore, function () {
 
   it("should send the MQTT keepalive", function (done) {
     var timer = new Date();
-    for(var c in mqttServer.clients) {
+    Object.keys(mqttServer.clients).forEach(function (c) {
       mqttServer.clients[c].once("pingreq", function () {
         expect(new Date() - timer).to.be.below(1000);
         done();
       });
-    }
+    });
   });
 });
