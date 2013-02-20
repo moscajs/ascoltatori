@@ -14,8 +14,8 @@ function setup(type, options, counter, done) {
       }
     };
 
-    var a = [];
-    for(var i = counter; i > 0; i--) {
+    var a = [], i = null;
+    for(i = counter; i > 0; i--) {
       a.push(instance.subscribe.bind(instance, "hello", callback));
     }
 
@@ -41,14 +41,15 @@ var argv = require('optimist').
   alias("r", "runs").
   alias("l", "listeners").
   alias("d", "header").
-  describe("c", "use the specified class MemoryAscoltatore, RedisAscoltatore, RabbitAscoltatore, ZeromqAscoltatore").
+  describe("c", "use the specified class MemoryAscoltatore, RedisAscoltatore, AMQPAscoltatore, ZeromqAscoltatore").
   describe("r", "the number of runs of this bench").
   describe("l", "the listeners to attach to use in each bench").
   describe("d", "write the header of the CSV sequence").
   boolean("header").
   check(function(args) {
-    if(ascoltatori[args.class] === undefined)
-      throw "ERROR: You can specify only one of: MemoryAscoltatore, RedisAscoltatore, RabbitAscoltatore, ZeromqAscoltatore";
+    if(ascoltatori[args.class] === undefined) {
+      throw "ERROR: You can specify only one of: MemoryAscoltatore, RedisAscoltatore, AMQPAscoltatore, ZeromqAscoltatore";
+    }
   }).
   argv;
 
@@ -72,6 +73,6 @@ runner({
     console.log(toCSV(argv.class, results.mean, results.stdDev, results.median, results.mode, argv.runs, argv.listeners));
     setTimeout(function() {
       process.exit(0);
-    }, 10)
+    }, 10);
   }
 });

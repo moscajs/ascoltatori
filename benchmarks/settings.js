@@ -1,7 +1,7 @@
 
 module.exports.MemoryAscoltatore = function() {
   return {};
-}
+};
 
 module.exports.RedisAscoltatore = function() {
   return {
@@ -22,16 +22,16 @@ module.exports.ZeromqAscoltatore = function(remote_ports) {
   };
 };
 
-module.exports.RabbitAscoltatore = function() {
+module.exports.AMQPAscoltatore = function() {
   return {
     amqp: require("amqp"),
     exchange: "ascolatore" + module.exports.nextPort()
   };
 };
 
-module.exports.MQTTAscoltatore= function() {
+module.exports.MQTTAscoltatore = function() {
   return {
-    mqtt: require("mqttjs"),
+    mqtt: require("mqtt"),
     host: "127.0.0.1",
     port: 1883
   };
