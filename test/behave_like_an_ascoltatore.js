@@ -311,4 +311,14 @@ module.exports = function () {
       }
     ]);
   });
+
+  it("should publish correctly a false", function (done) {
+    var that = this;
+    that.instance.sub("hello/*", function (topic, value) {
+      expect(value).to.be.false;
+      done();
+    }, function () {
+      that.instance.pub("hello/123", false);
+    });
+  });
 };
