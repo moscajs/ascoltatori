@@ -41,11 +41,11 @@ var mosca = require("mosca");
 
 global.mqttServer = new mosca.Server({ port: 5883 });
 
-global.behaveLikeAnAscoltatore = require("./behave_like_an_ascoltatore");
+global.ascoltatori = require("../");
+
+global.behaveLikeAnAscoltatore = ascoltatori.behaveLikeAnAscoltatore;
 
 global.wrap = require("../lib/util").wrap;
 
 var sinonChai = require("sinon-chai");
 chai.use(sinonChai);
-
-global.ascoltatori = require("../");

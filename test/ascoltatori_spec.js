@@ -1,12 +1,10 @@
 
-var behave_like_an_ascoltatore = require("./behave_like_an_ascoltatore");
-
 describe(ascoltatori, function () {
 
-  behave_like_an_ascoltatore();
+  behaveLikeAnAscoltatore();
 
   beforeEach(function () {
-    ascoltatori.use(new ascoltatori.MemoryAscoltatore);
+    ascoltatori.use(new ascoltatori.MemoryAscoltatore());
     this.instance = ascoltatori;
     this.sandbox = sinon.sandbox.create();
   });
