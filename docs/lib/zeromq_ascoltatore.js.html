@@ -17,77 +17,53 @@ code {
   div.description {margin: 14px 0; padding-top: 14px; border-top:1px solid #eee; border-bottom:1px solid #eee; }
   .tags {}
     .tags .types {color:#666}
-.ctx-type { float:right; margin-top:8px }</style></head><body><div class="row"><div class="twelve columns"><h1 class="pagetitle">Ascoltatori</h1></div></div><div class="row"><div id="nav" class="three columns"><ul class="side-nav"><li><a href="abstract_ascoltatore.js.html">abstract_ascoltatore.js</a><ul><li><a href="abstract_ascoltatore.js.html#AbstractAscoltatore">AbstractAscoltatore</a></li><li><a href="abstract_ascoltatore.js.html#subscribe">subscribe</a></li><li><a href="abstract_ascoltatore.js.html#publish">publish</a></li><li><a href="abstract_ascoltatore.js.html#unsubscribe">unsubscribe</a></li><li><a href="abstract_ascoltatore.js.html#close">close</a></li><li><a href="abstract_ascoltatore.js.html#registerDomain">registerDomain</a></li><li><a href="abstract_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="amqp_ascoltatore.js.html">amqp_ascoltatore.js</a><ul><li><a href="amqp_ascoltatore.js.html#AMQPAscoltatore">AMQPAscoltatore</a></li><li><a href="amqp_ascoltatore.js.html#prototype">prototype</a></li><li><a href="amqp_ascoltatore.js.html#_startConn">_startConn</a></li><li><a href="amqp_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="ascoltatori.js.html">ascoltatori.js</a><ul><li><a href="ascoltatori.js.html#build">build</a></li><li><a href="ascoltatori.js.html#use">use</a></li></ul></li><li><a href="memory_ascoltatore.js.html">memory_ascoltatore.js</a><ul><li><a href="memory_ascoltatore.js.html#MemoryAscoltatore">MemoryAscoltatore</a></li><li><a href="memory_ascoltatore.js.html#prototype">prototype</a></li><li><a href="memory_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="mqtt_ascoltatore.js.html">mqtt_ascoltatore.js</a><ul><li><a href="mqtt_ascoltatore.js.html#MQTTAscoltatore">MQTTAscoltatore</a></li><li><a href="mqtt_ascoltatore.js.html#prototype">prototype</a></li><li><a href="mqtt_ascoltatore.js.html#_startConn">_startConn</a></li><li><a href="mqtt_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="prefix_acoltatore.js.html">prefix_acoltatore.js</a><ul><li><a href="prefix_acoltatore.js.html#PrefixAscoltatore">PrefixAscoltatore</a></li><li><a href="prefix_acoltatore.js.html#prototype">prototype</a></li><li><a href="prefix_acoltatore.js.html#exports">exports</a></li></ul></li><li><a href="redis_ascoltatore.js.html">redis_ascoltatore.js</a><ul><li><a href="redis_ascoltatore.js.html#RedisAscoltatore">RedisAscoltatore</a></li><li><a href="redis_ascoltatore.js.html#createConn">createConn</a></li><li><a href="redis_ascoltatore.js.html#prototype">prototype</a></li><li><a href="redis_ascoltatore.js.html#_startPub">_startPub</a></li><li><a href="redis_ascoltatore.js.html#_startSub">_startSub</a></li><li><a href="redis_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="subs_counter.js.html">subs_counter.js</a><ul><li><a href="subs_counter.js.html#SubsCounter">SubsCounter</a></li><li><a href="subs_counter.js.html#clear">clear</a></li><li><a href="subs_counter.js.html#add">add</a></li><li><a href="subs_counter.js.html#remove">remove</a></li><li><a href="subs_counter.js.html#include">include</a></li><li><a href="subs_counter.js.html#forEach">forEach</a></li><li><a href="subs_counter.js.html#keys">keys</a></li></ul></li><li><a href="util.js.html">util.js</a><ul><li><a href="util.js.html#globalCounter">globalCounter</a></li><li><a href="util.js.html#buildIdentifier">buildIdentifier</a></li><li><a href="util.js.html#alias">alias</a></li><li><a href="util.js.html#aliases">aliases</a></li><li><a href="util.js.html#aliasAscoltatore">aliasAscoltatore</a></li><li><a href="util.js.html#wrap">wrap</a></li><li><a href="util.js.html#defer">defer</a></li></ul></li><li><a href="zeromq_ascoltatore.js.html">zeromq_ascoltatore.js</a><ul><li><a href="zeromq_ascoltatore.js.html#ZeromqAscoltatore">ZeromqAscoltatore</a></li><li><a href="zeromq_ascoltatore.js.html#prototype">prototype</a></li><li><a href="zeromq_ascoltatore.js.html#createConn">createConn</a></li><li><a href="zeromq_ascoltatore.js.html#_startSubs">_startSubs</a></li><li><a href="zeromq_ascoltatore.js.html#connect">connect</a></li><li><a href="zeromq_ascoltatore.js.html#subscribe">subscribe</a></li><li><a href="zeromq_ascoltatore.js.html#exports">exports</a></li></ul></li></ul></div><div class="nine columns"><div class="comment"><div class="label radius ctx-type">function</div><h1 id="AbstractAscoltatore">AbstractAscoltatore</h1><h5 class="subheader">AbstractAscoltatore()</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"><p>An <code>AbstractAscoltatore</code> is a class that inherits from <code>EventEmitter</code>.<br />It is also the base class of <code>ascoltatori</code>. It is not meant to be used alone,<br />but it defines the interface for every ascoltatore.</p>
+.ctx-type { float:right; margin-top:8px }</style></head><body><div class="row"><div class="twelve columns"><h1 class="pagetitle">Ascoltatori</h1></div></div><div class="row"><div id="nav" class="three columns"><ul class="side-nav"><li><a href="../../docs/lib/abstract_ascoltatore.js.html">lib/abstract_ascoltatore.js</a><ul><li><a href="../../docs/lib/abstract_ascoltatore.js.html#AbstractAscoltatore">AbstractAscoltatore</a></li><li><a href="../../docs/lib/abstract_ascoltatore.js.html#subscribe">subscribe</a></li><li><a href="../../docs/lib/abstract_ascoltatore.js.html#publish">publish</a></li><li><a href="../../docs/lib/abstract_ascoltatore.js.html#unsubscribe">unsubscribe</a></li><li><a href="../../docs/lib/abstract_ascoltatore.js.html#close">close</a></li><li><a href="../../docs/lib/abstract_ascoltatore.js.html#registerDomain">registerDomain</a></li><li><a href="../../docs/lib/abstract_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="../../docs/lib/amqp_ascoltatore.js.html">lib/amqp_ascoltatore.js</a><ul><li><a href="../../docs/lib/amqp_ascoltatore.js.html#AMQPAscoltatore">AMQPAscoltatore</a></li><li><a href="../../docs/lib/amqp_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="../../docs/lib/ascoltatori.js.html">lib/ascoltatori.js</a><ul><li><a href="../../docs/lib/ascoltatori.js.html#build">build</a></li><li><a href="../../docs/lib/ascoltatori.js.html#use">use</a></li></ul></li><li><a href="../../docs/lib/behave_like_an_ascoltatore.js.html">lib/behave_like_an_ascoltatore.js</a><ul></ul></li><li><a href="../../docs/lib/memory_ascoltatore.js.html">lib/memory_ascoltatore.js</a><ul><li><a href="../../docs/lib/memory_ascoltatore.js.html#MemoryAscoltatore">MemoryAscoltatore</a></li><li><a href="../../docs/lib/memory_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="../../docs/lib/mqtt_ascoltatore.js.html">lib/mqtt_ascoltatore.js</a><ul><li><a href="../../docs/lib/mqtt_ascoltatore.js.html#MQTTAscoltatore">MQTTAscoltatore</a></li><li><a href="../../docs/lib/mqtt_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="../../docs/lib/prefix_acoltatore.js.html">lib/prefix_acoltatore.js</a><ul><li><a href="../../docs/lib/prefix_acoltatore.js.html#PrefixAscoltatore">PrefixAscoltatore</a></li><li><a href="../../docs/lib/prefix_acoltatore.js.html#exports">exports</a></li></ul></li><li><a href="../../docs/lib/redis_ascoltatore.js.html">lib/redis_ascoltatore.js</a><ul><li><a href="../../docs/lib/redis_ascoltatore.js.html#RedisAscoltatore">RedisAscoltatore</a></li><li><a href="../../docs/lib/redis_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="../../docs/lib/subs_counter.js.html">lib/subs_counter.js</a><ul><li><a href="../../docs/lib/subs_counter.js.html#SubsCounter">SubsCounter</a></li><li><a href="../../docs/lib/subs_counter.js.html#clear">clear</a></li><li><a href="../../docs/lib/subs_counter.js.html#add">add</a></li><li><a href="../../docs/lib/subs_counter.js.html#remove">remove</a></li><li><a href="../../docs/lib/subs_counter.js.html#include">include</a></li><li><a href="../../docs/lib/subs_counter.js.html#forEach">forEach</a></li><li><a href="../../docs/lib/subs_counter.js.html#keys">keys</a></li></ul></li><li><a href="../../docs/lib/util.js.html">lib/util.js</a><ul><li><a href="../../docs/lib/util.js.html#globalCounter">globalCounter</a></li><li><a href="../../docs/lib/util.js.html#buildIdentifier">buildIdentifier</a></li><li><a href="../../docs/lib/util.js.html#alias">alias</a></li><li><a href="../../docs/lib/util.js.html#aliases">aliases</a></li><li><a href="../../docs/lib/util.js.html#aliasAscoltatore">aliasAscoltatore</a></li><li><a href="../../docs/lib/util.js.html#wrap">wrap</a></li><li><a href="../../docs/lib/util.js.html#defer">defer</a></li></ul></li><li><a href="../../docs/lib/zeromq_ascoltatore.js.html">lib/zeromq_ascoltatore.js</a><ul><li><a href="../../docs/lib/zeromq_ascoltatore.js.html#ZeromqAscoltatore">ZeromqAscoltatore</a></li><li><a href="../../docs/lib/zeromq_ascoltatore.js.html#connect">connect</a></li><li><a href="../../docs/lib/zeromq_ascoltatore.js.html#exports">exports</a></li></ul></li></ul></div><div class="nine columns"><div class="comment"><div class="label radius ctx-type">function</div><h1 id="ZeromqAscoltatore">ZeromqAscoltatore</h1><h5 class="subheader">ZeromqAscoltatore()</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"><p>ZeromqAscoltatore is a class that inherits from AbstractAscoltatore.<br />It is implemented through the <code>zmq</code> package.<br />ZeromqAscoltatore operates in a true peer-to-peer fashion, so there is<br />no central broker.<br />The two or more instances MUST be aware of each other and connect to each<br />other by the <code>connect</code> method.<br />All the instances transmit to everyone ALL messages in a broadcast fashion,<br />however loops are avoided.</p>
 
-<h2>Every ascoltatore emits the following events</h2>
+<h2>The options are</h2>
 
 <ul>
-<li><code>ready</code>, when the ascolatore is ready for subscribing and/or
-publishing messages;</li>
-<li><code>closed</code>, when the ascoltatore has closed all the connections
-and therefore it cannot accept new messages;</li>
-<li><code>newTopic</code>, emitted every time a new topic is created by the
-Ascoltatore;</li>
-<li><code>error</code>, if something goes wrong.</li>
-</ul></div><pre><code class="language-javascript">function AbstractAscoltatore() {
-  EventEmitter.call(this);
+<li><code>port</code>, the zmq port to listen from;</li>
+<li><code>remotePorts</code>, the remote ports to connect to;</li>
+<li><code>zmq</code>, the zmq module (it will automatically be required if not present);</li>
+<li><code>delay</code>, a delay that is applied to the <code>ready</code> and <code>closed</code> events (the default is 5ms);</li>
+</ul></div><pre><code class="language-javascript">function ZeromqAscoltatore(opts) {
+  AbstractAscoltatore.call(this);
 
-  this._ready = false;
-  this._closed = false;
+  this._opts = opts || {};
+  this._opts.delay = this._opts.delay || 5;
+  this._opts.zmq = this._opts.zmq || require(&quot;zmq&quot;);
 
-  var that = this;
+  this._ascoltatore = new MemoryAscoltatore();
+  this._startSubs();
+  this._startPub();
+  this._ascoltatore.on(&quot;newTopic&quot;, this.emit.bind(this, &quot;newTopic&quot;));
+}</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="connect">connect</h1><h5 class="subheader">ZeromqAscoltatore.prototype.connect()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {String} </span><span class="name">port </span></li><li><strong>@param: </strong><span class="types"> {Function} </span><span class="name">callback </span></li></ul></div><div class="description"><p>Connect the Ascoltatore to a remote ZMQ port.</p></div><pre><code class="language-javascript">ZeromqAscoltatore.prototype.connect = function connect(port, callback) {
+  var that = this,
+    conn = createConn(that._opts, &quot;sub&quot;);
 
-  this.on(&quot;ready&quot;, function () {
-    that._ready = true;
+  conn.connect(port);
+  conn.subscribe(&quot;&quot;);
+  that._sub_conns.push(conn);
+
+  conn.on(&quot;message&quot;, function (data) {
+    data = data.toString();
+    var topic = null, message = null;
+
+    topic = data.substr(0, data.indexOf(&quot; &quot;));
+    message = JSON.parse(data.substr(data.indexOf(&quot; &quot;)));
+
+    that._ascoltatore.publish(topic, message);
+
+    debug(&quot;new message received for topic &quot; + topic);
   });
 
-  this.on(&quot;closed&quot;, function () {
-    that._closed = true;
-  });
+  setTimeout(function () {
+    debug(&quot;connected and subscribed to &quot; + port);
+    util.defer(callback);
+  }, this._opts.delay);
 
-  this.on(&quot;newListener&quot;, function (event, listener) {
-    if (event === &quot;ready&quot; &amp;&amp; that._ready) {
-      listener();
-    }
-  });
-
-  this.setMaxListeners(0);
-}
-
-AbstractAscoltatore.prototype = Object.create(EventEmitter.prototype);
-
-AbstractAscoltatore.prototype._raiseIfClosed = function raiseIfClosed() {
-  if (this._closed) {
-    throw new Error(&quot;This ascoltatore is closed&quot;);
-  }
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="subscribe">subscribe</h1><h5 class="subheader">AbstractAscoltatore.prototype.subscribe()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {String} </span><span class="name">topic </span><span class="description">the topic to subscribe to</span></li><li><strong>@param: </strong><span class="types"> {Function} </span><span class="name">callback </span><span class="description">the callback that will be called when a new message is published.</span></li><li><strong>@param: </strong><span class="types"> {Function} </span><span class="name">done </span><span class="description">the callback that will be called when the subscribe is completed</span></li></ul></div><div class="description"><p>This method provides a way for users to subscribe for messages.</p>
-
-<p>The messages are published on topics, that is just a "path", e.g.<br /><code>/this/is/a/topic</code>.<br />The topic are organized in a hierarchy, and <code>subscribe</code> support the usage<br />of wildcards, e.g. you can subscribe to <code>*</code> and it will<br />match all the topics </p>
-
-<h2>Example</h2>
-
-<pre><code>  ascoltatore.subscribe("*", function () {
-    // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments); 
-  });
-</code></pre></div><pre><code class="language-javascript">AbstractAscoltatore.prototype.subscribe = function (topic, callback, done) {
-  throw new Error(&quot;Subclass to implement&quot;);
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="publish">publish</h1><h5 class="subheader">AbstractAscoltatore.prototype.publish()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {String} </span><span class="name">topic </span><span class="description">the topic to publish to</span></li><li><strong>@param: </strong><span class="types"> {Object} </span><span class="name">payload </span><span class="description">the callback that will be called when a new message is published.</span></li><li><strong>@param: </strong><span class="types"> {Function} </span><span class="name">done </span><span class="description">the callback that will be called after the message has been published.</span></li></ul></div><div class="description"><p>This method allow publishing of messages to topics.</p>
-
-<h2>Example</h2>
-
-<pre><code>ascoltatore.publish("hello/42", "a message", function () {
-  console.log("message published");
-});
-</code></pre></div><pre><code class="language-javascript">AbstractAscoltatore.prototype.publish = function (topic, payload, done) {
-  throw new Error(&quot;Subclass to implement&quot;);
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="unsubscribe">unsubscribe</h1><h5 class="subheader">AbstractAscoltatore.prototype.unsubscribe()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {String} </span><span class="name">topic </span><span class="description">the topic from which to unsubscribe</span></li><li><strong>@param: </strong><span class="types"> {Function} </span><span class="name">callback </span><span class="description">the callback that will be unsubscribed</span></li><li><strong>@param: </strong><span class="types"> {Function} </span><span class="name">done </span><span class="description">the callback that will be called when the unsubscribe is completed</span></li></ul></div><div class="description"><p>This method provides the inverse of subscribe.</p></div><pre><code class="language-javascript">AbstractAscoltatore.prototype.unsubscribe = function (topic, callback, done) {
-  throw new Error(&quot;Subclass to implement&quot;);
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="close">close</h1><h5 class="subheader">AbstractAscoltatore.prototype.close()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {Function} </span><span class="name">done </span><span class="description">the callback that will be called when Ascoltatore is closed</span></li></ul></div><div class="description"><p>This method closes the Ascoltatore.<br />After this method is called every call to subscribe or publish will raise<br />an exception</p></div><pre><code class="language-javascript">AbstractAscoltatore.prototype.close = function (done) {
-  throw new Error(&quot;Subclass to implement&quot;);
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="registerDomain">registerDomain</h1><h5 class="subheader">AbstractAscoltatore.prototype.registerDomain()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {Domain} </span><span class="name">domain </span><span class="description">the node.js error domain to use.</span></li></ul></div><div class="description"><p>You can register a nodejs domain so that every callback is<br />jailed and cannot crash the process.</p></div><pre><code class="language-javascript">AbstractAscoltatore.prototype.registerDomain = function (domain) {
-  this._ascoltatore.registerDomain(domain);
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">property</div><h1 id="exports">exports</h1><h5 class="subheader">module.exports</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"><p>Exports the AbstractAscoltatore;</p></div><pre><code class="language-javascript">module.exports = AbstractAscoltatore;</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
+  return this;
+};</code></pre></div><div class="comment"><div class="label radius ctx-type">property</div><h1 id="exports">exports</h1><h5 class="subheader">module.exports</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"><p>Export ZeromqAscoltatore</p></div><pre><code class="language-javascript">module.exports = ZeromqAscoltatore;</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
  * Prism: Lightweight, robust, elegant syntax highlighting
  * MIT license http://www.opensource.org/licenses/mit-license.php/
  * @author Lea Verou http://lea.verou.me
