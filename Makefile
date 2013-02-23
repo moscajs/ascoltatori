@@ -48,7 +48,7 @@ docs-clean:
 	rm -rf docs
 
 docs: docs-clean
-	./node_modules/.bin/dox-foundation --source lib/ --target docs --title Ascoltatori
+	./node_modules/.bin/dox-foundation --source lib --target docs --title Ascoltatori
 
 publish-docs: docs
 	git stash	
@@ -57,7 +57,7 @@ publish-docs: docs
 	git checkout gh-pages
 	git pull origin gh-pages
 	rm -rf docs
-	cp -R /tmp/ascoltatori-docs/lib docs
+	cp -R /tmp/ascoltatori-docs docs
 	git add docs
 	git add -u
 	git commit -m "Updated docs"
