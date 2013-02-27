@@ -1,7 +1,7 @@
 {
   "name": "ascoltatori",
   "version": "0.2.4",
-  "description": "The multi-transport MQTT broker for node.js. It supports AMQP, Redis, ZeroMQ or just MQTT.",
+  "description": "The pub/sub library for node backed by Redis, AMQP (RabbitMQ), ZeroMQ, MQTT (Mosquitto) or just plain node!",
   "main": "index.js",
   "scripts": {
     "test": "make test"
