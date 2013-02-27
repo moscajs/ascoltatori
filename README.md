@@ -25,6 +25,12 @@ http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html
 > Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.
 
+## Install
+
+```
+npm install ascoltatori --save
+```
+
 ## Usage
 
 __Ascoltatori__ is built to be extremely easy to use, and can provide a
@@ -59,6 +65,51 @@ should work smoothly on every broker.
 You might find some differences, and in that case file a bug
 report, so I can fix them.
 
+## Configuration and dependencies
+
+This library does not depend directly on redis, AMQP (RabbitMQ),
+0MQ, MQTT.js, but rather it encourages you to pass them to the
+ascoltatori via an options object, like so (for Redis):
+
+```
+var ascoltatori = require('ascoltatori');
+
+var settings = {
+  type: 'redis',
+  redis: require('redis'),
+  db: 12,
+  port: 424242,
+  host: 192.168.42.42
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+
+  ascoltatore.subscribe("hello/*", function() {
+    // this will print { '0': "hello/42", '1': "a message" }
+    console.log(arguments); 
+    process.exit(0);
+  });
+
+  ascoltatore.publish("hello/42", "a message", function() {
+    console.log("message published");
+  });
+});
+```
+
+
+By default, every ascoltatore built by the `ascoltatori.build`
+wraps every published message in a JSON format.
+This behaviour can be triggered off by passing a `{ json: false }`
+settings object, like so:
+```
+require('ascoltatori').build({ json: false }, function(a) {
+  // ...
+});
+```
+
+If you feel one more option is missing, feel free to fork this library,
+add it, and then send a pull request.
+
 ### Domain support
 
 __Ascoltatori__ properly supports the [node.js domain API](http://nodejs.org/api/domain.html).
@@ -87,47 +138,6 @@ ascoltatori.build(function (ascoltatore) {
     console.log("message published");
   });
 });
-```
-
-## Dependencies
-
-This library does not depend directly on redis, AMQP (RabbitMQ),
-zmq, MQTT.js, but rather it encourages you to pass them to the
-ascoltatori via an options object, like so (for Redis):
-
-```
-var ascoltatori = require('ascoltatori');
-
-var settings = {
-  type: 'redis',
-  redis: require('redis'),
-  db: 12,
-  port: 424242,
-  host: 192.168.42.42
-};
-
-ascoltatori.build(settings, function (ascoltatore) {
-
-  ascoltatore.subscribe("hello/*", function() {
-    // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments); 
-    process.exit(0);
-  });
-
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
-  });
-});
-
-```
-
-If you feel one more option is missing, feel free to fork this library,
-add it, and then send a pull request.
-
-## Install
-
-```
-npm install ascoltatori
 ```
 
 ## Debugging
