@@ -60,6 +60,11 @@ and the generated documentation is available at:
 An Ascoltatore is therefore a single listener.</p>
 </blockquote>
 
+<h2>Install</h2>
+
+<pre><code>npm install ascoltatori --save
+</code></pre>
+
 <h2>Usage</h2>
 
 <p><strong>Ascoltatori</strong> is built to be extremely easy to use, and can provide a
@@ -93,6 +98,49 @@ should work smoothly on every broker.
 You might find some differences, and in that case file a bug
 report, so I can fix them.</p>
 
+<h2>Configuration and dependencies</h2>
+
+<p>This library does not depend directly on redis, AMQP (RabbitMQ),
+0MQ, MQTT.js, but rather it encourages you to pass them to the
+ascoltatori via an options object, like so (for Redis):</p>
+
+<pre><code>var ascoltatori = require('ascoltatori');
+
+var settings = {
+  type: 'redis',
+  redis: require('redis'),
+  db: 12,
+  port: 424242,
+  host: 192.168.42.42
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+
+  ascoltatore.subscribe("hello/*", function() {
+    // this will print { '0': "hello/42", '1': "a message" }
+    console.log(arguments); 
+    process.exit(0);
+  });
+
+  ascoltatore.publish("hello/42", "a message", function() {
+    console.log("message published");
+  });
+});
+</code></pre>
+
+<p>By default, every ascoltatore built by the <code>ascoltatori.build</code>
+wraps every published message in a JSON format.
+This behaviour can be triggered off by passing a <code>{ json: false }</code>
+settings object, like so:</p>
+
+<pre><code>require('ascoltatori').build({ json: false }, function(a) {
+  // ...
+});
+</code></pre>
+
+<p>If you feel one more option is missing, feel free to fork this library,
+add it, and then send a pull request.</p>
+
 <h3>Domain support</h3>
 
 <p><strong>Ascoltatori</strong> properly supports the <a href="http://nodejs.org/api/domain.html">node.js domain API</a>.
@@ -121,45 +169,6 @@ ascoltatori.build(function (ascoltatore) {
     console.log("message published");
   });
 });
-</code></pre>
-
-<h2>Dependencies</h2>
-
-<p>This library does not depend directly on redis, AMQP (RabbitMQ),
-zmq, MQTT.js, but rather it encourages you to pass them to the
-ascoltatori via an options object, like so (for Redis):</p>
-
-<pre><code>var ascoltatori = require('ascoltatori');
-
-var settings = {
-  type: 'redis',
-  redis: require('redis'),
-  db: 12,
-  port: 424242,
-  host: 192.168.42.42
-};
-
-ascoltatori.build(settings, function (ascoltatore) {
-
-  ascoltatore.subscribe("hello/*", function() {
-    // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments); 
-    process.exit(0);
-  });
-
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
-  });
-});
-
-</code></pre>
-
-<p>If you feel one more option is missing, feel free to fork this library,
-add it, and then send a pull request.</p>
-
-<h2>Install</h2>
-
-<pre><code>npm install ascoltatori
 </code></pre>
 
 <h2>Debugging</h2>
