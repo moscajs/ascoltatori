@@ -39,7 +39,7 @@
     "zmq": "~2.2.0",
     "amqp": "~0.1.4",
     "optimist": "~0.3.5",
-    "mqtt": "~0.1.8",
+    "mqtt": "~0.2.0",
     "async_bench": "0.0.1",
     "dox-foundation": "0.4.4",
     "mosca": "~0.1.0"

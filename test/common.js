@@ -36,8 +36,7 @@ global.mqttSettings = function () {
     json: false,
     mqtt: require("mqtt"),
     host: "127.0.0.1",
-    port: 5883,
-    keepalive: 1
+    port: 5883
   };
 };
 
