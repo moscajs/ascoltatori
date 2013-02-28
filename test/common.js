@@ -1,3 +1,5 @@
+"use strict";
+
 global.sinon = require("sinon");
 global.chai = require("chai");
 global.expect = require("chai").expect;
@@ -34,6 +36,12 @@ global.mqttSettings = function () {
     host: "127.0.0.1",
     port: 5883,
     keepalive: 1
+  };
+};
+
+global.mongoSettings = function () {
+  return {
+
   };
 };
 
