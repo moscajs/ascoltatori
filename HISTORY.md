@@ -2,6 +2,13 @@
 History
 =======
 
+## 0.3.0
+
+* Introduced a JSONAscoltatore;
+* `ascoltatori.build` now wraps all ascoltatori using a JSONAscoltatore,
+  pass `{ json: false }` to disable;
+* Upgraded MQTT.js to version 0.2.0.
+
 ## 0.2.4
 
 * Published inside the package the 'behaveLikeAnAscoltatore' test.
