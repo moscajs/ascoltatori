@@ -7,6 +7,7 @@ global.async = require("async");
 
 global.redisSettings = function () {
   return {
+    json: false,
     redis: require('redis')
   };
 };
@@ -18,6 +19,7 @@ global.nextPort = function () {
 
 global.zeromqSettings = function (remote_ports) {
   return {
+    json: false,
     zmq: require("zmq"),
     port: "tcp://127.0.0.1:" + global.nextPort()
   };
@@ -25,6 +27,7 @@ global.zeromqSettings = function (remote_ports) {
 
 global.rabbitSettings = function () {
   return {
+    json: false,
     amqp: require("amqp"),
     exchange: "ascolatore" + global.nextPort()
   };
@@ -32,10 +35,10 @@ global.rabbitSettings = function () {
 
 global.mqttSettings = function () {
   return {
+    json: false,
     mqtt: require("mqtt"),
     host: "127.0.0.1",
-    port: 5883,
-    keepalive: 1
+    port: 5883
   };
 };
 

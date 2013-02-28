@@ -33,7 +33,7 @@ describe(ascoltatori, function () {
   it("should delegate to _global for 'subscribe'", function () {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "subscribe");
-    var func = function (argument) {}
+    var func = function (argument) {};
     ascoltatori.use(ascoltatore);
     ascoltatori.subscribe("hello", func);
     expect(spy).to.have.been.calledWith("hello", func);
@@ -42,7 +42,7 @@ describe(ascoltatori, function () {
   it("should delegate to _global for 'removeListener'", function () {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "removeListener");
-    var func = function (argument) {}
+    var func = function (argument) {};
     ascoltatori.use(ascoltatore);
     ascoltatori.sub("hello", func);
     ascoltatori.removeListener("hello", func);
@@ -53,7 +53,7 @@ describe(ascoltatori, function () {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "close");
     ascoltatori.use(ascoltatore);
-    ascoltatori.close()
+    ascoltatori.close();
     expect(spy).to.have.been.called;
   });
 
@@ -104,7 +104,7 @@ describe(ascoltatori, function () {
     });
 
     it("should create a new MemoryAscolatore", function () {
-      var a = ascoltatori.build();
+      var a = ascoltatori.build({ json: false });
       toClose.push(a);
       expect(a).to.be.instanceOf(ascoltatori.MemoryAscoltatore);
     });
@@ -139,9 +139,10 @@ describe(ascoltatori, function () {
     });
 
     it("should provide a callback function for being ready", function (done) {
-      ascoltatori.build(function (a) { 
+      var result = null;
+      result = ascoltatori.build(function (a) {
         toClose.push(a);
-        expect(a).to.be.instanceOf(ascoltatori.MemoryAscoltatore);
+        expect(a).to.be.equal(result);
         done();
       });
     });
@@ -152,6 +153,36 @@ describe(ascoltatori, function () {
       ascoltatori.build(settings, function (a) { 
         toClose.push(a);
         done();
+      });
+    });
+
+    it("should publish correctly a false with json = true", function (done) {
+      var settings = redisSettings();
+      settings.type = "redis";
+      settings.json = true;
+      ascoltatori.build(settings, function (a) { 
+        toClose.push(a);
+        a.sub("hello/*", function (topic, value) {
+          expect(value).to.be.eql(false);
+          done();
+        }, function () {
+          a.pub("hello/123", false);
+        });
+      });
+    });
+
+    it("should publish correctly a false without json", function (done) {
+      var settings = redisSettings();
+      settings.type = "redis";
+      delete settings.json;
+      ascoltatori.build(settings, function (a) { 
+        toClose.push(a);
+        a.sub("hello/*", function (topic, value) {
+          expect(value).to.be.eql(false);
+          done();
+        }, function () {
+          a.pub("hello/123", false);
+        });
       });
     });
   });

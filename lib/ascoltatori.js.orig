@@ -108,9 +108,12 @@ module.exports.ZeromqAscoltatore = require("./zeromq_ascoltatore");
 module.exports.AMQPAscoltatore = require("./amqp_ascoltatore");
 module.exports.MQTTAscoltatore = require("./mqtt_ascoltatore");
 module.exports.PrefixAscoltatore = require("./prefix_acoltatore");
+<<<<<<< HEAD
 module.exports.MongoAscoltatore = require('./mongo_ascoltatore');
+=======
 module.exports.DecoratorAscoltatore = require("./decorator_ascoltatore");
 module.exports.JSONAscoltatore = require("./json_ascoltatore");
+>>>>>>> 206aae0b426068d4c3f1bca023ba8098e7f15c39
 
 /**
  * The default global Ascoltatore is a MemoryAscoltatore.
