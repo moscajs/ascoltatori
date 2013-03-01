@@ -1,5 +1,5 @@
 env:
- - ZMQ="git://github.com/zeromq/zeromq3-x.git" DEBUG=*
+ - ZMQ="git://github.com/zeromq/zeromq3-x.git"
 before_install:
  - sudo apt-get install libevent-dev libev-dev uuid-dev
  - git clone --depth 1 $ZMQ zmqlib
