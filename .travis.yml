@@ -1,5 +1,6 @@
 env:
  - ZMQ="git://github.com/zeromq/zeromq3-x.git"
+ - DEBUG=*
 before_install:
  - sudo apt-get install uuid-dev
  - git clone --depth 1 $ZMQ zmqlib
