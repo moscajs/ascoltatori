@@ -13,10 +13,14 @@ function setup(type, options, counter, done) {
         pass.complete(null, instance);
       }
     };
+    
+    var subscribe = function (done) {
+      instance.subscribe("hello", callback, done);
+    };
 
     var a = [], i = null;
     for(i = counter; i > 0; i--) {
-      a.push(instance.subscribe.bind(instance, "hello", callback));
+      a.push(subscribe);
     }
 
     async.parallel(a, function() {
