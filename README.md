@@ -157,6 +157,15 @@ The following debug flags are supported, one for each ascoltatore:
 * `ascoltatori:redis`
 * `ascoltatori:zmq`
 
+## Reliability
+
+Due to the various transports Ascoltatori uses, it is impossible to
+garantee one of the various reliability properties across all of the
+transports.
+However, the MQTT and AMQP ascoltatori provides at-least-once semantics,
+which means that the message might be received more than once, but at
+least once.
+
 ## Contributing to Ascoltatori
 
 * Check out the latest master to make sure the feature hasn't been
