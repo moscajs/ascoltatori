@@ -189,7 +189,16 @@ trigger the logging based on an external enviroment variable, like so:</p>
 <li><code>ascoltatori:prefix</code></li>
 <li><code>ascoltatori:redis</code></li>
 <li><code>ascoltatori:zmq</code></li>
-</ul><h2>Contributing to Ascoltatori</h2>
+</ul><h2>Reliability</h2>
+
+<p>Due to the various transports Ascoltatori uses, it is impossible to
+garantee one of the various reliability properties across all of the
+transports.
+However, the MQTT and AMQP ascoltatori provides at-least-once semantics,
+which means that the message might be received more than once, but at
+least once.</p>
+
+<h2>Contributing to Ascoltatori</h2>
 
 <ul>
 <li>Check out the latest master to make sure the feature hasn't been
