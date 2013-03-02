@@ -41,7 +41,8 @@
   },
   "dependencies": {
     "async": "~0.2.4",
-    "debug": "~0.7.2"
+    "debug": "~0.7.2",
+    "node-uuid": "~1.4.0"
   },
   "optionalDependencies": {
     "redis": "~0.8.1",

@@ -45,8 +45,4 @@ describe("ascoltatori.util", function () {
   it("should build two different unique identifiers", function () {
     expect(util.buildIdentifier()).to.not.be.equal(util.buildIdentifier());
   });
-
-  it("should include the process PID in the unique identifier", function () {
-    expect(util.buildIdentifier()).to.be.include(String(process.pid));
-  });
 });
