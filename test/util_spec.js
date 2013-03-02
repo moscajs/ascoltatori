@@ -1,7 +1,7 @@
 
 var util = ascoltatori.util;
 
-describe(util, function () {
+describe("ascoltatori.util", function () {
 
   it("should respond to alias", function () {
     expect(util).to.respondTo("alias");

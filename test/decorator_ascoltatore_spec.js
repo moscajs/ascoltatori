@@ -1,5 +1,5 @@
 
-describe(ascoltatori.DecoratorAscoltatore, function () {
+describe("ascoltatori.DecoratorAscoltatore", function () {
 
   behaveLikeAnAscoltatore();
 

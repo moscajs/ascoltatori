@@ -1,5 +1,5 @@
 
-describe(ascoltatori.MQTTAscoltatore, function () {
+describe("ascoltatori.MQTTAscoltatore", function () {
 
   behaveLikeAnAscoltatore();
 

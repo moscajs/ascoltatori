@@ -1,5 +1,5 @@
 
-describe(ascoltatori.PrefixAscoltatore, function () {
+describe("ascoltatori.PrefixAscoltatore", function () {
 
   behaveLikeAnAscoltatore();
 

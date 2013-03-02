@@ -1,4 +1,4 @@
-describe(ascoltatori.ZeromqAscoltatore, function () {
+describe("ascoltatori.ZeromqAscoltatore", function () {
 
   behaveLikeAnAscoltatore();
 

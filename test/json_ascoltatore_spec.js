@@ -1,5 +1,5 @@
 
-describe(ascoltatori.JSONAscoltatore, function () {
+describe("ascoltatori.JSONAscoltatore", function () {
 
   behaveLikeAnAscoltatore();
 
