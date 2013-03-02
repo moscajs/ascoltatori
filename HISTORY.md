@@ -2,6 +2,17 @@
 History
 =======
 
+## 0.3.1
+
+* Using QoS 1 for MQTTAscoltatore
+  ([#36](https://github.com/mcollina/ascoltatori/issues/36)).
+* Added peer discovery in ZeromqAscolatore
+  ([#26](https://github.com/mcollina/ascoltatori/issues/26)).
+* Fixed RedisAscoltatore to work without hiredis
+  ([#42](https://github.com/mcollina/ascoltatori/issues/42)).
+* Uses node-uuid for identifiers
+  ([#27](https://github.com/mcollina/ascoltatori/issues/27)).
+
 ## 0.3.0
 
 * Introduced a JSONAscoltatore;

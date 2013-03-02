@@ -1,6 +1,6 @@
 {
   "name": "ascoltatori",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "The pub/sub library for node backed by Redis, AMQP (RabbitMQ), ZeroMQ, MQTT (Mosquitto) or just plain node!",
   "main": "index.js",
   "scripts": {
