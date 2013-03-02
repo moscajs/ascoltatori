@@ -65,7 +65,11 @@ publish-docs: docs
 	git checkout master
 	git stash apply
 
-jslint:
-	find lib -name "*.js" -print0 | xargs -0 jslint --indent 2 --nomen --node
+jshint:
+	find lib -name "*.js" -print0 | xargs -0 jshint
+	find test -name "*.js" -print0 | xargs -0 jshint
+
+install-pre-commit:
+	ln -s precommit.sh .git/hooks/pre-commit
 
 .PHONY: test

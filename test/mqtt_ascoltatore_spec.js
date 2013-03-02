@@ -10,7 +10,7 @@ describe("ascoltatori.MQTTAscoltatore", function () {
 
   afterEach(function (done) {
     this.instance.close(function () {
-     done();
+      done();
     });
     delete this.instance;
   });
