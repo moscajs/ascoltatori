@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.3.2
+
+* Fixed Mosca version at 0.2.0.
+
 ## 0.3.1
 
 * Using QoS 1 for MQTTAscoltatore
