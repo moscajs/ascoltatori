@@ -40,7 +40,7 @@
     "mosca": "~0.2.0"
   },
   "dependencies": {
-    "async": "~0.2.4",
+    "async": "~0.2.6",
     "debug": "~0.7.2",
     "node-uuid": "~1.4.0"
   },
