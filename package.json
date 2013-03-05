@@ -36,7 +36,7 @@
     "sinon-chai": "~2.1.2",
     "redis": "~0.8.1",
     "mongodb" : "~1.2.13",
-    "mongoskin" : "~0.5.0",
+    "mongojs" : "*",
     "hiredis": "~0.1.14",
     "zmq": "~2.2.0",
     "amqp": "~0.1.4",
