@@ -1,5 +1,5 @@
 
-describe(ascoltatori.AMQPAscoltatore, function () {
+describe("ascoltatori.AMQPAscoltatore", function () {
 
   behaveLikeAnAscoltatore();
 

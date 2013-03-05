@@ -1,5 +1,5 @@
 
-describe(ascoltatori.RedisAscoltatore, function () {
+describe("ascoltatori.RedisAscoltatore", function () {
 
   behaveLikeAnAscoltatore();
 

@@ -1,7 +1,7 @@
 
 var SubsCounter = ascoltatori.SubsCounter;
 
-describe(SubsCounter, function () {
+describe("ascoltatori.SubsCounter", function () {
 
   it("should be able to add elements", function () {
     expect(function () {

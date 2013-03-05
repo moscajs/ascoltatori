@@ -1,10 +1,10 @@
 {
   "name": "ascoltatori",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "The pub/sub library for node backed by Redis, AMQP (RabbitMQ), ZeroMQ, MQTT (Mosquitto) or just plain node!",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "make bail"
   },
   "repository": {
     "type": "git",
@@ -41,13 +41,20 @@
     "zmq": "~2.2.0",
     "amqp": "~0.1.4",
     "optimist": "~0.3.5",
-    "mqtt": "~0.2.0",
     "async_bench": "0.0.1",
     "dox-foundation": "0.4.4",
-    "mosca": "~0.1.0"
+    "mosca": "~0.2.0"
   },
   "dependencies": {
-    "async": "~0.2.4",
-    "debug": "~0.7.2"
+    "async": "~0.2.6",
+    "debug": "~0.7.2",
+    "node-uuid": "~1.4.0"
+  },
+  "optionalDependencies": {
+    "redis": "~0.8.1",
+    "hiredis": "~0.1.14",
+    "zmq": "~2.2.0",
+    "amqp": "~0.1.4",
+    "mqtt": "~0.2.0"
   }
 }

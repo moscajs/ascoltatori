@@ -1,26 +1,26 @@
 
 var util = ascoltatori.util;
 
-describe(util, function () {
+describe("ascoltatori.util", function () {
 
   it("should respond to alias", function () {
     expect(util).to.respondTo("alias");
   });
 
   it("should create copy a function into another", function () {
-    var obj = { meth: function () {} }
+    var obj = { meth: function () {} };
     util.alias(obj, "meth", "methB");
     expect(obj.methB).to.eql(obj.meth);
   });
 
   it("should return the object when aliasing", function () {
-    var obj = { meth: function () {} }
+    var obj = { meth: function () {} };
     expect(util.alias(obj, "meth", "methB")).to.eql(obj);
   });
 
   it("should raise an exception if we try to alias something that's not a function", function () {
-    var obj = { a: "b" }
-    expect(function () { util.alias("a", "c") }).to.throw("'a' is not a function");
+    var obj = { a: "b" };
+    expect(function () { util.alias("a", "c"); }).to.throw("'a' is not a function");
   });
 
   describe("aliasAscoltatore", function () {
@@ -44,9 +44,5 @@ describe(util, function () {
 
   it("should build two different unique identifiers", function () {
     expect(util.buildIdentifier()).to.not.be.equal(util.buildIdentifier());
-  });
-
-  it("should include the process PID in the unique identifier", function () {
-    expect(util.buildIdentifier()).to.be.include(String(process.pid));
   });
 });

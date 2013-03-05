@@ -1,5 +1,5 @@
 
-describe(ascoltatori.MemoryAscoltatore, function () {
+describe("ascoltatori.MemoryAscoltatore", function () {
 
   behaveLikeAnAscoltatore();
 

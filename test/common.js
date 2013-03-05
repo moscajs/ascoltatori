@@ -12,7 +12,7 @@ global.redisSettings = function () {
   };
 };
 
-var portCounter = 50042;
+var portCounter = 9042;
 global.nextPort = function () {
   return ++portCounter;
 };
@@ -21,7 +21,9 @@ global.zeromqSettings = function (remote_ports) {
   return {
     json: false,
     zmq: require("zmq"),
-    port: "tcp://127.0.0.1:" + global.nextPort()
+    port: "tcp://127.0.0.1:" + global.nextPort(),
+    controlPort: "tcp://127.0.0.1:" + global.nextPort(),
+    delay: 10
   };
 };
 

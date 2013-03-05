@@ -1,5 +1,5 @@
 
-describe(ascoltatori.MQTTAscoltatore, function () {
+describe("ascoltatori.MQTTAscoltatore", function () {
 
   behaveLikeAnAscoltatore();
 
@@ -9,7 +9,9 @@ describe(ascoltatori.MQTTAscoltatore, function () {
   });
 
   afterEach(function (done) {
-    this.instance.close(done);
+    this.instance.close(function () {
+      done();
+    });
     delete this.instance;
   });
 
