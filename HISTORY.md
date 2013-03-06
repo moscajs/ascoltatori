@@ -2,6 +2,11 @@
 History
 =======
 
+## 0.3.3
+
+* Fixed Mosca version at 0.2.0.
+* Added MongoAscoltatore, thanks to [filnik](https://github.com/filnik).
+
 ## 0.3.2
 
 * Fixed Mosca version at 0.2.0.
