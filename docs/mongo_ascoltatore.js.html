@@ -17,54 +17,60 @@ code {
   div.description {margin: 14px 0; padding-top: 14px; border-top:1px solid #eee; border-bottom:1px solid #eee; }
   .tags {}
     .tags .types {color:#666}
-.ctx-type { float:right; margin-top:8px }</style></head><body><div class="row"><div class="twelve columns"><h1 class="pagetitle">Ascoltatori</h1></div></div><div class="row"><div id="nav" class="three columns"><ul class="side-nav"><li><a href="abstract_ascoltatore.js.html">abstract_ascoltatore.js</a><ul><li><a href="abstract_ascoltatore.js.html#AbstractAscoltatore">AbstractAscoltatore</a></li><li><a href="abstract_ascoltatore.js.html#subscribe">subscribe</a></li><li><a href="abstract_ascoltatore.js.html#publish">publish</a></li><li><a href="abstract_ascoltatore.js.html#unsubscribe">unsubscribe</a></li><li><a href="abstract_ascoltatore.js.html#close">close</a></li><li><a href="abstract_ascoltatore.js.html#registerDomain">registerDomain</a></li><li><a href="abstract_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="amqp_ascoltatore.js.html">amqp_ascoltatore.js</a><ul><li><a href="amqp_ascoltatore.js.html#AMQPAscoltatore">AMQPAscoltatore</a></li><li><a href="amqp_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="ascoltatori.js.html">ascoltatori.js</a><ul><li><a href="ascoltatori.js.html#build">build</a></li><li><a href="ascoltatori.js.html#use">use</a></li></ul></li><li><a href="behave_like_an_ascoltatore.js.html">behave_like_an_ascoltatore.js</a><ul></ul></li><li><a href="decorator_ascoltatore.js.html">decorator_ascoltatore.js</a><ul><li><a href="decorator_ascoltatore.js.html#DecoratorAscoltatore">DecoratorAscoltatore</a></li><li><a href="decorator_ascoltatore.js.html#wrapTopic">wrapTopic</a></li><li><a href="decorator_ascoltatore.js.html#wrapCallback">wrapCallback</a></li><li><a href="decorator_ascoltatore.js.html#wrapPayload">wrapPayload</a></li></ul></li><li><a href="json_ascoltatore.js.html">json_ascoltatore.js</a><ul><li><a href="json_ascoltatore.js.html#JSONAscoltatore">JSONAscoltatore</a></li><li><a href="json_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="memory_ascoltatore.js.html">memory_ascoltatore.js</a><ul><li><a href="memory_ascoltatore.js.html#MemoryAscoltatore">MemoryAscoltatore</a></li><li><a href="memory_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="mongo_ascoltatore.js.html">mongo_ascoltatore.js</a><ul><li><a href="mongo_ascoltatore.js.html#MongoAscoltatore">MongoAscoltatore</a></li><li><a href="mongo_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="mqtt_ascoltatore.js.html">mqtt_ascoltatore.js</a><ul><li><a href="mqtt_ascoltatore.js.html#MQTTAscoltatore">MQTTAscoltatore</a></li><li><a href="mqtt_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="prefix_acoltatore.js.html">prefix_acoltatore.js</a><ul><li><a href="prefix_acoltatore.js.html#PrefixAscoltatore">PrefixAscoltatore</a></li><li><a href="prefix_acoltatore.js.html#exports">exports</a></li></ul></li><li><a href="redis_ascoltatore.js.html">redis_ascoltatore.js</a><ul><li><a href="redis_ascoltatore.js.html#RedisAscoltatore">RedisAscoltatore</a></li><li><a href="redis_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="subs_counter.js.html">subs_counter.js</a><ul><li><a href="subs_counter.js.html#SubsCounter">SubsCounter</a></li><li><a href="subs_counter.js.html#clear">clear</a></li><li><a href="subs_counter.js.html#add">add</a></li><li><a href="subs_counter.js.html#remove">remove</a></li><li><a href="subs_counter.js.html#include">include</a></li><li><a href="subs_counter.js.html#forEach">forEach</a></li><li><a href="subs_counter.js.html#keys">keys</a></li></ul></li><li><a href="util.js.html">util.js</a><ul><li><a href="util.js.html#buildIdentifier">buildIdentifier</a></li><li><a href="util.js.html#alias">alias</a></li><li><a href="util.js.html#aliases">aliases</a></li><li><a href="util.js.html#aliasAscoltatore">aliasAscoltatore</a></li><li><a href="util.js.html#wrap">wrap</a></li><li><a href="util.js.html#defer">defer</a></li></ul></li><li><a href="zeromq_ascoltatore.js.html">zeromq_ascoltatore.js</a><ul><li><a href="zeromq_ascoltatore.js.html#ZeromqAscoltatore">ZeromqAscoltatore</a></li><li><a href="zeromq_ascoltatore.js.html#prototype">prototype</a></li><li><a href="zeromq_ascoltatore.js.html#createConn">createConn</a></li><li><a href="zeromq_ascoltatore.js.html#_startSubs">_startSubs</a></li><li><a href="zeromq_ascoltatore.js.html#connect">connect</a></li><li><a href="zeromq_ascoltatore.js.html#_connectSub">_connectSub</a></li><li><a href="zeromq_ascoltatore.js.html#subscribe">subscribe</a></li><li><a href="zeromq_ascoltatore.js.html#exports">exports</a></li></ul></li></ul></div><div class="nine columns"><div class="comment"><div class="label radius ctx-type">function</div><h1 id="SubsCounter">SubsCounter</h1><h5 class="subheader">SubsCounter()</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"><p>This is a counter for the subscriptions.<br />It is used by all the ascoltatori to keep track to<br />for what topics there are subscribers.</p></div><pre><code class="language-javascript">function SubsCounter() {
-  this.clear();
-}</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="clear">clear</h1><h5 class="subheader">SubsCounter.prototype.clear()</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"><p>Clear the SubsCounter</p></div><pre><code class="language-javascript">SubsCounter.prototype.clear = function () {
-  this._length = 0;
-  this._obj = {};
-  return this;
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="add">add</h1><h5 class="subheader">SubsCounter.prototype.add()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {String} </span><span class="name">elem </span><span class="description">The element to track</span></li><li><strong>@return: </strong><span class="types"> {SubsCounter} </span></li></ul></div><div class="description"><p>Add a new element to the SubsCounter.<br />The SubsCounter keep track of the number of times<br />this method was called for every passed <code>elem</code>.</p></div><pre><code class="language-javascript">SubsCounter.prototype.add = function (elem) {
-  if (!this.include(elem)) {
-    this._length += 1;
-    this._obj[elem] = 1;
-  } else {
-    this._obj[elem] = this._obj[elem] + 1;
-  }
+.ctx-type { float:right; margin-top:8px }</style></head><body><div class="row"><div class="twelve columns"><h1 class="pagetitle">Ascoltatori</h1></div></div><div class="row"><div id="nav" class="three columns"><ul class="side-nav"><li><a href="abstract_ascoltatore.js.html">abstract_ascoltatore.js</a><ul><li><a href="abstract_ascoltatore.js.html#AbstractAscoltatore">AbstractAscoltatore</a></li><li><a href="abstract_ascoltatore.js.html#subscribe">subscribe</a></li><li><a href="abstract_ascoltatore.js.html#publish">publish</a></li><li><a href="abstract_ascoltatore.js.html#unsubscribe">unsubscribe</a></li><li><a href="abstract_ascoltatore.js.html#close">close</a></li><li><a href="abstract_ascoltatore.js.html#registerDomain">registerDomain</a></li><li><a href="abstract_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="amqp_ascoltatore.js.html">amqp_ascoltatore.js</a><ul><li><a href="amqp_ascoltatore.js.html#AMQPAscoltatore">AMQPAscoltatore</a></li><li><a href="amqp_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="ascoltatori.js.html">ascoltatori.js</a><ul><li><a href="ascoltatori.js.html#build">build</a></li><li><a href="ascoltatori.js.html#use">use</a></li></ul></li><li><a href="behave_like_an_ascoltatore.js.html">behave_like_an_ascoltatore.js</a><ul></ul></li><li><a href="decorator_ascoltatore.js.html">decorator_ascoltatore.js</a><ul><li><a href="decorator_ascoltatore.js.html#DecoratorAscoltatore">DecoratorAscoltatore</a></li><li><a href="decorator_ascoltatore.js.html#wrapTopic">wrapTopic</a></li><li><a href="decorator_ascoltatore.js.html#wrapCallback">wrapCallback</a></li><li><a href="decorator_ascoltatore.js.html#wrapPayload">wrapPayload</a></li></ul></li><li><a href="json_ascoltatore.js.html">json_ascoltatore.js</a><ul><li><a href="json_ascoltatore.js.html#JSONAscoltatore">JSONAscoltatore</a></li><li><a href="json_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="memory_ascoltatore.js.html">memory_ascoltatore.js</a><ul><li><a href="memory_ascoltatore.js.html#MemoryAscoltatore">MemoryAscoltatore</a></li><li><a href="memory_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="mongo_ascoltatore.js.html">mongo_ascoltatore.js</a><ul><li><a href="mongo_ascoltatore.js.html#MongoAscoltatore">MongoAscoltatore</a></li><li><a href="mongo_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="mqtt_ascoltatore.js.html">mqtt_ascoltatore.js</a><ul><li><a href="mqtt_ascoltatore.js.html#MQTTAscoltatore">MQTTAscoltatore</a></li><li><a href="mqtt_ascoltatore.js.html#prototype">prototype</a></li><li><a href="mqtt_ascoltatore.js.html#_startConn">_startConn</a></li><li><a href="mqtt_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="prefix_acoltatore.js.html">prefix_acoltatore.js</a><ul><li><a href="prefix_acoltatore.js.html#PrefixAscoltatore">PrefixAscoltatore</a></li><li><a href="prefix_acoltatore.js.html#prototype">prototype</a></li><li><a href="prefix_acoltatore.js.html#exports">exports</a></li></ul></li><li><a href="redis_ascoltatore.js.html">redis_ascoltatore.js</a><ul><li><a href="redis_ascoltatore.js.html#RedisAscoltatore">RedisAscoltatore</a></li><li><a href="redis_ascoltatore.js.html#createConn">createConn</a></li><li><a href="redis_ascoltatore.js.html#prototype">prototype</a></li><li><a href="redis_ascoltatore.js.html#_startPub">_startPub</a></li><li><a href="redis_ascoltatore.js.html#_startSub">_startSub</a></li><li><a href="redis_ascoltatore.js.html#exports">exports</a></li></ul></li><li><a href="subs_counter.js.html">subs_counter.js</a><ul><li><a href="subs_counter.js.html#SubsCounter">SubsCounter</a></li><li><a href="subs_counter.js.html#clear">clear</a></li><li><a href="subs_counter.js.html#add">add</a></li><li><a href="subs_counter.js.html#remove">remove</a></li><li><a href="subs_counter.js.html#include">include</a></li><li><a href="subs_counter.js.html#forEach">forEach</a></li><li><a href="subs_counter.js.html#keys">keys</a></li></ul></li><li><a href="util.js.html">util.js</a><ul><li><a href="util.js.html#buildIdentifier">buildIdentifier</a></li><li><a href="util.js.html#alias">alias</a></li><li><a href="util.js.html#aliases">aliases</a></li><li><a href="util.js.html#aliasAscoltatore">aliasAscoltatore</a></li><li><a href="util.js.html#wrap">wrap</a></li><li><a href="util.js.html#defer">defer</a></li></ul></li><li><a href="zeromq_ascoltatore.js.html">zeromq_ascoltatore.js</a><ul><li><a href="zeromq_ascoltatore.js.html#ZeromqAscoltatore">ZeromqAscoltatore</a></li><li><a href="zeromq_ascoltatore.js.html#prototype">prototype</a></li><li><a href="zeromq_ascoltatore.js.html#createConn">createConn</a></li><li><a href="zeromq_ascoltatore.js.html#_startSubs">_startSubs</a></li><li><a href="zeromq_ascoltatore.js.html#connect">connect</a></li><li><a href="zeromq_ascoltatore.js.html#_connectSub">_connectSub</a></li><li><a href="zeromq_ascoltatore.js.html#subscribe">subscribe</a></li><li><a href="zeromq_ascoltatore.js.html#exports">exports</a></li></ul></li></ul></div><div class="nine columns"><div class="comment"><div class="label radius ctx-type">function</div><h1 id="MongoAscoltatore">MongoAscoltatore</h1><h5 class="subheader">MongoAscoltatore()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {Object} </span><span class="name">opts </span><span class="description">The options object</span></li></ul></div><div class="description"><p>MongoAscoltatore is a class that inherits from AbstractAscoltatore.<br />It is implemented through the <code>mongodb</code> package.</p>
 
-  return this;
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="remove">remove</h1><h5 class="subheader">SubsCounter.prototype.remove()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {String} </span><span class="name">elem </span><span class="description">The element to track</span></li><li><strong>@return: </strong><span class="types"> {SubsCounter} </span></li></ul></div><div class="description"><p>Removes an element.<br />The SubsCounter keep track of the total<br />times an <code>elem</code> is added or removed.</p></div><pre><code class="language-javascript">SubsCounter.prototype.remove = function (elem) {
-  if (!this.include(elem)) {
-    return this;
-  }
+<h2>The options are</h2>
 
-  if (this._obj[elem] === 1) {
-    this._length -= 1;
-    delete this._obj[elem];
-  } else {
-    this._obj[elem] = this._obj[elem] - 1;
-  }
+<p>uri : the mongodb uri (default: 'mongodb://localhost:27017/' )<br />pubsubCollection : where to store the messages on mongodb (default: ascoltatori)<br />mongo : settings for the mongodb connection</p></div><pre><code class="language-javascript">var MongoAscoltatore = function (opts) {
+  AbstractAscoltatore.call(this);
+  this._opts = opts || {};
+  this.uri = this._opts.uri || 'mongodb://127.0.0.1/';
+  this._db = this._opts.db || 'ascoltatori';
+  this._pubsubCollection = opts.pubsubCollection || 'pubsub';
+  this.uri = this.uri + this._db;
+  this.uri = this.uri + '?auto_reconnect';
+  this.mongoOpts = this._opts.mongo || {};
 
-  return this;
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="include">include</h1><h5 class="subheader">SubsCounter.prototype.include()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {String} </span><span class="name">elem </span><span class="description">The element to track</span></li><li><strong>@return: </strong><span class="types"> {boolean} </span><span class="description">true if the element has more than one subscription</span></li></ul></div><div class="description"><p>The SubsCounter keep track of the total<br />times an <code>elem</code> is added or removed, and it<br />offers the <code>include</code> method to verify if it is<br />greater than zero.</p></div><pre><code class="language-javascript">SubsCounter.prototype.include = function (elem) {
-  return this._obj[elem] !== undefined;
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="forEach">forEach</h1><h5 class="subheader">SubsCounter.prototype.forEach()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {Function} </span><span class="name">callback </span><span class="description">the function where the elements will be</span></li><li><strong>@yield: </strong></li><li><strong>@return: </strong><span class="types"> {SubsCounter} </span></li></ul></div><div class="description"><p>List all the elements for which <code>include</code> returns true.</p></div><pre><code class="language-javascript">SubsCounter.prototype.forEach = function (callback) {
-  var key = null;
-  for (key in this._obj) {
-    if (this._obj.hasOwnProperty(key)) {
-      callback(key);
+  this._ascoltatore = new MemoryAscoltatore();
+
+  this._ascoltatore.on(&quot;newTopic&quot;, this.emit.bind(this, &quot;newTopic&quot;));
+
+  this.channels = {};
+  this._closed = false;
+
+  this.wait = this._opts.wait || 100;
+
+  this.connectionParams = {
+    capped: true,
+    size: this._opts.size || 100000,
+    max: this._opts.max || 500
+  };
+
+  this.mongoOpts.safe = true;
+
+  // this operation is SYNC, so emit after this will work
+  this.db = mongo.db(this.uri, this.mongoOpts);
+
+  var that = this;
+
+  // creating the capped collection where we can exchange messages
+  this.db.createCollection(this._pubsubCollection, that.connectionParams, function (err, collection) {
+    if (err) {
+      throw new Error(err);
+    } else {
+      that.collection = collection;
+      // be sure to have a capped collection on the run
+      that.db.executeDbCommand({&quot;convertToCapped&quot;: that._pubsubCollection, size: that.connectionParams.size}, function ready() {
+        debug('ready');
+
+        // create a new object id. We will get all the events from now on
+        that._poll(new BSON.ObjectID());
+
+        that.emit('ready');
+      });
     }
-  }
-
-  return this;
-};</code></pre></div><div class="comment"><div class="label radius ctx-type">method</div><h1 id="keys">keys</h1><h5 class="subheader">SubsCounter.prototype.keys()</h5><div class="tags"><ul class="no-bullet"><li><strong>@return: </strong><span class="types"> {Array} </span><span class="description">a list of elements</span></li></ul></div><div class="description"><p>List all the elements for which <code>include</code> returns true.</p></div><pre><code class="language-javascript">SubsCounter.prototype.keys = function () {
-  var array = [];
-  this.forEach(function (e) { array.push(e); });
-  return array;
-};</code></pre></div><div class="comment"><div class="tags"><ul class="no-bullet"><li><strong>@return: </strong><span class="types"> {Number} </span></li></ul></div><div class="description"><p>Returns the number of elements for which <code>include</code> returns true.</p></div><pre><code class="language-javascript">SubsCounter.prototype.__defineGetter__(&quot;length&quot;, function () {
-  return this._length;
-});
-
-module.exports = SubsCounter;</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
+  });
+};</code></pre></div><div class="comment"><div class="label radius ctx-type">property</div><h1 id="exports">exports</h1><h5 class="subheader">module.exports</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"><p>Exports the MongoAscoltatore</p></div><pre><code class="language-javascript">module.exports = MongoAscoltatore;</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
  * Prism: Lightweight, robust, elegant syntax highlighting
  * MIT license http://www.opensource.org/licenses/mit-license.php/
  * @author Lea Verou http://lea.verou.me
