@@ -14,6 +14,8 @@ This list currently includes:
   [@antirez](https://github.com/antirez).
 * [Mosquitto](http://mosquitto.org/) and all implementations of the
   [MQTT](http://mqtt.org/) protocol.
+* [MongoDB](http://www.mongodb.org/), the documental NoSQL that
+  is revolutioning how web apps are built.
 * [ZeroMQ](http://www.zeromq.org/) without a central broker, so
   Ascoltatori can also be used in a P2P fashion.
 
