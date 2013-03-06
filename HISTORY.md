@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.3.4
+
+* Bugfixes to MQTTAscoltatore.
+
 ## 0.3.3
 
 * Fixed Mosca version at 0.2.0.
