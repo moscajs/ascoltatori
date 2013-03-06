@@ -43,6 +43,6 @@ describe("ascoltatori.util", function () {
   });
 
   it("should build two different unique identifiers", function () {
-    expect(util.buildIdentifier()).to.not.be.equal(util.buildIdentifier());
+    expect(util.buildIdentifier()).not.to.be.eql(util.buildIdentifier());
   });
 });
