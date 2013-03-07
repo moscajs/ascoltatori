@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.3.5
+
+* More docs for MongoAscoltatore.
+
 ## 0.3.4
 
 * Bugfixes to MQTTAscoltatore.

@@ -1,7 +1,7 @@
 {
   "name": "ascoltatori",
-  "version": "0.3.4",
-  "description": "The pub/sub library for node backed by Redis, AMQP (RabbitMQ), ZeroMQ, MQTT (Mosquitto) or just plain node!",
+  "version": "0.3.5",
+  "description": "The pub/sub library for node backed by Redis, MongoDB, AMQP (RabbitMQ), ZeroMQ, MQTT (Mosquitto) or just plain node!",
   "main": "index.js",
   "scripts": {
     "test": "make bail"
@@ -22,7 +22,11 @@
     "0mq",
     "mqtt",
     "amqp",
-    "mosquitto"
+    "mosquitto",
+    "mongodb",
+    "mongo",
+    "pub",
+    "sub"
   ],
   "author": "Matteo Collina <hello@matteocollina.com>",
   "license": "MIT",
