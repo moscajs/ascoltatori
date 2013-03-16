@@ -66,8 +66,8 @@ publish-docs: docs
 	git stash apply
 
 jshint:
-	find lib -name "*.js" -print0 | xargs -0 jshint
-	find test -name "*.js" -print0 | xargs -0 jshint
+	find lib -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
+	find test -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
 
 install-pre-commit:
 	ln -s precommit.sh .git/hooks/pre-commit
