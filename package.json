@@ -43,7 +43,8 @@
     "async_bench": "0.0.1",
     "dox-foundation": "0.4.4",
     "mosca": "~0.2.0",
-    "jshint": "~1.1.0"
+    "jshint": "~1.1.0",
+    "js-beautify": "~0.4.2"
   },
   "dependencies": {
     "async": "~0.2.6",

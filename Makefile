@@ -7,6 +7,15 @@ bail:
 ci:
 	./node_modules/.bin/mocha --recursive --watch test
 
+jshint:
+	find lib -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
+	find test -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
+
+BEAUTIFY=node_modules/.bin/js-beautify -r -s 2
+beautify:
+	find lib -name "*.js" -print0 | xargs -0 $(BEAUTIFY)
+	find test -name "*.js" -print0 | xargs -0 $(BEAUTIFY)
+
 bench-clean:
 	rm -rf ./benchmarks/results
 
@@ -64,10 +73,6 @@ publish-docs: docs
 	git push origin
 	git checkout master
 	git stash apply
-
-jshint:
-	find lib -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
-	find test -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
 
 install-pre-commit:
 	ln -s precommit.sh .git/hooks/pre-commit
