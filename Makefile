@@ -1,8 +1,8 @@
 test:
-	./node_modules/.bin/mocha --recursive test --reporter nyan
+	./node_modules/.bin/mocha --recursive test
 
 bail:
-	./node_modules/.bin/mocha --recursive test --bail --reporter spec
+	./node_modules/.bin/mocha --recursive --bail --reporter spec test 
 
 ci:
 	./node_modules/.bin/mocha --recursive --watch test
@@ -66,8 +66,8 @@ publish-docs: docs
 	git stash apply
 
 jshint:
-	find lib -name "*.js" -print0 | xargs -0 jshint
-	find test -name "*.js" -print0 | xargs -0 jshint
+	find lib -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
+	find test -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
 
 install-pre-commit:
 	ln -s precommit.sh .git/hooks/pre-commit

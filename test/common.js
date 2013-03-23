@@ -5,7 +5,7 @@ global.chai = require("chai");
 global.expect = require("chai").expect;
 global.async = require("async");
 
-global.redisSettings = function () {
+global.redisSettings = function() {
   return {
     json: false,
     redis: require('redis')
@@ -13,11 +13,11 @@ global.redisSettings = function () {
 };
 
 var portCounter = 9042;
-global.nextPort = function () {
+global.nextPort = function() {
   return ++portCounter;
 };
 
-global.zeromqSettings = function (remote_ports) {
+global.zeromqSettings = function(remote_ports) {
   return {
     json: false,
     zmq: require("zmq"),
@@ -27,7 +27,7 @@ global.zeromqSettings = function (remote_ports) {
   };
 };
 
-global.rabbitSettings = function () {
+global.rabbitSettings = function() {
   return {
     json: false,
     amqp: require("amqp"),
@@ -35,7 +35,7 @@ global.rabbitSettings = function () {
   };
 };
 
-global.mqttSettings = function () {
+global.mqttSettings = function() {
   return {
     json: false,
     mqtt: require("mqtt"),
@@ -44,7 +44,7 @@ global.mqttSettings = function () {
   };
 };
 
-global.mongoSettings = function () {
+global.mongoSettings = function() {
   return {
     uri: 'mongodb://127.0.0.1/',
     db: 'ascoltatori',
@@ -55,7 +55,9 @@ global.mongoSettings = function () {
 
 var mosca = require("mosca");
 
-global.mqttServer = new mosca.Server({ port: 5883 });
+global.mqttServer = new mosca.Server({
+  port: 5883
+});
 
 global.ascoltatori = require("../");
 

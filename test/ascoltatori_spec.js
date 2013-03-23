@@ -1,28 +1,27 @@
-
-describe("ascoltatori", function () {
+describe("ascoltatori", function() {
 
   behaveLikeAnAscoltatore();
 
-  beforeEach(function () {
+  beforeEach(function() {
     ascoltatori.use(new ascoltatori.MemoryAscoltatore());
     this.instance = ascoltatori;
     this.sandbox = sinon.sandbox.create();
   });
 
-  afterEach(function () {
+  afterEach(function() {
     this.sandbox.restore();
   });
 
-  it("should have an use method", function () {
+  it("should have an use method", function() {
     expect(this.instance).to.respondTo("use");
   });
 
-  it("should return the ascoltatori object when calling use", function () {
+  it("should return the ascoltatori object when calling use", function() {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
     expect(ascoltatori.use(ascoltatore)).to.have.be.equal(ascoltatori);
   });
 
-  it("should delegate to the use ascoltatore for 'pub'", function () {
+  it("should delegate to the use ascoltatore for 'pub'", function() {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "publish");
     ascoltatori.use(ascoltatore);
@@ -30,26 +29,26 @@ describe("ascoltatori", function () {
     expect(spy).to.have.been.calledWith("hello");
   });
 
-  it("should delegate to _global for 'subscribe'", function () {
+  it("should delegate to _global for 'subscribe'", function() {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "subscribe");
-    var func = function (argument) {};
+    var func = function(argument) {};
     ascoltatori.use(ascoltatore);
     ascoltatori.subscribe("hello", func);
     expect(spy).to.have.been.calledWith("hello", func);
   });
 
-  it("should delegate to _global for 'removeListener'", function () {
+  it("should delegate to _global for 'removeListener'", function() {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "removeListener");
-    var func = function (argument) {};
+    var func = function(argument) {};
     ascoltatori.use(ascoltatore);
     ascoltatori.sub("hello", func);
     ascoltatori.removeListener("hello", func);
     expect(spy).to.have.been.calledWith("hello", func);
   });
 
-  it("should delegate to _global for 'close'", function () {
+  it("should delegate to _global for 'close'", function() {
     var ascoltatore = new ascoltatori.MemoryAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "close");
     ascoltatori.use(ascoltatore);
@@ -57,13 +56,13 @@ describe("ascoltatori", function () {
     expect(spy).to.have.been.called;
   });
 
-  describe(".build", function () {
+  describe(".build", function() {
 
     var toClose = [];
 
-    afterEach(function (done) {
-      async.parallel(toClose.map(function (a) {
-        return function (cb) {
+    afterEach(function(done) {
+      async.parallel(toClose.map(function(a) {
+        return function(cb) {
           a.once("ready", function() {
             a.close(cb);
           });
@@ -71,7 +70,7 @@ describe("ascoltatori", function () {
       }), done);
     });
 
-    it("should create a new MQTTAscoltatore", function () {
+    it("should create a new MQTTAscoltatore", function() {
       var settings = mqttSettings();
       settings.type = "mqtt";
       var a = ascoltatori.build(settings);
@@ -79,7 +78,7 @@ describe("ascoltatori", function () {
       expect(a).to.be.instanceOf(ascoltatori.MQTTAscoltatore);
     });
 
-    it("should create a new RedisAscoltatore", function () {
+    it("should create a new RedisAscoltatore", function() {
       var settings = redisSettings();
       settings.type = "redis";
       var a = ascoltatori.build(settings);
@@ -87,7 +86,7 @@ describe("ascoltatori", function () {
       expect(a).to.be.instanceOf(ascoltatori.RedisAscoltatore);
     });
 
-    it("should create a new AMQPAscoltatore", function () {
+    it("should create a new AMQPAscoltatore", function() {
       var settings = rabbitSettings();
       settings.type = "amqp";
       var a = ascoltatori.build(settings);
@@ -95,7 +94,7 @@ describe("ascoltatori", function () {
       expect(a).to.be.instanceOf(ascoltatori.AMQPAscoltatore);
     });
 
-    it("should create a new ZeromqAscoltatore", function () {
+    it("should create a new ZeromqAscoltatore", function() {
       var settings = zeromqSettings();
       settings.type = "zmq";
       var a = ascoltatori.build(settings);
@@ -103,13 +102,15 @@ describe("ascoltatori", function () {
       expect(a).to.be.instanceOf(ascoltatori.ZeromqAscoltatore);
     });
 
-    it("should create a new MemoryAscolatore", function () {
-      var a = ascoltatori.build({ json: false });
+    it("should create a new MemoryAscolatore", function() {
+      var a = ascoltatori.build({
+        json: false
+      });
       toClose.push(a);
       expect(a).to.be.instanceOf(ascoltatori.MemoryAscoltatore);
     });
 
-    it("should wrap it with a prefix", function (done) {
+    it("should wrap it with a prefix", function(done) {
       var settings = redisSettings();
       settings.type = "redis";
       settings.prefix = "/hello";
@@ -123,64 +124,68 @@ describe("ascoltatori", function () {
       toClose.push(b);
 
       async.series([
-        function (cb) {
+
+        function(cb) {
           a.on("ready", cb);
         },
-        function (cb) {
+
+        function(cb) {
           b.on("ready", cb);
         },
-        function (cb) {
+
+        function(cb) {
           b.subscribe("/hello/world", wrap(done), cb);
         },
-        function (cb) {
+
+        function(cb) {
           a.publish("/world", true);
         }
       ]);
     });
 
-    it("should provide a callback function for being ready", function (done) {
+    it("should provide a callback function for being ready", function(done) {
       var result = null;
-      result = ascoltatori.build(function (a) {
+      result = ascoltatori.build(function(a) {
         toClose.push(a);
         expect(a).to.be.equal(result);
         done();
       });
     });
 
-    it("should provide a callback function for being ready with settings", function (done) {
+    it("should provide a callback function for being ready with settings", function(done) {
       var settings = redisSettings();
       settings.type = "redis";
-      ascoltatori.build(settings, function (a) { 
+      ascoltatori.build(settings, function(a) {
         toClose.push(a);
         done();
       });
     });
 
-    it("should publish correctly a false with json = true", function (done) {
+    it("should publish correctly a false with json = true", function(done) {
       var settings = redisSettings();
       settings.type = "redis";
       settings.json = true;
-      ascoltatori.build(settings, function (a) { 
+      ascoltatori.build(settings, function(a) {
         toClose.push(a);
-        a.sub("hello/*", function (topic, value) {
+        a.sub("hello/*", function(topic, value) {
           expect(value).to.be.eql(false);
           done();
-        }, function () {
+        }, function() {
           a.pub("hello/123", false);
         });
       });
     });
 
-    it("should publish correctly a false without json", function (done) {
+    it("should publish correctly a false without json", function(done) {
       var settings = redisSettings();
       settings.type = "redis";
       delete settings.json;
-      ascoltatori.build(settings, function (a) { 
+      ascoltatori.build(settings, function(a) {
         toClose.push(a);
-        a.sub("hello/*", function (topic, value) {
+        a.sub("hello/*", function(topic, value) {
           expect(value).to.be.eql(false);
           done();
-        }, function () {
+        }, function() {
           a.pub("hello/123", false);
         });
       });

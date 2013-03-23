@@ -1,28 +1,30 @@
-
-describe("ascoltatori.AMQPAscoltatore", function () {
+describe("ascoltatori.AMQPAscoltatore", function() {
 
   behaveLikeAnAscoltatore();
 
-  beforeEach(function (done) {
+  beforeEach(function(done) {
     this.instance = new ascoltatori.AMQPAscoltatore(rabbitSettings());
     this.instance.on("ready", done);
   });
 
-  afterEach(function (done) {
+  afterEach(function(done) {
     this.instance.close(done);
   });
 
-  it("should sync two instances", function (done) {
+  it("should sync two instances", function(done) {
     var other = new ascoltatori.AMQPAscoltatore(this.instance._opts);
     var that = this;
     async.series([
-      function (cb){
+
+      function(cb) {
         other.on("ready", cb);
       },
-      function (cb) {
+
+      function(cb) {
         that.instance.subscribe("hello", wrap(done), cb);
       },
-      function (cb) {
+
+      function(cb) {
         other.publish("hello", null, cb);
       }
     ]);
