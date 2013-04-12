@@ -10,6 +10,7 @@ describe("ascoltatori.AMQPAscoltatore", function() {
   afterEach(function(done) {
     this.instance.close(done);
     this.instance.on("error", function () {
+      console.log(arguments);
       // we should just close it,
       // avoid errors
     });
