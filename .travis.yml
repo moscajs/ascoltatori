@@ -1,5 +1,5 @@
 env:
- - ZMQ="git://github.com/zeromq/zeromq3-x.git"
+ - ZMQ="git://github.com/zeromq/zeromq3-x.git -b v3.2.2"
 before_install:
  - sudo apt-get install libevent-dev libev-dev uuid-dev
  - git clone --depth 1 $ZMQ zmqlib
@@ -13,6 +13,7 @@ before_install:
 language: node_js
 node_js:
   - 0.8
+  - 0.10
 services:
   - rabbitmq
   - redis-server
