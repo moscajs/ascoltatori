@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.4.1
+
+* Stabilized AMQP on node v0.10.
+
 ## 0.4.0
 
 * Suppor for node v0.10.
