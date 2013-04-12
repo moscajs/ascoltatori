@@ -2,6 +2,13 @@
 History
 =======
 
+## 0.4.0
+
+* Suppor for node v0.10.
+* Added error handling for amqp (@unlucio).
+* Updated MQTT.js to v0.2.6.
+* Updated node-zeromq to v2.4.0.
+
 ## 0.3.5
 
 * More docs for MongoAscoltatore.
