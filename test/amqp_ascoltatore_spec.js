@@ -9,6 +9,10 @@ describe("ascoltatori.AMQPAscoltatore", function() {
 
   afterEach(function(done) {
     this.instance.close(done);
+    this.instance.on("error", function () {
+      // we should just close it,
+      // avoid errors
+    });
   });
 
   it("should sync two instances", function(done) {
