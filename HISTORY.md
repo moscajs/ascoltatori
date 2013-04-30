@@ -2,6 +2,11 @@
 History
 =======
 
+## 0.4.2
+
+* Replaced mongoskin with mongodb.
+* Stabilized MongoAscoltatore on node v0.10.
+
 ## 0.4.1
 
 * Stabilized AMQP on node v0.10.
