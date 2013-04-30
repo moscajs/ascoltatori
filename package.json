@@ -42,7 +42,7 @@
     "optimist": "~0.3.5",
     "async_bench": "~0.1.0",
     "dox-foundation": "0.4.4",
-    "mosca": "git://github.com/mcollina/mosca.git#node-v0.10",
+    "mosca": "git://github.com/mcollina/mosca.git",
     "jshint": "~1.1.0",
     "js-beautify": "~0.4.2"
   },
