@@ -110,6 +110,24 @@ describe("ascoltatori", function() {
       expect(a).to.be.instanceOf(ascoltatori.MemoryAscoltatore);
     });
 
+    it("should create a new FunctionAscoltatore", function() {
+      var a = ascoltatori.build({
+        json: false,
+        type: function (options, ascoltatori) {
+          this.__proto__ = ascoltatori.AbstractAscoltatore.prototype;
+          ascoltatori.AbstractAscoltatore.call(this);
+
+          this.emit("ready");
+
+          this.close = function (done) {
+            done();
+          }
+        }
+      });
+      toClose.push(a);
+      expect(a).to.be.instanceOf(ascoltatori.AbstractAscoltatore);
+    });
+
     it("should wrap it with a prefix", function(done) {
       var settings = redisSettings();
       settings.type = "redis";
