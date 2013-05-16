@@ -2,6 +2,13 @@
 History
 =======
 
+## 0.4.3
+
+* Ascoltatori.build now accepts a custom `type`, so that it is
+  pluggable with a new Ascoltatore
+  (https://github.com/mcollina/ascoltatori/pull/52), thanks to
+  [@davedoesdev](https://github.com/davedoesdev).
+
 ## 0.4.2
 
 * Replaced mongoskin with mongodb.
