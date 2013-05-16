@@ -215,8 +215,7 @@ code {
     this.instance.close(function() {
       expect(function() {
         this.instance.publish(&quot;hello&quot;, &quot;world&quot;);
-      }).to.
-      throw;
+      }).to.throw;
       done();
     });
   });
@@ -225,8 +224,7 @@ code {
     this.instance.close(function() {
       expect(function() {
         this.instance.subscribe(&quot;hello&quot;);
-      }).to.
-      throw;
+      }).to.throw;
       done();
     });
   });
@@ -284,7 +282,7 @@ code {
 
         // the nextTick hack is needed to skip out
         // of mocha control
-        process.nextTick(function() {
+        async.setImmediate(function() {
           that.instance.publish(&quot;throw&quot;);
         });
       });

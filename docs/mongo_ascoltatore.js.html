@@ -42,36 +42,39 @@ code {
 
   this.connectionParams = {
     capped: true,
-    size: this._opts.size || 100000,
-    max: this._opts.max || 500
+    size: this._opts.size || 1000,
+    max: this._opts.max || 100
   };
 
   this.mongoOpts.safe = true;
 
-  // this operation is SYNC, so emit after this will work
-  this.db = mongo.db(this.uri, this.mongoOpts);
-
   var that = this;
 
-  // creating the capped collection where we can exchange messages
-  this.db.createCollection(this._pubsubCollection, that.connectionParams, function(err, collection) {
-    if (err) {
-      throw new Error(err);
-    } else  {
-      that.collection = collection;
-      // be sure to have a capped collection on the run
-      that.db.executeDbCommand({
-        &quot;convertToCapped&quot;: that._pubsubCollection,
-        size: that.connectionParams.size
-      }, function ready() {
-        debug('ready');
+  // this operation is SYNC, so emit after this will work
+  MongoClient.connect(this.uri, this.mongoOpts, function(err, db) {
+    that.db = db;
 
-        // create a new object id. We will get all the events from now on
-        that._poll(new BSON.ObjectID());
+    // creating the capped collection where we can exchange messages
+    that.db.createCollection(that._pubsubCollection, that.connectionParams, function(err, collection) {
+      if (err) {
+        throw new Error(err);
+      } else  {
+        that.collection = collection;
 
-        that.emit('ready');
-      });
-    }
+        // be sure to have a capped collection on the run
+        that.db.executeDbCommand({
+          &quot;convertToCapped&quot;: that._pubsubCollection,
+          size: that.connectionParams.size
+        }, function ready() {
+          debug('ready');
+
+          // create a new object id. We will get all the events from now on
+          that._poll(new BSON.ObjectID());
+
+          that.emit('ready');
+        });
+      }
+    });
   });
 };</code></pre></div><div class="comment"><div class="label radius ctx-type">property</div><h1 id="exports">exports</h1><h5 class="subheader">module.exports</h5><div class="tags"><ul class="no-bullet"></ul></div><div class="description"><p>Exports the MongoAscoltatore</p></div><pre><code class="language-javascript">module.exports = MongoAscoltatore;</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
  * Prism: Lightweight, robust, elegant syntax highlighting

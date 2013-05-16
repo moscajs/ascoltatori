@@ -52,7 +52,7 @@ module.exports.aliasAscoltatore = aliasAscoltatore;</code></pre></div><div class
 }
 module.exports.wrap = wrap;</code></pre></div><div class="comment"><div class="label radius ctx-type">function</div><h1 id="defer">defer</h1><h5 class="subheader">defer()</h5><div class="tags"><ul class="no-bullet"><li><strong>@param: </strong><span class="types"> {Function} </span><span class="name">done </span><span class="description">the funcion to be deferred.</span></li></ul></div><div class="description"><p>Defer the execution of the passed function to the<br />next tick. The function might be null.</p></div><pre><code class="language-javascript">function defer(done) {
   if (typeof done === 'function') {
-    process.nextTick(done);
+    async.setImmediate(done);
   }
 }
 module.exports.defer = defer;</code></pre></div></div></div><!-- Foundation JS--><script src="http://cdnjs.cloudflare.com/ajax/libs/foundation/3.2.2/javascripts/foundation.min.js"></script><script>/**
