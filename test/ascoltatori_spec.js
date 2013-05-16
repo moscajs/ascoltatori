@@ -110,18 +110,18 @@ describe("ascoltatori", function() {
       expect(a).to.be.instanceOf(ascoltatori.MemoryAscoltatore);
     });
 
-    it("should create a new FunctionAscoltatore", function() {
+    it("should create a new AbstractAscoltatore using function", function() {
       var a = ascoltatori.build({
         json: false,
         type: function (options, ascoltatori) {
           this.__proto__ = ascoltatori.AbstractAscoltatore.prototype;
           ascoltatori.AbstractAscoltatore.call(this);
 
-          this.emit("ready");
-
           this.close = function (done) {
             done();
           }
+
+          this.emit("ready");
         }
       });
       toClose.push(a);
