@@ -111,18 +111,21 @@ describe("ascoltatori", function() {
     });
 
     it("should create a new AbstractAscoltatore using function", function() {
+      function DummyAscoltatore(options, ascoltatori) {
+        ascoltatori.AbstractAscoltatore.call(this);
+
+        this.close = function (done) {
+          done();
+        };
+
+        this.emit("ready");
+      }
+
+      DummyAscoltatore.prototype = Object.create(ascoltatori.AbstractAscoltatore.prototype);
+
       var a = ascoltatori.build({
         json: false,
-        type: function (options, ascoltatori) {
-          this.__proto__ = ascoltatori.AbstractAscoltatore.prototype;
-          ascoltatori.AbstractAscoltatore.call(this);
-
-          this.close = function (done) {
-            done();
-          }
-
-          this.emit("ready");
-        }
+        type: DummyAscoltatore
       });
       toClose.push(a);
       expect(a).to.be.instanceOf(ascoltatori.AbstractAscoltatore);
