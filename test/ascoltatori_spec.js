@@ -21,7 +21,7 @@ describe("ascoltatori", function() {
     expect(ascoltatori.use(ascoltatore)).to.have.be.equal(ascoltatori);
   });
 
-  var make_fake_ascoltatore = function() {
+  var makeFakeAscoltatore = function() {
     var r = {};
     r.publish = r.subscribe = r.unsubscribe = r.close = r.on =
     r.removeListener = r.registerDomain = function () {};
@@ -29,7 +29,7 @@ describe("ascoltatori", function() {
   };
 
   it("should delegate to the use ascoltatore for 'pub'", function() {
-    var ascoltatore = make_fake_ascoltatore();
+    var ascoltatore = makeFakeAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "publish");
     ascoltatori.use(ascoltatore);
     ascoltatori.publish("hello");
@@ -37,7 +37,7 @@ describe("ascoltatori", function() {
   });
 
   it("should delegate to _global for 'subscribe'", function() {
-    var ascoltatore = make_fake_ascoltatore();
+    var ascoltatore = makeFakeAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "subscribe");
     var func = function(argument) {};
     ascoltatori.use(ascoltatore);
