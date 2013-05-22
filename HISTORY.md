@@ -2,6 +2,13 @@
 History
 =======
 
+## 0.5.0
+
+* *Ascoltatore#publish and #subscribe accepts an option,
+  just before the callbacks
+  (https://github.com/mcollina/ascoltatori/pull/55), thanks to 
+  [@davedoesdev](https://github.com/davedoesdev).
+
 ## 0.4.3
 
 * Ascoltatori.build now accepts a custom `type`, so that it is
