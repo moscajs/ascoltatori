@@ -31,7 +31,8 @@
   "author": "Matteo Collina <hello@matteocollina.com>",
   "license": "MIT",
   "contributors": [
-    "Filippo De Pretto <filnik90@gmail.com>"
+    "Filippo De Pretto <filnik90@gmail.com>",
+    "David Halls <dave@davedoesdev.com>"
   ],
   "devDependencies": {
     "mocha": "~1.8.1",
