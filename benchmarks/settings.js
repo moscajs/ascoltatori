@@ -18,6 +18,7 @@ module.exports.ZeromqAscoltatore = function(remote_ports) {
   return {
     zmq: require("zmq"),
     port: "tcp://127.0.0.1:" + module.exports.nextPort(),
+    controlPort: "tcp://127.0.0.1:" + module.exports.nextPort(),
     delay: 0
   };
 };
