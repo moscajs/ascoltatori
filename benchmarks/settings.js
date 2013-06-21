@@ -3,6 +3,10 @@ module.exports.MemoryAscoltatore = function() {
   return {};
 };
 
+module.exports.TrieAscoltatore = function() {
+  return {};
+};
+
 module.exports.RedisAscoltatore = function() {
   return {
     redis: require('redis')

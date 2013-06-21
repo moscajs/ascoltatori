@@ -15,7 +15,7 @@ function setup(type, options, counter, done) {
     };
     
     var subscribe = function (done) {
-      instance.subscribe("hello", callback, done);
+      instance.subscribe("start/*/end", function () { callback(); }, done);
     };
 
     var a = [], i = null;
@@ -35,7 +35,7 @@ function teardown(instance, callback) {
 
 function bench(pass, instance, done) {
   pass.complete = done;
-  instance.publish("hello", null);
+  instance.publish("start/foo/bar/end", null);
 }
 
 var argv = require('optimist').
@@ -45,14 +45,14 @@ var argv = require('optimist').
   alias("r", "runs").
   alias("l", "listeners").
   alias("d", "header").
-  describe("c", "use the specified class MemoryAscoltatore, RedisAscoltatore, AMQPAscoltatore, ZeromqAscoltatore").
+  describe("c", "use the specified class MemoryAscoltatore, TrieAscoltatore, RedisAscoltatore, AMQPAscoltatore, ZeromqAscoltatore").
   describe("r", "the number of runs of this bench").
   describe("l", "the listeners to attach to use in each bench").
   describe("d", "write the header of the CSV sequence").
   boolean("header").
   check(function(args) {
     if(ascoltatori[args.class] === undefined) {
-      throw "ERROR: You can specify only one of: MemoryAscoltatore, RedisAscoltatore, AMQPAscoltatore, ZeromqAscoltatore";
+      throw "ERROR: You can specify only one of: MemoryAscoltatore, TrieAscoltatore, RedisAscoltatore, AMQPAscoltatore, ZeromqAscoltatore";
     }
   }).
   argv;
