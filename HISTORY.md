@@ -2,6 +2,13 @@
 History
 =======
 
+## 0.7.0
+
+* Added the TrieAscolatore, thanks to 
+  [@davedoesdev](https://github.com/davedoesdev).
+* Using the TrieAscoltatore as the basis of all the other
+  Ascoltatori.
+
 ## 0.6.0
 
 * Removed the option object from #subscribe, thanks to
