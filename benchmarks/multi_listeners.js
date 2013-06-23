@@ -15,7 +15,7 @@ function setup(type, options, pubTopic, subTopic, counter, done) {
     };
     
     var subscribe = function (done) {
-      instance.subscribe(subTopic, function () { callback(); }, done);
+      instance.subscribe(subTopic, callback, done);
     };
 
     var a = [], i = null;
