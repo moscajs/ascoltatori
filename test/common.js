@@ -56,7 +56,10 @@ global.mongoSettings = function() {
 var mosca = require("mosca");
 
 global.mqttServer = new mosca.Server({
-  port: 5883
+  port: 5883,
+  logger: {
+    level: "fatal"
+  }
 });
 
 global.ascoltatori = require("../");
