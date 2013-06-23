@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.7.1
+
+* README fixes.
+
 ## 0.7.0
 
 * Added the TrieAscolatore, thanks to 
