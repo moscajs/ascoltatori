@@ -230,12 +230,8 @@ Ascoltatori is only possible due to the excellent work of the following contribu
 
 <table><tbody>
 <tr><th align="left">Matteo Collina</th><td><a href="https://github.com/mcollina">GitHub/mcollina</a></td><td><a href="https://twitter.com/matteocollina">Twitter/@matteocollina</a></td></tr>
-<tr><th align="left">Filippo de Pretto</th><td><a
-href="https://github.com/filnik">GitHub/filnik</a></td><td><a
-href="https://twitter.com/filnik90">Twitter/@filnik90</a></td></tr>
-<tr><th align="left">David Halls</th><td><a
-href="https://github.com/davedoesdev">GitHub/davedoesdev</a></td><td><a
-href="https://twitter.com/davedoesdev">Twitter/@davedoesdev</a></td></tr>
+<tr><th align="left">Filippo de Pretto</th><td><a href="https://github.com/filnik">GitHub/filnik</a></td><td><a href="https://twitter.com/filnik90">Twitter/@filnik90</a></td></tr>
+<tr><th align="left">David Halls</th><td><a href="https://github.com/davedoesdev">GitHub/davedoesdev</a></td><td><a href="https://twitter.com/davedoesdev">Twitter/@davedoesdev</a></td></tr>
 </tbody></table>
 
 ## LICENSE - "MIT License"
