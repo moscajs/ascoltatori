@@ -67,6 +67,45 @@ should work smoothly on every broker.
 You might find some differences, and in that case file a bug
 report, so I can fix them.
 
+Ascoltatori also support the '+' operator, which match only one step in
+in a tree of topics:
+```
+var ascoltatori = require('ascoltatori');
+
+ascoltatori.build(function (ascoltatore) {
+
+  ascolatore.subscribe("hello/+", function() {
+    // this will print { '0': "hello/world/42", '1': "a message" }
+    console.log(arguments); 
+  });
+
+  ascoltatore.publish("hello/42", "a message", function() {
+    console.log("message published");
+  });
+});
+```
+
+This is an example with both a '*' and a '+':
+```
+var ascoltatori = require('ascoltatori');
+
+ascoltatori.build(function (ascoltatore) {
+
+  ascoltatore.subscribe("hello/*", function() {
+    // this will print { '0': "hello/world/42", '1': "a message" }
+    console.log(arguments); 
+  });
+
+  ascolatore.subscribe("hello/+", function() {
+    // this will not be called
+  });
+
+  ascoltatore.publish("hello/world/42", "a message", function() {
+    console.log("message published");
+  });
+});
+```
+
 ## Configuration and dependencies
 
 This library does not depend directly on redis, AMQP (RabbitMQ),
@@ -154,6 +193,7 @@ $: DEBUG=ascoltatori:mqtt node exaples/mqtt_topic_bridge.js
 The following debug flags are supported, one for each ascoltatore:
 * `ascoltatori:amqp`
 * `ascoltatori:memory`
+* `ascoltatori:trie`
 * `ascoltatori:mqtt`
 * `ascoltatori:prefix`
 * `ascoltatori:redis`
@@ -184,9 +224,23 @@ least once.
   fine, but please isolate to its own commit so I can cherry-pick around
   it.
 
+## Contributors
+
+Ascoltatori is only possible due to the excellent work of the following contributors:
+
+<table><tbody>
+<tr><th align="left">Matteo Collina</th><td><a href="https://github.com/mcollina">GitHub/mcollina</a></td><td><a href="https://twitter.com/matteocollina">Twitter/@matteocollina</a></td></tr>
+<tr><th align="left">Filippo de Pretto</th><td><a
+href="https://github.com/filnik">GitHub/filnik</a></td><td><a
+href="https://twitter.com/filnik90">Twitter/@filnik90</a></td></tr>
+<tr><th align="left">David Halls</th><td><a
+href="https://github.com/davedoesdev">GitHub/davedoesdev</a></td><td><a
+href="https://twitter.com/davedoesdev">Twitter/@davedoesdev</a></td></tr>
+</tbody></table>
+
 ## LICENSE - "MIT License"
 
-Copyright (c) 2012-2013 Matteo Collina, http://matteocollina.com
+Copyright (c) 2012-2013 Matteo Collina and Contributors, http://matteocollina.com
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
