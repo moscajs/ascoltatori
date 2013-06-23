@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.7.2
+
+* README fixes.
+
 ## 0.7.1
 
 * README fixes.
