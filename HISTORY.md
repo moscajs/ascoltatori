@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.7.3
+
+* Setted TrieAscoltatore as the default ascoltatore.
+
 ## 0.7.2
 
 * README fixes.
