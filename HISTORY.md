@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.7.4
+
+* Made ascoltatori.build return a TrieAscoltatore.
+
 ## 0.7.3
 
 * Setted TrieAscoltatore as the default ascoltatore.
