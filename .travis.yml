@@ -10,9 +10,10 @@ before_install:
  - sudo make install
  - sudo /sbin/ldconfig
  - cd ..
- - mkdir node_modules
+ - mkdir .node_modules
+ - mv * .jshintrc .node_modules
+ - mv .node_modules node_modules
  - cd node_modules
- - mv ../* .
 language: node_js
 node_js:
   - 0.8
