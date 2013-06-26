@@ -109,12 +109,12 @@ describe("ascoltatori", function() {
       expect(a).to.be.instanceOf(ascoltatori.ZeromqAscoltatore);
     });
 
-    it("should create a new MemoryAscolatore", function() {
+    it("should create a new TrieAscoltatore", function() {
       var a = ascoltatori.build({
         json: false
       });
       toClose.push(a);
-      expect(a).to.be.instanceOf(ascoltatori.MemoryAscoltatore);
+      expect(a).to.be.instanceOf(ascoltatori.TrieAscoltatore);
     });
 
     it("should create a new AbstractAscoltatore using function", function() {
