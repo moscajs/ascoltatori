@@ -114,7 +114,7 @@ describe("ascoltatori", function() {
         json: false
       });
       toClose.push(a);
-      expect(a).to.be.instanceOf(ascoltatori.MemoryAscoltatore);
+      expect(a).to.be.instanceOf(ascoltatori.TrieAscoltatore);
     });
 
     it("should create a new AbstractAscoltatore using function", function() {
