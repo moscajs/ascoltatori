@@ -2,6 +2,13 @@
 History
 =======
 
+## 0.8.0
+
+* Made consistent behaviour for the wildcards
+  (https://github.com/mcollina/ascoltatori/pull/62).
+* Added EventEmitter2Ascoltatore
+  (https://github.com/mcollina/ascoltatori/pull/61).
+
 ## 0.7.4
 
 * Made ascoltatori.build return a TrieAscoltatore.
