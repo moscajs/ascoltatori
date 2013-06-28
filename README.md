@@ -57,7 +57,8 @@ ascoltatori.build(function (ascoltatore) {
 ```
 
 See the tests for more examples regarding RedisAscoltatore,
-AMQPAscoltatore, ZeromqAscoltatore, MQTTAscoltatore.
+AMQPAscoltatore, ZeromqAscoltatore, MQTTAscoltatore, TrieAscoltatore,
+EventEmitter2Ascoltatore.
 
 In the test/common.js file you can find all the options for
 all the ascoltatori.
@@ -198,6 +199,7 @@ The following debug flags are supported, one for each ascoltatore:
 * `ascoltatori:prefix`
 * `ascoltatori:redis`
 * `ascoltatori:zmq`
+* `ascoltatori:ee2`
 
 ## Reliability
 
