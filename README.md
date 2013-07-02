@@ -1,8 +1,8 @@
 Ascoltatori
 ===========
 
-[![Build
-Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori)
+> Ascoltatori is an italian word which means listeners.
+An Ascoltatore is therefore a single listener.
 
 __Ascoltatori__ is the publish/subscribe library that supports every
 broker/protocol out there.
@@ -24,8 +24,8 @@ The source code of __Ascoltatori__ had been annotated with
 and the generated documentation is available at:
 http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html
 
-> Ascoltatori is an italian word which means listeners.
-An Ascoltatore is therefore a single listener.
+[![Build
+Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori)
 
 ## Install
 
