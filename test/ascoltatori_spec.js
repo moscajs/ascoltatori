@@ -7,6 +7,14 @@ describe("ascoltatori", function() {
     return r;
   };
 
+  beforeEach(function() {
+    this.sandbox = sinon.sandbox.create();
+  });
+
+  afterEach(function() {
+    this.sandbox.restore();
+  });
+
   it("should delegate to the use ascoltatore for 'pub'", function() {
     var ascoltatore = makeFakeAscoltatore();
     var spy = this.sandbox.spy(ascoltatore, "publish");
