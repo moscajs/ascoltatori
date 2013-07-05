@@ -2,6 +2,11 @@
 History
 =======
 
+## 0.9.0
+
+* Removed MemoryAscoltatore.
+* Removed 'newTopic' event from every Ascoltatore.
+
 ## 0.8.0
 
 * Made consistent behaviour for the wildcards
