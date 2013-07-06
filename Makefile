@@ -1,15 +1,26 @@
+BIN=./node_modules/.bin
+MOCHA=$(BIN)/mocha
+JSHINT=$(BIN)/jshint
+ISTANBUL=$(BIN)/istanbul
+
 test:
-	./node_modules/.bin/mocha --recursive test
+	$(MOCHA) --recursive test
+
+clean-coverage:
+	rm -rf coverage
+
+coverage: clean-coverage
+	$(ISTANBUL) cover _mocha -- -R spec --bail
 
 bail:
-	./node_modules/.bin/mocha --recursive --bail --reporter spec test 
+	$(MOCHA) --bail --reporter spec test
 
 ci:
-	./node_modules/.bin/mocha --recursive --watch test
+	$(MOCHA) --watch test
 
 jshint:
-	find lib -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
-	find test -name "*.js" -print0 | xargs -0 ./node_modules/.bin/jshint
+	find lib -name "*.js" -print0 | xargs -0 $(JSHINT)
+	find test -name "*.js" -print0 | xargs -0 $(JSHINT)
 
 BEAUTIFY=node_modules/.bin/js-beautify -r -s 2
 beautify:
@@ -61,7 +72,7 @@ docs-clean:
 	rm -rf docs
 
 docs: docs-clean
-	./node_modules/.bin/dox-foundation --source lib --target docs --title Ascoltatori
+	$(BIN)/dox-foundation --source lib --target docs --title Ascoltatori
 
 publish-docs: docs
 	git stash	
