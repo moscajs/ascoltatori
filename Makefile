@@ -4,13 +4,15 @@ JSHINT=$(BIN)/jshint
 ISTANBUL=$(BIN)/istanbul
 
 test:
-	$(MOCHA) --recursive test
+	$(MOCHA)
 
 clean-coverage:
 	rm -rf coverage
 
 coverage: clean-coverage
-	$(ISTANBUL) cover _mocha -- -R spec --bail
+	$(ISTANBUL) cover _mocha -- --reporter spec --bail
+	@echo
+	@echo open coverage/lcov-report/index.html
 
 bail:
 	$(MOCHA) --bail --reporter spec test
