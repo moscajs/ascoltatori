@@ -1,5 +1,5 @@
-Ascoltatori
-===========
+Ascoltatori&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori) [![Coverage Status](https://coveralls.io/repos/mcollina/ascoltatori/badge.png?branch=master)](https://coveralls.io/r/mcollina/ascoltatori?branch=master)
+========================================
 
 > Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.
@@ -23,9 +23,6 @@ The source code of __Ascoltatori__ had been annotated with
 [dox](https://github.com/visionmedia/dox)
 and the generated documentation is available at:
 http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html
-
-[![Build
-Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori)
 
 ## Install
 
