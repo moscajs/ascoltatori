@@ -14,6 +14,9 @@ coverage: clean-coverage
 	@echo
 	@echo open coverage/lcov-report/index.html
 
+publish-coverage: coverage
+	cat coverage/lcov.info | $(BIN)/coveralls
+
 bail:
 	$(MOCHA) --bail --reporter spec test
 

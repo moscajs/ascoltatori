@@ -12,6 +12,8 @@ before_install:
  - cd ..
 before_script:
  - (cd node_modules/mosca/node_modules && rm -rf ascoltatori && ln -s ../../.. ascoltatori)
+after_success:
+ - make publish-coverage
 language: node_js
 node_js:
   - 0.8
