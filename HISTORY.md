@@ -2,6 +2,13 @@
 History
 =======
 
+## 0.10.0
+
+* Refactoring of the MongoAscoltatore `close` method, to close up everything for real #68.
+* Add the TrieAscoltatore 'global' testing #69.
+* Ascoltatori.build should allow a function as a type #70.
+* Added code coverage with istanbul #67.
+
 ## 0.9.0
 
 * Removed MemoryAscoltatore.
