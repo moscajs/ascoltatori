@@ -1,5 +1,6 @@
 BIN=./node_modules/.bin
 MOCHA=$(BIN)/mocha
+MOCHA_=$(BIN)/_mocha
 JSHINT=$(BIN)/jshint
 ISTANBUL=$(BIN)/istanbul
 
@@ -10,7 +11,7 @@ clean-coverage:
 	rm -rf coverage
 
 coverage: clean-coverage
-	$(ISTANBUL) cover _mocha -- --reporter spec --bail
+	$(ISTANBUL) cover $(MOCHA_) -- --reporter spec --bail
 	@echo
 	@echo open coverage/lcov-report/index.html
 
