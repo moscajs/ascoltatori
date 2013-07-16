@@ -2,6 +2,13 @@
 History
 =======
 
+## 0.11.0
+
+* MQTTAscolatore should send a `clientId.length` < 23 chars #73.
+  Made the `clientId` an option in MQTTAscoltatore.
+* Handling of duplicate topics "/hello/world" and "hello/world" on
+  MQTT, which are the same.
+
 ## 0.10.0
 
 * Refactoring of the MongoAscoltatore `close` method, to close up everything for real #68.
