@@ -2,6 +2,11 @@
 History
 =======
 
+## 0.11.1
+
+* Reverted "Handling of duplicate topics "/hello/world" and "hello/world" on
+  MQTT, which are the same."
+
 ## 0.11.0
 
 * MQTTAscolatore should send a `clientId.length` < 23 chars #73.
