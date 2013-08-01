@@ -3,13 +3,13 @@
 [![Build
 Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori)
 
-Ascoltatori is a simple publish/subscribe library supporting the followint brokers/protocols:
+Ascoltatori is a simple publish/subscribe library supporting the following brokers/protocols:
 
-* [Redis](http://redis.io/).
-* [MongoDB](http://www.mongodb.org/).
+* [Redis](http://redis.io/), a key/value store created by [@antirez](https://github.com/antirez).
+* [MongoDB](http://www.mongodb.org/), a scalable, high-performance, document-oriented database.
 * [Mosquitto](http://mosquitto.org/) and all implementations of the [MQTT](http://mqtt.org/) protocol.
 * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of the [AMQP](http://www.amqp.org/) protocol.
-* [ZeroMQ](http://www.zeromq.org/) (use Ascoltatori in a P2P fashion).
+* [ZeroMQ](http://www.zeromq.org/) to use Ascoltatori in a P2P fashion.
 
 Find out more aout Ascoltatori reading the [dox documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
 
@@ -49,7 +49,7 @@ var settings = {
   host: localhost
 };
 
-ascoltatori.build(function (ascoltatore) {
+ascoltatori.build(settings, function (ascoltatore) {
 
   // subscribes all messages published with root hello/
   ascoltatore.subscribe('hello/*', function() {
@@ -72,7 +72,7 @@ Ascoltatori supports wildcards and the '+' operator, which match only one step i
 in a tree of topics. Here a simple example showing how to use both of them.
 
 ```javascript
-ascoltatori.build(function (ascoltatore) {
+ascoltatori.build(settings, function (ascoltatore) {
 
   // subscribes all messages published with root hello/
   // examples: hello/world, hello/world/42, hello/world/super/42
@@ -94,43 +94,47 @@ ascoltatori.build(function (ascoltatore) {
 });
 ```
 
+### Broker configs
 
-### Brokers
+Ascoltatori supports different brokers (see [introduction](#ascoltatori)).
+Here we show how to use each of them.
 
-Find more about the supported broker configurations on [test/common.js](https://github.com/mcollina/ascoltatori/blob/master/test/common.js).
+#### Redis
 
-
-
-## Configuration and dependencies
-
-This library does not depend directly on redis, AMQP (RabbitMQ),
-0MQ, MQTT.js, but rather it encourages you to pass them to the
-ascoltatori via an options object, like so (for Redis):
-
-```
+```javascript
 var ascoltatori = require('ascoltatori');
-
 var settings = {
   type: 'redis',
   redis: require('redis'),
   db: 12,
-  port: 424242,
-  host: 192.168.42.42
+  port: 6379,
+  host: localhost
 };
 
 ascoltatori.build(settings, function (ascoltatore) {
-
-  ascoltatore.subscribe("hello/*", function() {
-    // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments);
-    process.exit(0);
-  });
-
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
-  });
-});
+  // ...
 ```
+
+#### MongoDB
+
+MongoDB uses [Capped Collections](http://docs.mongodb.org/manual/core/capped-collections/)
+to implement the pub/sub pattern.
+
+```javascript
+var ascoltatori = require('ascoltatori');
+settings = {
+  type: 'mongo',
+  uri: 'mongodb://127.0.0.1/',
+  db: 'ascoltatori',
+  pubsubCollection: 'ascoltatori',
+  mongo: {} // mongo specific options
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+  // ...
+```
+
+
 
 
 By default, every ascoltatore built by the `ascoltatori.build`
