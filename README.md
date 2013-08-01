@@ -20,13 +20,13 @@ An Ascoltatore is therefore a single listener.
 
 ## Install
 
-Install the client library using [npm](http://npmjs.org/).
+Install the library using [npm](http://npmjs.org/).
 
 ```
 $ npm install ascoltatori --save
 ```
 
-Install the client library using git.
+Install the library using git.
 
 ```
 $ git clone git://github.com/mcollina/ascoltatori.git
