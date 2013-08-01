@@ -41,15 +41,8 @@ supported brokes. Here a simple example using Redis.
 
 ```javascript
 var ascoltatori = require('ascoltatori');
-var settings = {
-  type: 'redis',
-  redis: require('redis'),
-  db: 12,
-  port: 6379,
-  host: localhost
-};
 
-ascoltatori.build(settings, function (ascoltatore) {
+ascoltatori.build(function (ascoltatore) {
 
   // subscribes all messages published with root hello/
   ascoltatore.subscribe('hello/*', function() {
@@ -182,6 +175,15 @@ settings = {
 ascoltatori.build(settings, function (ascoltatore) {
   // ...
 ```
+
+#### Memory
+
+```javascript
+var ascoltatori = require('ascoltatori');
+ascoltatori.build(function (ascoltatore) {
+  // ...
+```
+
 
 By default, every ascoltatore built by the `ascoltatori.build`
 wraps every published message in a JSON format.
