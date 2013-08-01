@@ -41,73 +41,58 @@ supported brokes. Here a simple example using Redis.
 
 ```javascript
 var ascoltatori = require('ascoltatori');
-var settings    = { type: 'redis', redis: require('redis'), db: 12, port: 6379, host: localhost };
+var settings = {
+  type: 'redis',
+  redis: require('redis'),
+  db: 12,
+  port: 6379,
+  host: localhost
+};
 
 ascoltatori.build(function (ascoltatore) {
+  // subscribes all messages published with root hello/
   ascoltatore.subscribe('hello/*', function() {
-    console.log(arguments);
-    // will print { '0': 'hello/42', '1': 'a message' }
+    console.log(arguments); // will print { '0': 'hello/42', '1': 'a message' }
   });
-
+  // publishes a message to the topic hello/42
   ascoltatore.publish('hello/42', 'a message', function() {
     console.log('message published');
   });
 });
 ```
 
+## Configurations
 
+### Matching operators
 
+Ascoltatori supports wildcards and the '+' operator, which match only one step in
+in a tree of topics. Here a simple example showing how to use both of them.
 
-
-See the tests for more examples regarding RedisAscoltatore,
-AMQPAscoltatore, ZeromqAscoltatore, MQTTAscoltatore.
-
-In the test/common.js file you can find all the options for
-all the ascoltatori.
-
-All ascoltatori supports the use of a wildcards, so everything
-should work smoothly on every broker.
-You might find some differences, and in that case file a bug
-report, so I can fix them.
-
-Ascoltatori also support the '+' operator, which match only one step in
-in a tree of topics:
-```
-var ascoltatori = require('ascoltatori');
-
+```javascript
 ascoltatori.build(function (ascoltatore) {
-
-  ascolatore.subscribe("hello/+", function() {
-    // this will print { '0': "hello/world/42", '1': "a message" }
-    console.log(arguments);
+  // subscribes all messages published with root hello/
+  // examples: hello/world, hello/world/42, hello/world/super/42
+  ascoltatore.subscribe('hello/*', function() {
+    console.log(arguments); // will print { '0': 'hello/world/42', '1': 'a message' }
   });
-
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
+  // subscribes all messages published with root hello/ and one more step
+  // examples: hello/world, hello/42, hello/super
+  ascolatore.subscribe('hello/+', function() {
+    // this subscription will not be called
+  });
+  // publishes a message to the topic hello/world/42
+  ascoltatore.publish('hello/world/42', 'a message', function() {
+    console.log('message published');
   });
 });
 ```
 
-This is an example with both a '*' and a '+':
-```
-var ascoltatori = require('ascoltatori');
 
-ascoltatori.build(function (ascoltatore) {
+### Brokers
 
-  ascoltatore.subscribe("hello/*", function() {
-    // this will print { '0': "hello/world/42", '1': "a message" }
-    console.log(arguments);
-  });
+Find more about the supported broker configurations on [test/common.js](https://github.com/mcollina/ascoltatori/blob/master/test/common.js).
 
-  ascolatore.subscribe("hello/+", function() {
-    // this will not be called
-  });
 
-  ascoltatore.publish("hello/world/42", "a message", function() {
-    console.log("message published");
-  });
-});
-```
 
 ## Configuration and dependencies
 
