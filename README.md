@@ -65,7 +65,7 @@ Ascoltatori supports wildcards and the '+' operator, which match only one step i
 in a tree of topics. Here a simple example showing how to use both of them.
 
 ```javascript
-ascoltatori.build(settings, function (ascoltatore) {
+ascoltatori.build(function (ascoltatore) {
 
   // subscribes all messages published with root hello/
   // examples: hello/world, hello/world/42, hello/world/super/42
@@ -164,7 +164,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 ```javascript
 var ascoltatori = require('ascoltatori');
 settings = {
-  type: 'zeromq',
+  type: 'zmq',
   json: false,
   zmq: require("zmq"),
   port: "tcp://127.0.0.1:33333",
@@ -185,59 +185,58 @@ ascoltatori.build(function (ascoltatore) {
 ```
 
 
-By default, every ascoltatore built by the `ascoltatori.build`
-wraps every published message in a JSON format.
-This behaviour can be triggered off by passing a `{ json: false }`
-settings object, like so:
-```
+### JSON
+
+By default, every ascoltatore built by the `ascoltatori.build` wraps every
+published message in a JSON format. This behaviour can be triggered off by
+passing the `{ json: false }` option.
+
+```javascript
 require('ascoltatori').build({ json: false }, function(a) {
   // ...
 });
 ```
 
-If you feel one more option is missing, feel free to fork this library,
-add it, and then send a pull request.
 
 ### Domain support
 
-__Ascoltatori__ properly supports the [node.js domain API](http://nodejs.org/api/domain.html).
-To use it, you have to call the `registerDomain` function on your
-_Ascoltatore_, and it will take care of routing the exceptions to the
-given domain. Look at this example:
-```
+Ascoltatori supports the [node.js domain API](http://nodejs.org/api/domain.html).
+Use it calling the `registerDomain` function on your Ascoltatore and it will take
+care of routing the exceptions to the given domain. Look at this example:
+
+```javascript
 var ascoltatori = require('ascoltatori');
-var domain      = require("domain");
+var domain = require('domain');
 
 var d = domain.create();
-d.on("error", function() {
+d.on('error', function() {
   console.log(arguments);
-  process.exit(0);
 });
 
 ascoltatori.build(function (ascoltatore) {
-
   ascoltatore.registerDomain(d);
 
-  ascoltatore.subscribe("hello/*", function() {
+  ascoltatore.subscribe('hello/*', function() {
     throw new Error();
   });
 
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
+  ascoltatore.publish('hello/42', 'a message', function() {
+    console.log('message published');
   });
 });
 ```
 
+
 ## Debugging
 
-__Ascoltatori__ supports the clever
-[debug](https://github.com/visionmedia/debug) package, so it is able to
-trigger the logging based on an external enviroment variable, like so:
+Ascoltatori supports the [debug](https://github.com/visionmedia/debug) package
+and triggers the logs based on an external enviroment variable.
+
 ```
-$: DEBUG=ascoltatori:mqtt node exaples/mqtt_topic_bridge.js
+$ DEBUG=ascoltatori:mqtt node exaples/mqtt_topic_bridge.js
 ```
 
-The following debug flags are supported, one for each ascoltatore:
+The following debug flags are supported:
 * `ascoltatori:amqp`
 * `ascoltatori:memory`
 * `ascoltatori:trie`
@@ -246,40 +245,60 @@ The following debug flags are supported, one for each ascoltatore:
 * `ascoltatori:redis`
 * `ascoltatori:zmq`
 
+
 ## Reliability
 
 Due to the various transports Ascoltatori uses, it is impossible to
 garantee one of the various reliability properties across all of the
-transports.
-However, the MQTT and AMQP ascoltatori provides at-least-once semantics,
-which means that the message might be received more than once, but at
-least once.
+transports. However, the MQTT and AMQP ascoltatori provides at-least-once
+semantics, which means that the message might be received more than once,
+but at least once.
 
-## Contributing to Ascoltatori
 
-* Check out the latest master to make sure the feature hasn't been
-  implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't
-  requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it
-  in a future version unintentionally.
-* Please try not to mess with the Makefile and package.json. If you
-  want to have your own version, or is otherwise necessary, that is
-  fine, but please isolate to its own commit so I can cherry-pick around
-  it.
+## Contributing
+
+Fork the repo on github and send a pull requests with topic branches.
+Do not forget to provide specs to your contribution.
+
+
+### Running specs
+
+* Fork and clone the repository
+* Run `npm install`
+* Run `npm test`
+
+
+## Coding guidelines
+
+Follow [felix](http://nodeguide.com/style.html) guidelines.
+
+
+## Feedback
+
+Use the [issue tracker](http://github.com/mcollina/ascoltatori/issues) for bugs.
+[Mail](mailto:touch@lelylan.com) or [Tweet](http://twitter.com/matteocollina) us
+for any idea that can improve the project.
+
+
+## Links
+
+* [GIT Repository](http://github.com/mcollina/ascoltatori)
+* [Redis](http://redis.io/)
+* [MongoDB](http://www.mongodb.org/)
+* [Mosquitto](http://mosquitto.org/)
+* [RabbitMQ](http://www.rabbitmq.com/)
+* [ZeroMQ](http://www.zeromq.org/)
+
+
+## Authors
+
+[Matteo Collina](http://twitter.com/matteocollina)
+
 
 ## Contributors
 
-Ascoltatori is only possible due to the excellent work of the following contributors:
+Special thanks to the [following people](https://github.com/mcollina/ascoltatori/contributors) for submitting patches.
 
-<table><tbody>
-<tr><th align="left">Matteo Collina</th><td><a href="https://github.com/mcollina">GitHub/mcollina</a></td><td><a href="https://twitter.com/matteocollina">Twitter/@matteocollina</a></td></tr>
-<tr><th align="left">Filippo de Pretto</th><td><a href="https://github.com/filnik">GitHub/filnik</a></td><td><a href="https://twitter.com/filnik90">Twitter/@filnik90</a></td></tr>
-<tr><th align="left">David Halls</th><td><a href="https://github.com/davedoesdev">GitHub/davedoesdev</a></td><td><a href="https://twitter.com/davedoesdev">Twitter/@davedoesdev</a></td></tr>
-</tbody></table>
 
 ## LICENSE - "MIT License"
 
