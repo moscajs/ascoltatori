@@ -1,49 +1,62 @@
-# Lelylan Device Component
+# Ascoltatori
 
 [![Build
 Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori)
 
-Ascoltatori is a publish/subscribe library supporting the followint brokers/protocols:
+Ascoltatori is a simple publish/subscribe library supporting the followint brokers/protocols:
 
 * [Redis](http://redis.io/), a key/value store created by [@antirez](https://github.com/antirez).
 * [MongoDB](http://www.mongodb.org/), a scalable, high-performance, document-oriented database.
 * [Mosquitto](http://mosquitto.org/) and all implementations of the [MQTT](http://mqtt.org/) protocol.
 * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of the [AMQP](http://www.amqp.org/) protocol.
-* [ZeroMQ](http://www.zeromq.org/) without a central broker, so Ascoltatori can also be used in a P2P fashion.
+* [ZeroMQ](http://www.zeromq.org/) without a central broker. In this way Ascoltatori can be used in a P2P fashion.
 
-Find out more aout Ascoltatori reading the [documnetation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
+Find out more aout Ascoltatori reading the [dox documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
 
 > TIP: Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.
 
+
 ## Install
 
+Install the client library using [npm](http://npmjs.org/)
+
 ```
-npm install ascoltatori --save
+$ npm install ascoltatori --save
 ```
 
-## Usage
+Install the client library using git
 
-__Ascoltatori__ is built to be extremely easy to use, and can provide a
-useful abstraction for every compatible pub/sub broker.
-In this way you can choose whatever broker suits you.
+```
+$ git clone git://github.com/mcollina/ascoltatori.git
+$ cd ascoltatori
+$ npm install
+```
+
+
+## Getting Started
+
+Ascoltatori focuses on providing a simple and unique abstraction for all
+supported brokes. Here a simple example using Redis.
 
 ```
 var ascoltatori = require('ascoltatori');
 
 ascoltatori.build(function (ascoltatore) {
 
-  ascoltatore.subscribe("hello/*", function() {
-    // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments);
-    process.exit(0);
+  ascoltatore.subscribe('hello/*', function() {
+    console.log(arguments); // { '0': 'hello/42', '1': 'a message' }
   });
 
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
+  ascoltatore.publish('hello/42', 'a message', function() {
+    console.log('message published');
   });
 });
 ```
+
+
+
+
 
 See the tests for more examples regarding RedisAscoltatore,
 AMQPAscoltatore, ZeromqAscoltatore, MQTTAscoltatore.
