@@ -11,7 +11,8 @@ Ascoltatori is a simple publish/subscribe library supporting the following broke
 * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of the [AMQP](http://www.amqp.org/) protocol.
 * [ZeroMQ](http://www.zeromq.org/) to use Ascoltatori in a P2P fashion.
 
-Find out more aout Ascoltatori reading the [dox documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
+Find out more aout Ascoltatori reading the
+[dox generated documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
 
 > TIP: Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.
@@ -59,38 +60,9 @@ ascoltatori.build(function (ascoltatore) {
 
 ## Configurations
 
-### Matching operators
-
-Ascoltatori supports wildcards and the '+' operator, which match only one step in
-in a tree of topics. Here a simple example showing how to use both of them.
-
-```javascript
-ascoltatori.build(function (ascoltatore) {
-
-  // subscribes all messages published with root hello/
-  // examples: hello/world, hello/world/42, hello/world/super/42
-  ascoltatore.subscribe('hello/*', function() {
-    console.log(arguments);
-    // { '0': 'hello/world/42', '1': 'a message' }
-  });
-
-  // subscribes all messages published with root hello/ and one more step
-  // examples: hello/world, hello/42, hello/super
-  ascolatore.subscribe('hello/+', function() {
-    // this subscription will not be called
-  });
-
-  // publishes a message to the topic hello/world/42
-  ascoltatore.publish('hello/world/42', 'a message', function() {
-    console.log('message published');
-  });
-});
-```
-
 ### Brokers
 
-Ascoltatori supports different brokers (see [introduction](#ascoltatori)).
-Here we show how to use each of them.
+Ascoltatori supports different brokers. Here we show how to use each of them.
 
 #### Redis
 
@@ -182,6 +154,35 @@ ascoltatori.build(settings, function (ascoltatore) {
 var ascoltatori = require('ascoltatori');
 ascoltatori.build(function (ascoltatore) {
   // ...
+```
+
+
+### Matching operators
+
+Ascoltatori supports wildcards and the '+' operator, which match only one step in
+in a tree of topics. Here a simple example showing how to use both of them.
+
+```javascript
+ascoltatori.build(function (ascoltatore) {
+
+  // subscribes all messages published with root hello/
+  // examples: hello/world, hello/world/42, hello/world/super/42
+  ascoltatore.subscribe('hello/*', function() {
+    console.log(arguments);
+    // { '0': 'hello/world/42', '1': 'a message' }
+  });
+
+  // subscribes all messages published with root hello/ and one more step
+  // examples: hello/world, hello/42, hello/super
+  ascolatore.subscribe('hello/+', function() {
+    // this subscription will not be called
+  });
+
+  // publishes a message to the topic hello/world/42
+  ascoltatore.publish('hello/world/42', 'a message', function() {
+    console.log('message published');
+  });
+});
 ```
 
 
@@ -283,6 +284,7 @@ for any idea that can improve the project.
 ## Links
 
 * [GIT Repository](http://github.com/mcollina/ascoltatori)
+* [Ascoltaori Documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
 * [Redis](http://redis.io/)
 * [MongoDB](http://www.mongodb.org/)
 * [Mosquitto](http://mosquitto.org/)
