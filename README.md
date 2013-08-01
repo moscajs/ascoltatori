@@ -1,28 +1,18 @@
-Ascoltatori
-===========
+# Lelylan Device Component
 
 [![Build
 Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori)
 
-__Ascoltatori__ is the publish/subscribe library that supports every
-broker/protocol out there.
-This list currently includes:
+Ascoltatori is a publish/subscribe library supporting most of the brokers and protocols
+out there. This list currently includes:
 
-* [RabbitMQ](http://www.rabbitmq.com/) and all implementations of
-  the [AMQP](http://www.amqp.org/) protocol.
-* [Redis](http://redis.io/), the fabulous key/value store by
-  [@antirez](https://github.com/antirez).
-* [Mosquitto](http://mosquitto.org/) and all implementations of the
-  [MQTT](http://mqtt.org/) protocol.
-* [MongoDB](http://www.mongodb.org/), the documental NoSQL that
-  is revolutioning how web apps are built.
-* [ZeroMQ](http://www.zeromq.org/) without a central broker, so
-  Ascoltatori can also be used in a P2P fashion.
+* [Redis](http://redis.io/), the key/value store by [@antirez](https://github.com/antirez).
+* [MongoDB](http://www.mongodb.org/) the scalable, high-performance, document-oriented database.
+* [Mosquitto](http://mosquitto.org/) and all implementations of the [MQTT](http://mqtt.org/) protocol.
+* [RabbitMQ](http://www.rabbitmq.com/) and all implementations of the [AMQP](http://www.amqp.org/) protocol.
+* [ZeroMQ](http://www.zeromq.org/) without a central broker, so Ascoltatori can also be used in a P2P fashion.
 
-The source code of __Ascoltatori__ had been annotated with
-[dox](https://github.com/visionmedia/dox)
-and the generated documentation is available at:
-http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html
+Find out more reading the Ascoltatori [documnetation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
 
 > Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.
@@ -46,7 +36,7 @@ ascoltatori.build(function (ascoltatore) {
 
   ascoltatore.subscribe("hello/*", function() {
     // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments); 
+    console.log(arguments);
     process.exit(0);
   });
 
@@ -76,7 +66,7 @@ ascoltatori.build(function (ascoltatore) {
 
   ascolatore.subscribe("hello/+", function() {
     // this will print { '0': "hello/world/42", '1': "a message" }
-    console.log(arguments); 
+    console.log(arguments);
   });
 
   ascoltatore.publish("hello/42", "a message", function() {
@@ -93,7 +83,7 @@ ascoltatori.build(function (ascoltatore) {
 
   ascoltatore.subscribe("hello/*", function() {
     // this will print { '0': "hello/world/42", '1': "a message" }
-    console.log(arguments); 
+    console.log(arguments);
   });
 
   ascolatore.subscribe("hello/+", function() {
@@ -127,7 +117,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 
   ascoltatore.subscribe("hello/*", function() {
     // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments); 
+    console.log(arguments);
     process.exit(0);
   });
 
@@ -163,7 +153,7 @@ var domain      = require("domain");
 
 var d = domain.create();
 d.on("error", function() {
-  console.log(arguments); 
+  console.log(arguments);
   process.exit(0);
 });
 
