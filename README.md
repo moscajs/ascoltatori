@@ -11,7 +11,7 @@ Ascoltatori is a simple publish/subscribe library supporting the following broke
 * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of the [AMQP](http://www.amqp.org/) protocol.
 * [ZeroMQ](http://www.zeromq.org/) to use Ascoltatori in a P2P fashion.
 
-Find out more aout Ascoltatori reading the
+Find out more about Ascoltatori reading the
 [dox generated documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
 
 > TIP: Ascoltatori is an italian word which means listeners.
