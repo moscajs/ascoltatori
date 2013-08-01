@@ -3,8 +3,7 @@
 [![Build
 Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori)
 
-Ascoltatori is a publish/subscribe library supporting most of the brokers and protocols
-out there. This list currently includes:
+Ascoltatori is a publish/subscribe library supporting the followint brokers/protocols:
 
 * [Redis](http://redis.io/), a key/value store created by [@antirez](https://github.com/antirez).
 * [MongoDB](http://www.mongodb.org/), a scalable, high-performance, document-oriented database.
