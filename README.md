@@ -5,11 +5,11 @@ Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/m
 
 Ascoltatori is a simple publish/subscribe library supporting the followint brokers/protocols:
 
-* [Redis](http://redis.io/), a key/value store created by [@antirez](https://github.com/antirez).
-* [MongoDB](http://www.mongodb.org/), a scalable, high-performance, document-oriented database.
+* [Redis](http://redis.io/).
+* [MongoDB](http://www.mongodb.org/).
 * [Mosquitto](http://mosquitto.org/) and all implementations of the [MQTT](http://mqtt.org/) protocol.
 * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of the [AMQP](http://www.amqp.org/) protocol.
-* [ZeroMQ](http://www.zeromq.org/) without a central broker. In this way Ascoltatori can be used in a P2P fashion.
+* [ZeroMQ](http://www.zeromq.org/) (use Ascoltatori in a P2P fashion).
 
 Find out more aout Ascoltatori reading the [dox documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
 
