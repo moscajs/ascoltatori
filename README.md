@@ -52,8 +52,10 @@ var settings = {
 ascoltatori.build(function (ascoltatore) {
   // subscribes all messages published with root hello/
   ascoltatore.subscribe('hello/*', function() {
-    console.log(arguments); // will print { '0': 'hello/42', '1': 'a message' }
+    console.log(arguments);
+    // this will print { '0': 'hello/42', '1': 'a message' }
   });
+
   // publishes a message to the topic hello/42
   ascoltatore.publish('hello/42', 'a message', function() {
     console.log('message published');
@@ -73,13 +75,16 @@ ascoltatori.build(function (ascoltatore) {
   // subscribes all messages published with root hello/
   // examples: hello/world, hello/world/42, hello/world/super/42
   ascoltatore.subscribe('hello/*', function() {
-    console.log(arguments); // will print { '0': 'hello/world/42', '1': 'a message' }
+    console.log(arguments);
+    // this will print { '0': 'hello/world/42', '1': 'a message' }
   });
+
   // subscribes all messages published with root hello/ and one more step
   // examples: hello/world, hello/42, hello/super
   ascolatore.subscribe('hello/+', function() {
     // this subscription will not be called
   });
+
   // publishes a message to the topic hello/world/42
   ascoltatore.publish('hello/world/42', 'a message', function() {
     console.log('message published');
