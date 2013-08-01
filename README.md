@@ -50,10 +50,11 @@ var settings = {
 };
 
 ascoltatori.build(function (ascoltatore) {
+
   // subscribes all messages published with root hello/
   ascoltatore.subscribe('hello/*', function() {
     console.log(arguments);
-    // this will print { '0': 'hello/42', '1': 'a message' }
+    // { '0': 'hello/42', '1': 'a message' }
   });
 
   // publishes a message to the topic hello/42
@@ -72,11 +73,12 @@ in a tree of topics. Here a simple example showing how to use both of them.
 
 ```javascript
 ascoltatori.build(function (ascoltatore) {
+
   // subscribes all messages published with root hello/
   // examples: hello/world, hello/world/42, hello/world/super/42
   ascoltatore.subscribe('hello/*', function() {
     console.log(arguments);
-    // this will print { '0': 'hello/world/42', '1': 'a message' }
+    // { '0': 'hello/world/42', '1': 'a message' }
   });
 
   // subscribes all messages published with root hello/ and one more step
