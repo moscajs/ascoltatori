@@ -94,7 +94,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 });
 ```
 
-### Broker configs
+### Brokers
 
 Ascoltatori supports different brokers (see [introduction](#ascoltatori)).
 Here we show how to use each of them.
@@ -134,8 +134,54 @@ ascoltatori.build(settings, function (ascoltatore) {
   // ...
 ```
 
+#### MQTT (Mosquitto)
 
 
+```javascript
+var ascoltatori = require('ascoltatori');
+settings = {
+  type: 'mqtt',
+  json: false,
+  mqtt: require('mqtt'),
+  host: '127.0.0.1',
+  port: 1883
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+  // ...
+```
+
+#### AMQP (RabbitMQ)
+
+```javascript
+var ascoltatori = require('ascoltatori');
+settings = {
+  type: 'amqp',
+  json: false,
+  amqp: require('amqp'),
+  exchange: 'ascolatore5672'
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+  // ...
+```
+
+#### ZeroMQ (RabbitMQ)
+
+```javascript
+var ascoltatori = require('ascoltatori');
+settings = {
+  type: 'zeromq',
+  json: false,
+  zmq: require("zmq"),
+  port: "tcp://127.0.0.1:33333",
+  controlPort: "tcp://127.0.0.1:33334",
+  delay: 10
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+  // ...
+```
 
 By default, every ascoltatore built by the `ascoltatori.build`
 wraps every published message in a JSON format.
