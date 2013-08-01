@@ -277,8 +277,7 @@ Follow [felix](http://nodeguide.com/style.html) guidelines.
 ## Feedback
 
 Use the [issue tracker](http://github.com/mcollina/ascoltatori/issues) for bugs.
-[Mail](mailto:touch@lelylan.com) or [Tweet](http://twitter.com/matteocollina) us
-for any idea that can improve the project.
+[Tweet](http://twitter.com/matteocollina) us for any idea that can improve the project.
 
 
 ## Links
