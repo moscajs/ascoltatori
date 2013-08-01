@@ -19,13 +19,13 @@ An Ascoltatore is therefore a single listener.
 
 ## Install
 
-Install the client library using [npm](http://npmjs.org/)
+Install the client library using [npm](http://npmjs.org/).
 
 ```
 $ npm install ascoltatori --save
 ```
 
-Install the client library using git
+Install the client library using git.
 
 ```
 $ git clone git://github.com/mcollina/ascoltatori.git
@@ -39,13 +39,14 @@ $ npm install
 Ascoltatori focuses on providing a simple and unique abstraction for all
 supported brokes. Here a simple example using Redis.
 
-```
+```javascript
 var ascoltatori = require('ascoltatori');
+var settings    = { type: 'redis', redis: require('redis'), db: 12, port: 6379, host: localhost };
 
 ascoltatori.build(function (ascoltatore) {
-
   ascoltatore.subscribe('hello/*', function() {
-    console.log(arguments); // { '0': 'hello/42', '1': 'a message' }
+    console.log(arguments);
+    // will print { '0': 'hello/42', '1': 'a message' }
   });
 
   ascoltatore.publish('hello/42', 'a message', function() {
