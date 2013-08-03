@@ -134,13 +134,11 @@ ascoltatori.build(function (ascoltatore) {
 ```
 
 
-## Configurations
-
-### Brokers
+## Brokers
 
 Ascoltatori supports different brokers. Here we show how to use each of them.
 
-#### Redis
+### Redis
 
 ```javascript
 var ascoltatori = require('ascoltatori');
@@ -157,7 +155,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 });
 ```
 
-#### MongoDB
+### MongoDB
 
 MongoDB uses [Capped Collections](http://docs.mongodb.org/manual/core/capped-collections/)
 to implement the pub/sub pattern.
@@ -177,7 +175,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 });
 ```
 
-#### MQTT (Mosquitto)
+### MQTT (Mosquitto)
 
 ```javascript
 var ascoltatori = require('ascoltatori');
@@ -194,7 +192,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 });
 ```
 
-#### AMQP (RabbitMQ)
+### AMQP (RabbitMQ)
 
 ```javascript
 var ascoltatori = require('ascoltatori');
@@ -210,7 +208,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 });
 ```
 
-#### ZeroMQ (RabbitMQ)
+### ZeroMQ
 
 ```javascript
 var ascoltatori = require('ascoltatori');
@@ -228,7 +226,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 });
 ```
 
-#### Memory
+### Memory
 
 ```javascript
 var ascoltatori = require('ascoltatori');
@@ -237,7 +235,7 @@ ascoltatori.build(function (ascoltatore) {
 });
 ```
 
-### JSON
+## JSON
 
 By default, every ascoltatore built by the `ascoltatori.build` wraps every
 published message in a JSON format. This behaviour can be triggered off by
@@ -249,7 +247,7 @@ require('ascoltatori').build({ json: false }, function(a) {
 });
 ```
 
-### Domain support
+## Domain support
 
 Ascoltatori supports the [node.js domain API](http://nodejs.org/api/domain.html).
 Use it calling the `registerDomain` function on your Ascoltatore and it will take
