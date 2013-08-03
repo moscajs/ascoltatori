@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.11.2
+
+* New README, thanks to [Andrea Reginato](https://github.com/andreareginato).
+
 ## 0.11.1
 
 * Reverted "Handling of duplicate topics "/hello/world" and "hello/world" on
