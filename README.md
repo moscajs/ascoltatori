@@ -117,7 +117,7 @@ ascoltatori.build(function (ascoltatore) {
 
 Of course, you can mix `*` and `+` in the same subscription:
 
-```js
+```javascript
 var ascoltatori = require('ascoltatori');
 
 ascoltatori.build(function (ascoltatore) {
