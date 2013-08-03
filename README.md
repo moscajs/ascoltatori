@@ -1,112 +1,72 @@
 Ascoltatori&nbsp;&nbsp;&nbsp;[![Build Status](https://travis-ci.org/mcollina/ascoltatori.png)](https://travis-ci.org/mcollina/ascoltatori) [![Coverage Status](https://coveralls.io/repos/mcollina/ascoltatori/badge.png?branch=master)](https://coveralls.io/r/mcollina/ascoltatori?branch=master)
 ========================================
 
-> Ascoltatori is an italian word which means listeners.
+> TIP: Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.
 
-__Ascoltatori__ is the publish/subscribe library that supports every
-broker/protocol out there.
-This list currently includes:
+Ascoltatori is a simple publish/subscribe library supporting the following brokers/protocols:
 
-* [RabbitMQ](http://www.rabbitmq.com/) and all implementations of
-  the [AMQP](http://www.amqp.org/) protocol.
-* [Redis](http://redis.io/), the fabulous key/value store by
-  [@antirez](https://github.com/antirez).
-* [Mosquitto](http://mosquitto.org/) and all implementations of the
-  [MQTT](http://mqtt.org/) protocol.
-* [MongoDB](http://www.mongodb.org/), the documental NoSQL that
-  is revolutioning how web apps are built.
-* [ZeroMQ](http://www.zeromq.org/) without a central broker, so
-  Ascoltatori can also be used in a P2P fashion.
+* [Redis](http://redis.io/), a key/value store created by [@antirez](https://github.com/antirez).
+* [MongoDB](http://www.mongodb.org/), a scalable, high-performance, document-oriented database.
+* [Mosquitto](http://mosquitto.org/) and all implementations of the [MQTT](http://mqtt.org/) protocol.
+* [RabbitMQ](http://www.rabbitmq.com/) and all implementations of the [AMQP](http://www.amqp.org/) protocol.
+* [ZeroMQ](http://www.zeromq.org/) to use Ascoltatori in a P2P fashion.
 
-The source code of __Ascoltatori__ had been annotated with
-[dox](https://github.com/visionmedia/dox)
-and the generated documentation is available at:
-http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html
+Find out more about Ascoltatori reading the
+[dox generated documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
+
 
 ## Install
 
+Install the library using [npm](http://npmjs.org/).
+
 ```
-npm install ascoltatori --save
+$ npm install ascoltatori --save
 ```
 
-## Usage
+Install the library using git.
 
-__Ascoltatori__ is built to be extremely easy to use, and can provide a
-useful abstraction for every compatible pub/sub broker.
-In this way you can choose whatever broker suits you.
+```
+$ git clone git://github.com/mcollina/ascoltatori.git
+$ cd ascoltatori
+$ npm install
+```
 
-```js
+
+## Getting Started
+
+Ascoltatori focuses on providing a simple and unique abstraction for all
+supported brokes. Here a simple example using Redis.
+
+```javascript
 var ascoltatori = require('ascoltatori');
 
 ascoltatori.build(function (ascoltatore) {
 
-  ascoltatore.subscribe("hello/*", function() {
-    // this will print { '0': "hello/world/42", '1': "a message" }
-    console.log(arguments); 
-    process.exit(0);
+  // subscribes to a topic
+  ascoltatore.subscribe('hello', function() {
+    console.log(arguments);
+    // { '0': 'hello', '1': 'a message' }
   });
 
-  ascoltatore.publish("hello/world/42", "a message", function() {
-    console.log("message published");
-  });
-});
-```
-
-See the tests for more examples regarding RedisAscoltatore,
-AMQPAscoltatore, ZeromqAscoltatore, MQTTAscoltatore, TrieAscoltatore,
-EventEmitter2Ascoltatore.
-
-In the test/common.js file you can find all the options for
-all the ascoltatori.
-
-## Topics
-
-Consider the example below:
-
-```js
-var ascoltatori = require('ascoltatori');
-
-ascoltatori.build(function (ascoltatore) {
-
-  ascoltatore.subscribe("hello", function() {
-    // this will print { '0': "hello", '1': "a message" }
-    console.log(arguments); 
-  });
-
-  ascoltatore.publish("hello", "a message", function() {
-    console.log("message published");
+  // publishes a message to the topic 'hello'
+  ascoltatore.publish('hello', 'a message', function() {
+    console.log('message published');
   });
 });
 ```
 
-We're publishing messages to the topic `hello`. Topics are always strings but they can contain multiple words, where the words are delimited by the `/` character.
-
-For example:
-
-```js
-var ascoltatori = require('ascoltatori');
-
-ascoltatori.build(function (ascoltatore) {
-
-  ascoltatore.subscribe("hello/there/world", function() {
-    // this will print { '0': "hello/there/world", '1': "a message" }
-    console.log(arguments); 
-  });
-
-  ascoltatore.publish("hello/there/world", "a message", function() {
-    console.log("message published");
-  });
-});
-```
 
 ## Wildcards
 
-All ascoltatori support the use of wildcards, so everything should work smoothly on every broker. You might find some differences, and in that case file a bug report, so I can fix them.
+All ascoltatori support the use of wildcards, so everything
+should work smoothly on every broker.
+You might find some differences, and in that case file a bug
+report, so we can fix them.
 
 The wildcard character `+` matches exactly one word:
 
-```js
+```javascript
 var ascoltatori = require('ascoltatori');
 
 ascoltatori.build(function (ascoltatore) {
@@ -129,7 +89,7 @@ ascoltatori.build(function (ascoltatore) {
 
 The wildcard character `*` matches zero or more words:
 
-```js
+```javascript
 var ascoltatori = require('ascoltatori');
 
 ascoltatori.build(function (ascoltatore) {
@@ -155,7 +115,7 @@ ascoltatori.build(function (ascoltatore) {
 });
 ```
 
-Of course, you can mix `*` and `+` in the same topic:
+Of course, you can mix `*` and `+` in the same subscription:
 
 ```js
 var ascoltatori = require('ascoltatori');
@@ -173,91 +133,159 @@ ascoltatori.build(function (ascoltatore) {
 });
 ```
 
-## Configuration and dependencies
 
-This library does not depend directly on redis, AMQP (RabbitMQ),
-0MQ, MQTT.js, but rather it encourages you to pass them to the
-ascoltatori via an options object, like so (for Redis):
+## Brokers
 
-```js
+Ascoltatori supports different brokers. Here we show how to use each of them.
+
+### Redis
+
+```javascript
 var ascoltatori = require('ascoltatori');
-
 var settings = {
   type: 'redis',
   redis: require('redis'),
   db: 12,
-  port: 424242,
-  host: 192.168.42.42
+  port: 6379,
+  host: localhost
 };
 
 ascoltatori.build(settings, function (ascoltatore) {
-
-  ascoltatore.subscribe("hello/*", function() {
-    // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments); 
-    process.exit(0);
-  });
-
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
-  });
+  // ...
 });
 ```
 
+### MongoDB
 
-By default, every ascoltatore built by the `ascoltatori.build`
-wraps every published message in a JSON format.
-This behaviour can be triggered off by passing a `{ json: false }`
-settings object, like so:
-```js
+MongoDB uses [Capped Collections](http://docs.mongodb.org/manual/core/capped-collections/)
+to implement the pub/sub pattern.
+
+```javascript
+var ascoltatori = require('ascoltatori');
+settings = {
+  type: 'mongo',
+  uri: 'mongodb://127.0.0.1/',
+  db: 'ascoltatori',
+  pubsubCollection: 'ascoltatori',
+  mongo: {} // mongo specific options
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+  // ...
+});
+```
+
+### MQTT (Mosquitto)
+
+```javascript
+var ascoltatori = require('ascoltatori');
+settings = {
+  type: 'mqtt',
+  json: false,
+  mqtt: require('mqtt'),
+  host: '127.0.0.1',
+  port: 1883
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+  // ...
+});
+```
+
+### AMQP (RabbitMQ)
+
+```javascript
+var ascoltatori = require('ascoltatori');
+settings = {
+  type: 'amqp',
+  json: false,
+  amqp: require('amqp'),
+  exchange: 'ascolatore5672'
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+  // ...
+});
+```
+
+### ZeroMQ
+
+```javascript
+var ascoltatori = require('ascoltatori');
+settings = {
+  type: 'zmq',
+  json: false,
+  zmq: require("zmq"),
+  port: "tcp://127.0.0.1:33333",
+  controlPort: "tcp://127.0.0.1:33334",
+  delay: 10
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+  // ...
+});
+```
+
+### Memory
+
+```javascript
+var ascoltatori = require('ascoltatori');
+ascoltatori.build(function (ascoltatore) {
+  // ...
+});
+```
+
+## JSON
+
+By default, every ascoltatore built by the `ascoltatori.build` wraps every
+published message in a JSON format. This behaviour can be triggered off by
+passing the `{ json: false }` option.
+
+```javascript
 require('ascoltatori').build({ json: false }, function(a) {
   // ...
 });
 ```
 
-If you feel one more option is missing, feel free to fork this library,
-add it, and then send a pull request.
+## Domain support
 
-### Domain support
+Ascoltatori supports the [node.js domain API](http://nodejs.org/api/domain.html).
+Use it calling the `registerDomain` function on your Ascoltatore and it will take
+care of routing the exceptions to the given domain. Look at this example:
 
-__Ascoltatori__ properly supports the [node.js domain API](http://nodejs.org/api/domain.html).
-To use it, you have to call the `registerDomain` function on your
-_Ascoltatore_, and it will take care of routing the exceptions to the
-given domain. Look at this example:
-```js
+```javascript
 var ascoltatori = require('ascoltatori');
-var domain      = require("domain");
+var domain = require('domain');
 
 var d = domain.create();
-d.on("error", function() {
-  console.log(arguments); 
-  process.exit(0);
+d.on('error', function() {
+  console.log(arguments);
 });
 
 ascoltatori.build(function (ascoltatore) {
-
   ascoltatore.registerDomain(d);
 
-  ascoltatore.subscribe("hello/*", function() {
+  ascoltatore.subscribe('hello/*', function() {
     throw new Error();
   });
 
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
+  ascoltatore.publish('hello/42', 'a message', function() {
+    console.log('message published');
   });
 });
 ```
 
+
 ## Debugging
 
-__Ascoltatori__ supports the clever
-[debug](https://github.com/visionmedia/debug) package, so it is able to
-trigger the logging based on an external enviroment variable, like so:
+Ascoltatori supports the [debug](https://github.com/visionmedia/debug) package
+and triggers the logs based on an external enviroment variable.
+
 ```
-$: DEBUG=ascoltatori:mqtt node exaples/mqtt_topic_bridge.js
+$ DEBUG=ascoltatori:mqtt node exaples/mqtt_topic_bridge.js
 ```
 
-The following debug flags are supported, one for each ascoltatore:
+The following debug flags are supported:
 * `ascoltatori:amqp`
 * `ascoltatori:trie`
 * `ascoltatori:mqtt`
@@ -266,40 +294,61 @@ The following debug flags are supported, one for each ascoltatore:
 * `ascoltatori:zmq`
 * `ascoltatori:ee2`
 
+
 ## Reliability
 
 Due to the various transports Ascoltatori uses, it is impossible to
 garantee one of the various reliability properties across all of the
-transports.
-However, the MQTT and AMQP ascoltatori provides at-least-once semantics,
-which means that the message might be received more than once, but at
-least once.
+transports. However, the MQTT and AMQP ascoltatori provides at-least-once
+semantics, which means that the message might be received more than once,
+but at least once.
 
-## Contributing to Ascoltatori
 
-* Check out the latest master to make sure the feature hasn't been
-  implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't
-  requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it
-  in a future version unintentionally.
-* Please try not to mess with the Makefile and package.json. If you
-  want to have your own version, or is otherwise necessary, that is
-  fine, but please isolate to its own commit so I can cherry-pick around
-  it.
+## Contributing
+
+Fork the repo on github and send a pull requests with topic branches.
+Do not forget to provide specs to your contribution.
+
+
+### Running specs
+
+* Fork and clone the repository
+* Run `npm install`
+* Run `npm test`
+
+
+## Coding guidelines
+
+Follow [felix](http://nodeguide.com/style.html) guidelines.
+
+
+## Feedback
+
+Use the [issue tracker](http://github.com/mcollina/ascoltatori/issues) for bugs.
+[Tweet](http://twitter.com/matteocollina) us for any idea that can improve the project.
+
+
+## Links
+
+* [GIT Repository](http://github.com/mcollina/ascoltatori)
+* [Ascoltatori Documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
+* [Redis](http://redis.io/)
+* [MongoDB](http://www.mongodb.org/)
+* [Mosquitto](http://mosquitto.org/)
+* [RabbitMQ](http://www.rabbitmq.com/)
+* [ZeroMQ](http://www.zeromq.org/)
+
+
+## Authors
+
+* [Matteo Collina](http://twitter.com/matteocollina)
+* [David Halls](https://github.com/davedoesdev)
+
 
 ## Contributors
 
-Ascoltatori is only possible due to the excellent work of the following contributors:
+Special thanks to the [following people](https://github.com/mcollina/ascoltatori/contributors) for submitting patches.
 
-<table><tbody>
-<tr><th align="left">Matteo Collina</th><td><a href="https://github.com/mcollina">GitHub/mcollina</a></td><td><a href="https://twitter.com/matteocollina">Twitter/@matteocollina</a></td></tr>
-<tr><th align="left">Filippo de Pretto</th><td><a href="https://github.com/filnik">GitHub/filnik</a></td><td><a href="https://twitter.com/filnik90">Twitter/@filnik90</a></td></tr>
-<tr><th align="left">David Halls</th><td><a href="https://github.com/davedoesdev">GitHub/davedoesdev</a></td><td><a href="https://twitter.com/davedoesdev">Twitter/@davedoesdev</a></td></tr>
-</tbody></table>
 
 ## LICENSE - "MIT License"
 
