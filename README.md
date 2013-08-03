@@ -331,7 +331,7 @@ Use the [issue tracker](http://github.com/mcollina/ascoltatori/issues) for bugs.
 ## Links
 
 * [GIT Repository](http://github.com/mcollina/ascoltatori)
-* [Ascoltaori Documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
+* [Ascoltatori Documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
 * [Redis](http://redis.io/)
 * [MongoDB](http://www.mongodb.org/)
 * [Mosquitto](http://mosquitto.org/)
