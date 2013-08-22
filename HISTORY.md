@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.11.3
+
+* Updated MQTT.js `optionalDependency` to v0.3.1.
+
 ## 0.11.2
 
 * New README, thanks to [Andrea Reginato](https://github.com/andreareginato).
