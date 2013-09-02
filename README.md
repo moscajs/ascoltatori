@@ -15,6 +15,8 @@ Ascoltatori is a simple publish/subscribe library supporting the following broke
 Find out more about Ascoltatori reading the
 [dox generated documentation](http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html)
 
+[![NPM](https://nodei.co/npm/ascoltatori.png)](https://nodei.co/npm/ascoltatori/)
+[![NPM](https://nodei.co/npm-dl/ascoltatori.png)](https://nodei.co/npm/ascoltatori/)
 
 ## Install
 
