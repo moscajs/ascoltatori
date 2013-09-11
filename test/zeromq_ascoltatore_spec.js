@@ -11,11 +11,9 @@ describe("ascoltatori.ZeromqAscoltatore", function() {
   });
 
   afterEach(function(done) {
-    async.parallel(toClose.map(function(i) {
-      return function(cb) {
-        i.close(cb);
-      };
-    }), done);
+    async.each(toClose, function(i, cb) {
+      i.close(cb);
+    }, setImmediate.bind(null, done));
   });
 
   it("should sync two instances", function(done) {

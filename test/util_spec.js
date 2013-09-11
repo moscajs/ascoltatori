@@ -23,12 +23,11 @@ describe("ascoltatori.util", function() {
 
   it("should raise an exception if we try to alias something that's not a function", function() {
     var obj = {
-      a: "b"
+      a: function() {}
     };
     expect(function() {
-      util.alias("a", "c");
-    }).to.
-    throw ("'a' is not a function");
+      util.alias({}, "a", "c");
+    }).to.throw ("'a' is not a function");
   });
 
   describe("aliasAscoltatore", function() {
