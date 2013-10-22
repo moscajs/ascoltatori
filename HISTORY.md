@@ -2,6 +2,11 @@
 History
 =======
 
+## 0.11.4
+
+* Fixed Redis duplicate messages when using wildcards
+  (https://github.com/mcollina/ascoltatori/pull/84).
+
 ## 0.11.3
 
 * Updated MQTT.js `optionalDependency` to v0.3.1.
