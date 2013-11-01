@@ -2,6 +2,11 @@
 History
 =======
 
+## 0.11.5
+
+* Fixed binary payload support in Redis
+  (https://github.com/mcollina/ascoltatori/pull/85).
+
 ## 0.11.4
 
 * Fixed Redis duplicate messages when using wildcards
