@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.12.1
+
+* Fixed broken link to docs in the README.
+
 ## 0.12.0
 
 * Changed the MongoAscoltatore setup API
