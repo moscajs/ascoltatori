@@ -20,4 +20,14 @@ describe("ascoltatori.MongoAscoltatore", function() {
       that.instance.pub("hello/123", new Buffer("42"));
     });
   });
+
+  it("should support the old connect uri + db", function(done) {
+    this.instance.close(function() {
+      this.instance = new ascoltatori.MongoAscoltatore({ uri: 'mongodb://127.0.0.1/', db: 'ascoltatoriTests2' });
+      this.instance.on('ready', function() {
+        expect(this.instance.db.databaseName).to.eql('ascoltatoriTests2');
+        done();
+      }.bind(this));
+    }.bind(this));
+  });
 });

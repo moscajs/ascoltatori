@@ -46,8 +46,7 @@ global.mqttSettings = function() {
 
 global.mongoSettings = function() {
   return {
-    uri: 'mongodb://127.0.0.1/',
-    db: 'ascoltatori',
+    url: 'mongodb://127.0.0.1/ascoltatoriTests?auto_reconnect',
     pubsubCollection: 'pubsub',
     json: false,
     mongo: {} // put here your mongo-specific options!
