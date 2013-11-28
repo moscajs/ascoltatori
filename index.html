@@ -28,198 +28,384 @@
         </ul>
       </header>
       <section>
-        <h1>Ascoltatori</h1>
-
-<p><a href="https://travis-ci.org/mcollina/ascoltatori"><img src="https://travis-ci.org/mcollina/ascoltatori.png" alt="Build
-Status"></a></p>
-
-<p><strong>Ascoltatori</strong> is the publish/subscribe library that supports every
-broker/protocol out there.
-This list currently includes:</p>
-
-<ul>
-<li>
-<a href="http://www.rabbitmq.com/">RabbitMQ</a> and all implementations of
-the <a href="http://www.amqp.org/">AMQP</a> protocol.</li>
-<li>
-<a href="http://redis.io/">Redis</a>, the fabulous key/value store by
-<a href="https://github.com/antirez">@antirez</a>.</li>
-<li>
-<a href="http://mosquitto.org/">Mosquitto</a> and all implementations of the
-<a href="http://mqtt.org/">MQTT</a> protocol.</li>
-<li>
-<a href="http://www.mongodb.org/">MongoDB</a>, the documental NoSQL that
-is revolutioning how web apps are built.</li>
-<li>
-<a href="http://www.zeromq.org/">ZeroMQ</a> without a central broker, so
-Ascoltatori can also be used in a P2P fashion.</li>
-</ul><p>The source code of <strong>Ascoltatori</strong> had been annotated with
-<a href="https://github.com/visionmedia/dox">dox</a>
-and the generated documentation is available at:
-<a href="http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html">http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html</a></p>
+        <h1>
+<a name="ascoltatori-" class="anchor" href="#ascoltatori-"><span class="octicon octicon-link"></span></a>Ascoltatori   <a href="https://travis-ci.org/mcollina/ascoltatori"><img src="https://travis-ci.org/mcollina/ascoltatori.png" alt="Build Status"></a> <a href="https://coveralls.io/r/mcollina/ascoltatori?branch=master"><img src="https://coveralls.io/repos/mcollina/ascoltatori/badge.png?branch=master" alt="Coverage Status"></a>
+</h1>
 
 <blockquote>
-<p>Ascoltatori is an italian word which means listeners.
+<p>TIP: Ascoltatori is an italian word which means listeners.
 An Ascoltatore is therefore a single listener.</p>
 </blockquote>
 
-<h2>Install</h2>
+<p>Ascoltatori is a simple publish/subscribe library supporting the following brokers/protocols:</p>
 
-<pre><code>npm install ascoltatori --save
+<ul>
+<li>
+<a href="http://redis.io/">Redis</a>, a key/value store created by <a href="https://github.com/antirez">@antirez</a>.</li>
+<li>
+<a href="http://www.mongodb.org/">MongoDB</a>, a scalable, high-performance, document-oriented database.</li>
+<li>
+<a href="http://mosquitto.org/">Mosquitto</a> and all implementations of the <a href="http://mqtt.org/">MQTT</a> protocol.</li>
+<li>
+<a href="http://www.rabbitmq.com/">RabbitMQ</a> and all implementations of the <a href="http://www.amqp.org/">AMQP</a> protocol.</li>
+<li>
+<a href="http://www.zeromq.org/">ZeroMQ</a> to use Ascoltatori in a P2P fashion.</li>
+</ul><p>Find out more about Ascoltatori reading the
+<a href="http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html">dox generated documentation</a></p>
+
+<p><a href="https://nodei.co/npm/ascoltatori/"><img src="https://nodei.co/npm/ascoltatori.png" alt="NPM"></a>
+<a href="https://nodei.co/npm/ascoltatori/"><img src="https://nodei.co/npm-dl/ascoltatori.png" alt="NPM"></a></p>
+
+<h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>Install the library using <a href="http://npmjs.org/">npm</a>.</p>
+
+<pre><code>$ npm install ascoltatori --save
 </code></pre>
 
-<h2>Usage</h2>
+<p>Install the library using git.</p>
 
-<p><strong>Ascoltatori</strong> is built to be extremely easy to use, and can provide a
-useful abstraction for every compatible pub/sub broker.
-In this way you can choose whatever broker suits you.</p>
-
-<pre><code>var ascoltatori = require('ascoltatori');
-
-ascoltatori.build(function (ascoltatore) {
-
-  ascoltatore.subscribe("hello/*", function() {
-    // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments); 
-    process.exit(0);
-  });
-
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
-  });
-});
+<pre><code>$ git clone git://github.com/mcollina/ascoltatori.git
+$ cd ascoltatori
+$ npm install
 </code></pre>
 
-<p>See the tests for more examples regarding RedisAscoltatore,
-AMQPAscoltatore, ZeromqAscoltatore, MQTTAscoltatore.</p>
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
 
-<p>In the test/common.js file you can find all the options for
-all the ascoltatori.</p>
+<p>Ascoltatori focuses on providing a simple and unique abstraction for all
+supported brokes. Here a simple example using Redis.</p>
 
-<p>All ascoltatori supports the use of a wildcards, so everything
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="c1">// subscribes to a topic</span>
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+    <span class="c1">// { '0': 'hello', '1': 'a message' }</span>
+  <span class="p">});</span>
+
+  <span class="c1">// publishes a message to the topic 'hello'</span>
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">,</span> <span class="s1">'a message'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'message published'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="wildcards" class="anchor" href="#wildcards"><span class="octicon octicon-link"></span></a>Wildcards</h2>
+
+<p>All ascoltatori support the use of wildcards, so everything
 should work smoothly on every broker.
 You might find some differences, and in that case file a bug
-report, so I can fix them.</p>
+report, so we can fix them.</p>
 
-<h2>Configuration and dependencies</h2>
+<p>The wildcard character <code>+</code> matches exactly one word:</p>
 
-<p>This library does not depend directly on redis, AMQP (RabbitMQ),
-0MQ, MQTT.js, but rather it encourages you to pass them to the
-ascoltatori via an options object, like so (for Redis):</p>
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
 
-<pre><code>var ascoltatori = require('ascoltatori');
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
 
-var settings = {
-  type: 'redis',
-  redis: require('redis'),
-  db: 12,
-  port: 424242,
-  host: 192.168.42.42
-};
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">"hello/+/world"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this will print { '0': "hello/there/world", '1': "a message" }</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span> 
+  <span class="p">});</span>
 
-ascoltatori.build(settings, function (ascoltatore) {
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">"hello/+"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this will not be called</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span> 
+  <span class="p">});</span>
 
-  ascoltatore.subscribe("hello/*", function() {
-    // this will print { '0': "hello/42", '1': "a message" }
-    console.log(arguments); 
-    process.exit(0);
-  });
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">"hello/there/world"</span><span class="p">,</span> <span class="s2">"a message"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"message published"</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
 
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
-  });
-});
+<p>The wildcard character <code>*</code> matches zero or more words:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">"hello/*"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this will print { '0': "hello/there/world", '1': "a message" }</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span> 
+  <span class="p">});</span>
+
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">"*"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this will print { '0': "hello/there/world", '1': "a message" }</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span> 
+  <span class="p">});</span>
+
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">"hello/there/world/*"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this will print { '0': "hello/there/world", '1': "a message" }</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span> 
+  <span class="p">});</span>
+
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">"hello/there/world"</span><span class="p">,</span> <span class="s2">"a message"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"message published"</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>Of course, you can mix <code>*</code> and <code>+</code> in the same subscription:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s2">"hello/+/world/*"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// this will print { '0': "hello/foo/world/bar/42", '1': "a message" }</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span> 
+  <span class="p">});</span>
+
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s2">"hello/foo/world/bar/42"</span><span class="p">,</span> <span class="s2">"a message"</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"message published"</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="brokers" class="anchor" href="#brokers"><span class="octicon octicon-link"></span></a>Brokers</h2>
+
+<p>Ascoltatori supports different brokers. Here we show how to use each of them.</p>
+
+<h3>
+<a name="redis" class="anchor" href="#redis"><span class="octicon octicon-link"></span></a>Redis</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">'redis'</span><span class="p">,</span>
+  <span class="nx">redis</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'redis'</span><span class="p">),</span>
+  <span class="nx">db</span><span class="o">:</span> <span class="mi">12</span><span class="p">,</span>
+  <span class="nx">port</span><span class="o">:</span> <span class="mi">6379</span><span class="p">,</span>
+  <span class="nx">host</span><span class="o">:</span> <span class="nx">localhost</span>
+<span class="p">};</span>
+
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="nx">settings</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="mongodb" class="anchor" href="#mongodb"><span class="octicon octicon-link"></span></a>MongoDB</h3>
+
+<p>MongoDB uses <a href="http://docs.mongodb.org/manual/core/capped-collections/">Capped Collections</a>
+to implement the pub/sub pattern.</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">'mongo'</span><span class="p">,</span>
+  <span class="nx">url</span><span class="o">:</span> <span class="s1">'mongodb://127.0.0.1/ascoltatori'</span><span class="p">,</span>
+  <span class="nx">pubsubCollection</span><span class="o">:</span> <span class="s1">'ascoltatori'</span><span class="p">,</span>
+  <span class="nx">mongo</span><span class="o">:</span> <span class="p">{}</span> <span class="c1">// mongo specific options</span>
+<span class="p">};</span>
+
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="nx">settings</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>It is also possible to reuse an existing mongodb connection:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">MongoClient</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'mongodb'</span><span class="p">).</span><span class="nx">MongoClient</span><span class="p">;</span>
+
+<span class="nx">MongoClient</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="s1">'mongodb://127.0.0.1/ascoltatori'</span><span class="p">,</span> <span class="p">{},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">db</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">'mongo'</span><span class="p">,</span>
+    <span class="nx">db</span><span class="o">:</span> <span class="nx">db</span><span class="p">,</span>
+    <span class="nx">pubsubCollection</span><span class="o">:</span> <span class="s1">'ascoltatori'</span>
+  <span class="p">};</span>
+  <span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="nx">settings</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+  <span class="p">});</span>
+<span class="p">})</span>
+</pre></div>
+
+<h3>
+<a name="mqtt-mosquitto" class="anchor" href="#mqtt-mosquitto"><span class="octicon octicon-link"></span></a>MQTT (Mosquitto)</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+<span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">'mqtt'</span><span class="p">,</span>
+  <span class="nx">json</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">mqtt</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'mqtt'</span><span class="p">),</span>
+  <span class="nx">host</span><span class="o">:</span> <span class="s1">'127.0.0.1'</span><span class="p">,</span>
+  <span class="nx">port</span><span class="o">:</span> <span class="mi">1883</span>
+<span class="p">};</span>
+
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="nx">settings</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="amqp-rabbitmq" class="anchor" href="#amqp-rabbitmq"><span class="octicon octicon-link"></span></a>AMQP (RabbitMQ)</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">'amqp'</span><span class="p">,</span>
+  <span class="nx">json</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">amqp</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'amqp'</span><span class="p">),</span>
+  <span class="nx">exchange</span><span class="o">:</span> <span class="s1">'ascolatore5672'</span>
+<span class="p">};</span>
+
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="nx">settings</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="zeromq" class="anchor" href="#zeromq"><span class="octicon octicon-link"></span></a>ZeroMQ</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">type</span><span class="o">:</span> <span class="s1">'zmq'</span><span class="p">,</span>
+  <span class="nx">json</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">zmq</span><span class="o">:</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"zmq"</span><span class="p">),</span>
+  <span class="nx">port</span><span class="o">:</span> <span class="s2">"tcp://127.0.0.1:33333"</span><span class="p">,</span>
+  <span class="nx">controlPort</span><span class="o">:</span> <span class="s2">"tcp://127.0.0.1:33334"</span><span class="p">,</span>
+  <span class="nx">delay</span><span class="o">:</span> <span class="mi">10</span>
+<span class="p">};</span>
+
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="nx">settings</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="memory" class="anchor" href="#memory"><span class="octicon octicon-link"></span></a>Memory</h3>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="json" class="anchor" href="#json"><span class="octicon octicon-link"></span></a>JSON</h2>
+
+<p>By default, every ascoltatore built by the <code>ascoltatori.build</code> wraps every
+published message in a JSON format. This behaviour can be triggered off by
+passing the <code>{ json: false }</code> option.</p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">).</span><span class="nx">build</span><span class="p">({</span> <span class="nx">json</span><span class="o">:</span> <span class="kc">false</span> <span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="domain-support" class="anchor" href="#domain-support"><span class="octicon octicon-link"></span></a>Domain support</h2>
+
+<p>Ascoltatori supports the <a href="http://nodejs.org/api/domain.html">node.js domain API</a>.
+Use it calling the <code>registerDomain</code> function on your Ascoltatore and it will take
+care of routing the exceptions to the given domain. Look at this example:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">ascoltatori</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ascoltatori'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">domain</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'domain'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nx">domain</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+<span class="nx">d</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'error'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">ascoltatori</span><span class="p">.</span><span class="nx">build</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">ascoltatore</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">registerDomain</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">'hello/*'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">();</span>
+  <span class="p">});</span>
+
+  <span class="nx">ascoltatore</span><span class="p">.</span><span class="nx">publish</span><span class="p">(</span><span class="s1">'hello/42'</span><span class="p">,</span> <span class="s1">'a message'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'message published'</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="debugging" class="anchor" href="#debugging"><span class="octicon octicon-link"></span></a>Debugging</h2>
+
+<p>Ascoltatori supports the <a href="https://github.com/visionmedia/debug">debug</a> package
+and triggers the logs based on an external enviroment variable.</p>
+
+<pre><code>$ DEBUG=ascoltatori:mqtt node exaples/mqtt_topic_bridge.js
 </code></pre>
 
-<p>By default, every ascoltatore built by the <code>ascoltatori.build</code>
-wraps every published message in a JSON format.
-This behaviour can be triggered off by passing a <code>{ json: false }</code>
-settings object, like so:</p>
-
-<pre><code>require('ascoltatori').build({ json: false }, function(a) {
-  // ...
-});
-</code></pre>
-
-<p>If you feel one more option is missing, feel free to fork this library,
-add it, and then send a pull request.</p>
-
-<h3>Domain support</h3>
-
-<p><strong>Ascoltatori</strong> properly supports the <a href="http://nodejs.org/api/domain.html">node.js domain API</a>.
-To use it, you have to call the <code>registerDomain</code> function on your
-<em>Ascoltatore</em>, and it will take care of routing the exceptions to the
-given domain. Look at this example:</p>
-
-<pre><code>var ascoltatori = require('ascoltatori');
-var domain      = require("domain");
-
-var d = domain.create();
-d.on("error", function() {
-  console.log(arguments); 
-  process.exit(0);
-});
-
-ascoltatori.build(function (ascoltatore) {
-
-  ascoltatore.registerDomain(d);
-
-  ascoltatore.subscribe("hello/*", function() {
-    throw new Error();
-  });
-
-  ascoltatore.publish("hello/42", "a message", function() {
-    console.log("message published");
-  });
-});
-</code></pre>
-
-<h2>Debugging</h2>
-
-<p><strong>Ascoltatori</strong> supports the clever
-<a href="https://github.com/visionmedia/debug">debug</a> package, so it is able to
-trigger the logging based on an external enviroment variable, like so:</p>
-
-<pre><code>$: DEBUG=ascoltatori:mqtt node exaples/mqtt_topic_bridge.js
-</code></pre>
-
-<p>The following debug flags are supported, one for each ascoltatore:</p>
+<p>The following debug flags are supported:</p>
 
 <ul>
 <li><code>ascoltatori:amqp</code></li>
-<li><code>ascoltatori:memory</code></li>
+<li><code>ascoltatori:trie</code></li>
 <li><code>ascoltatori:mqtt</code></li>
 <li><code>ascoltatori:prefix</code></li>
 <li><code>ascoltatori:redis</code></li>
 <li><code>ascoltatori:zmq</code></li>
-</ul><h2>Reliability</h2>
+<li><code>ascoltatori:ee2</code></li>
+</ul><h2>
+<a name="reliability" class="anchor" href="#reliability"><span class="octicon octicon-link"></span></a>Reliability</h2>
 
 <p>Due to the various transports Ascoltatori uses, it is impossible to
 garantee one of the various reliability properties across all of the
-transports.
-However, the MQTT and AMQP ascoltatori provides at-least-once semantics,
-which means that the message might be received more than once, but at
-least once.</p>
+transports. However, the MQTT and AMQP ascoltatori provides at-least-once
+semantics, which means that the message might be received more than once,
+but at least once.</p>
 
-<h2>Contributing to Ascoltatori</h2>
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Fork the repo on github and send a pull requests with topic branches.
+Do not forget to provide specs to your contribution.</p>
+
+<h3>
+<a name="running-specs" class="anchor" href="#running-specs"><span class="octicon octicon-link"></span></a>Running specs</h3>
 
 <ul>
-<li>Check out the latest master to make sure the feature hasn't been
-implemented or the bug hasn't been fixed yet</li>
-<li>Check out the issue tracker to make sure someone already hasn't
-requested it and/or contributed it</li>
-<li>Fork the project</li>
-<li>Start a feature/bugfix branch</li>
-<li>Commit and push until you are happy with your contribution</li>
-<li>Make sure to add tests for it. This is important so I don't break it
-in a future version unintentionally.</li>
-<li>Please try not to mess with the Makefile and package.json. If you
-want to have your own version, or is otherwise necessary, that is
-fine, but please isolate to its own commit so I can cherry-pick around
-it.</li>
-</ul><h2>LICENSE - "MIT License"</h2>
+<li>Fork and clone the repository</li>
+<li>Run <code>npm install</code>
+</li>
+<li>Run <code>npm test</code>
+</li>
+</ul><h2>
+<a name="coding-guidelines" class="anchor" href="#coding-guidelines"><span class="octicon octicon-link"></span></a>Coding guidelines</h2>
 
-<p>Copyright (c) 2012-2013 Matteo Collina, <a href="http://matteocollina.com">http://matteocollina.com</a></p>
+<p>Follow <a href="http://nodeguide.com/style.html">felix</a> guidelines.</p>
+
+<h2>
+<a name="feedback" class="anchor" href="#feedback"><span class="octicon octicon-link"></span></a>Feedback</h2>
+
+<p>Use the <a href="http://github.com/mcollina/ascoltatori/issues">issue tracker</a> for bugs.
+<a href="http://twitter.com/matteocollina">Tweet</a> us for any idea that can improve the project.</p>
+
+<h2>
+<a name="links" class="anchor" href="#links"><span class="octicon octicon-link"></span></a>Links</h2>
+
+<ul>
+<li><a href="http://github.com/mcollina/ascoltatori">GIT Repository</a></li>
+<li><a href="http://mcollina.github.com/ascoltatori/docs/ascoltatori.js.html">Ascoltatori Documentation</a></li>
+<li><a href="http://redis.io/">Redis</a></li>
+<li><a href="http://www.mongodb.org/">MongoDB</a></li>
+<li><a href="http://mosquitto.org/">Mosquitto</a></li>
+<li><a href="http://www.rabbitmq.com/">RabbitMQ</a></li>
+<li><a href="http://www.zeromq.org/">ZeroMQ</a></li>
+</ul><h2>
+<a name="authors" class="anchor" href="#authors"><span class="octicon octicon-link"></span></a>Authors</h2>
+
+<ul>
+<li><a href="http://twitter.com/matteocollina">Matteo Collina</a></li>
+<li><a href="https://github.com/davedoesdev">David Halls</a></li>
+</ul><h2>
+<a name="contributors" class="anchor" href="#contributors"><span class="octicon octicon-link"></span></a>Contributors</h2>
+
+<p>Special thanks to the <a href="https://github.com/mcollina/ascoltatori/contributors">following people</a> for submitting patches.</p>
+
+<h2>
+<a name="license---mit-license" class="anchor" href="#license---mit-license"><span class="octicon octicon-link"></span></a>LICENSE - "MIT License"</h2>
+
+<p>Copyright (c) 2012-2013 Matteo Collina and Contributors, <a href="http://matteocollina.com">http://matteocollina.com</a></p>
 
 <p>Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
