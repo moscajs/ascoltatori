@@ -4,8 +4,18 @@
   "description": "The pub/sub library for node backed by Redis, MongoDB, AMQP (RabbitMQ), ZeroMQ, MQTT (Mosquitto) or just plain node!",
   "main": "index.js",
   "scripts": {
-    "test": "make bail"
+    "test": "mocha --recursive --bail --reporter spec test",
+    "ci": "mocha --recursive --bail --watch test",
+    "coverage": "rm -rf coverage; istanbul cover _mocha -- --reporter spec --bail",
+    "publish-coverage": "npm run coverage && cat coverage/lcov.info | coveralls",
+    "jshint-lib": "jshint lib/*.js",
+    "jshint-test": "jshint test/*.js"
   },
+  "pre-commit": [
+    "jshint-lib",
+    "jshint-test",
+    "test"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mcollina/ascoltatori.git"
@@ -41,12 +51,12 @@
     "sinon-chai": "~2.4.0",
     "optimist": "~0.6.0",
     "async_bench": "~0.1.0",
-    "dox-foundation": "0.4.4",
+    "dox-foundation": "0.5.4",
     "mosca": "git://github.com/mcollina/mosca.git",
-    "jshint": "~2.1.0",
-    "js-beautify": "~0.4.2",
+    "jshint": "~2.3.0",
     "istanbul": "~0.1.40",
-    "coveralls": "~2.0.16"
+    "coveralls": "~2.0.16",
+    "pre-commit": "0.0.4"
   },
   "dependencies": {
     "async": "~0.2.6",
