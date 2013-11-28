@@ -2,15 +2,20 @@
 History
 =======
 
+## 0.12.0
+
+* Changed the MongoAscoltatore setup API
+  [#83](https://github.com/mcollina/ascoltatori/pull/83).
+
 ## 0.11.5
 
 * Fixed binary payload support in Redis
-  (https://github.com/mcollina/ascoltatori/pull/85).
+  [#85](https://github.com/mcollina/ascoltatori/pull/85).
 
 ## 0.11.4
 
 * Fixed Redis duplicate messages when using wildcards
-  (https://github.com/mcollina/ascoltatori/pull/84).
+  [#84](https://github.com/mcollina/ascoltatori/pull/84).
 
 ## 0.11.3
 
