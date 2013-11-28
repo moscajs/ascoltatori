@@ -1,3 +1,6 @@
+
+var MongoClient = require('mongodb').MongoClient;
+
 describe("ascoltatori.MongoAscoltatore", function() {
 
   behaveLikeAnAscoltatore(ascoltatori.MongoAscoltatore, "mongo", mongoSettings);
@@ -19,5 +22,24 @@ describe("ascoltatori.MongoAscoltatore", function() {
     }, function() {
       that.instance.pub("hello/123", new Buffer("42"));
     });
+  });
+
+  it("should support the old connect uri + db", function(done) {
+    this.instance.close(function() {
+      this.instance = new ascoltatori.MongoAscoltatore({ uri: 'mongodb://127.0.0.1/', db: 'ascoltatoriTests2' });
+      this.instance.on('ready', function() {
+        expect(this.instance.db.databaseName).to.eql('ascoltatoriTests2');
+        done();
+      }.bind(this));
+    }.bind(this));
+  });
+
+  it("should reuse another mongo connection", function(done) {
+    this.instance.close(function() {
+      MongoClient.connect('mongodb://127.0.0.1/ascoltatoriTest3', {}, function(err, db) {
+        this.instance = new ascoltatori.MongoAscoltatore({ db: db });
+        this.instance.on('ready', done);
+      }.bind(this));
+    }.bind(this));
   });
 });
