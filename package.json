@@ -7,7 +7,7 @@
     "test": "mocha --recursive --bail --reporter spec test",
     "ci": "mocha --recursive --bail --watch test",
     "coverage": "rm -rf coverage; istanbul cover _mocha -- --reporter spec --bail",
-    "publish-coverage": "npm run coverage && cat coverage/lcov.info | coveralls",
+    "publish-coverage": "npm run coverage && (cat coverage/lcov.info | coveralls)",
     "jshint-lib": "jshint lib/*.js",
     "jshint-test": "jshint test/*.js"
   },
