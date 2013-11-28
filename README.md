@@ -164,10 +164,9 @@ to implement the pub/sub pattern.
 
 ```javascript
 var ascoltatori = require('ascoltatori');
-settings = {
+var settings = {
   type: 'mongo',
-  uri: 'mongodb://127.0.0.1/',
-  db: 'ascoltatori',
+  url: 'mongodb://127.0.0.1/ascoltatori',
   pubsubCollection: 'ascoltatori',
   mongo: {} // mongo specific options
 };
@@ -175,6 +174,24 @@ settings = {
 ascoltatori.build(settings, function (ascoltatore) {
   // ...
 });
+```
+
+It is also possible to reuse an existing mongodb connection:
+
+```javascript
+var ascoltatori = require('ascoltatori');
+var MongoClient = require('mongodb').MongoClient;
+
+MongoClient.connect('mongodb://127.0.0.1/ascoltatori', {}, function (err, db) {
+  var settings = {
+    type: 'mongo',
+    db: db,
+    pubsubCollection: 'ascoltatori'
+  };
+  ascoltatori.build(settings, function (ascoltatore) {
+    // ...
+  });
+})
 ```
 
 ### MQTT (Mosquitto)
@@ -198,7 +215,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 
 ```javascript
 var ascoltatori = require('ascoltatori');
-settings = {
+var settings = {
   type: 'amqp',
   json: false,
   amqp: require('amqp'),
@@ -214,7 +231,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 
 ```javascript
 var ascoltatori = require('ascoltatori');
-settings = {
+var settings = {
   type: 'zmq',
   json: false,
   zmq: require("zmq"),
