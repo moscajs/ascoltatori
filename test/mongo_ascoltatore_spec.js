@@ -1,3 +1,6 @@
+
+var MongoClient = require('mongodb').MongoClient;
+
 describe("ascoltatori.MongoAscoltatore", function() {
 
   behaveLikeAnAscoltatore(ascoltatori.MongoAscoltatore, "mongo", mongoSettings);
@@ -27,6 +30,15 @@ describe("ascoltatori.MongoAscoltatore", function() {
       this.instance.on('ready', function() {
         expect(this.instance.db.databaseName).to.eql('ascoltatoriTests2');
         done();
+      }.bind(this));
+    }.bind(this));
+  });
+
+  it("should reuse another mongo connection", function(done) {
+    this.instance.close(function() {
+      MongoClient.connect('mongodb://127.0.0.1/ascoltatoriTest3', {}, function(err, db) {
+        this.instance = new ascoltatori.MongoAscoltatore({ db: db });
+        this.instance.on('ready', done);
       }.bind(this));
     }.bind(this));
   });
