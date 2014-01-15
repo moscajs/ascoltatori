@@ -2,6 +2,13 @@
 History
 =======
 
+## 0.12.2
+
+* Fixed PrefixAscoltatore support on Windows
+  [#86](https://github.com/mcollina/ascoltatori/pull/86).
+* Pass through message options in PrefixAscoltatore
+  [#86](https://github.com/mcollina/ascoltatori/pull/86).
+
 ## 0.12.1
 
 * Fixed broken link to docs in the README.
