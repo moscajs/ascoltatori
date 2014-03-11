@@ -1,5 +1,6 @@
 
 var MongoClient = require('mongodb').MongoClient;
+var async = require('async');
 
 describe("ascoltatori.MongoAscoltatore", function() {
 
@@ -49,7 +50,7 @@ describe("ascoltatori.MongoAscoltatore", function() {
     var max = 2000;
 
     function doPub() {
-      setImmediate(function() {
+      async.setImmediate(function() {
         that.instance.pub("hello/123", "abcde");
       });
     }
