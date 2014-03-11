@@ -2,6 +2,11 @@
 History
 =======
 
+## 0.12.3
+
+* Fixed skipped message by MongoAscoltatore
+  [#90](https://github.com/mcollina/ascoltatori/pull/90).
+
 ## 0.12.2
 
 * Fixed PrefixAscoltatore support on Windows
