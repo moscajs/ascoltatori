@@ -42,4 +42,27 @@ describe("ascoltatori.MongoAscoltatore", function() {
       }.bind(this));
     }.bind(this));
   });
+
+  it("should publish 2000 messages without skipping one", function(done) {
+    var that = this;
+    var count = 0;
+    var max = 2000;
+
+    function doPub() {
+      setImmediate(function() {
+        that.instance.pub("hello/123", "abcde");
+      });
+    }
+
+    that.instance.sub("hello/*", function(topic, value) {
+      count++;
+      if (count === max) {
+        done();
+      }
+    }, function() {
+      for (var i = 0; i < max; i++) {
+        doPub();
+      }
+    });
+  });
 });

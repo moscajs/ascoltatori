@@ -53,7 +53,7 @@
     "async_bench": "~0.1.0",
     "dox-foundation": "0.5.4",
     "mosca": "git://github.com/mcollina/mosca.git",
-    "jshint": "~2.3.0",
+    "jshint": "~2.4.4",
     "istanbul": "~0.1.40",
     "coveralls": "~2.0.16",
     "pre-commit": "0.0.4"
