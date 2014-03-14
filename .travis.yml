@@ -1,5 +1,7 @@
+before_install:
+  - sudo apt-get install libzmq3-dev
 before_script:
- - (cd node_modules/mosca/node_modules && rm -rf ascoltatori && mkdir ascoltatori && tar -c --exclude node_modules ../../.. | tar -x -C ascoltatori)
+  - (cd node_modules/mosca/node_modules && rm -rf ascoltatori && mkdir ascoltatori && tar -c --exclude node_modules ../../.. | tar -x -C ascoltatori)
 script:
   - npm run coverage
 after_success:
