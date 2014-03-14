@@ -7,8 +7,8 @@ describe("ascoltatori.AMQPAscoltatore", function() {
     this.instance.on("ready", done);
   });
 
-  afterEach(function(done) {
-    this.instance.close(done);
+  afterEach(function() {
+    this.instance.close();
     this.instance.on("error", function () {
       console.log(arguments);
       // we should just close it,
