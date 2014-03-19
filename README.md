@@ -11,6 +11,8 @@ Ascoltatori is a simple publish/subscribe library supporting the following broke
 * [Mosquitto](http://mosquitto.org/) and all implementations of the [MQTT](http://mqtt.org/) protocol.
 * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of the [AMQP](http://www.amqp.org/) protocol.
 * [ZeroMQ](http://www.zeromq.org/) to use Ascoltatori in a P2P fashion.
+* [QlobberFSQ](https://github.com/davedoesdev/qlobber-fsq), a shared file system queue.
+* Memory-only routing, using [Qlobber](https://github.com/davedoesdev/qlobber).
 
 Find out more about Ascoltatori reading the
 [dox generated documentation](http://mcollina.github.com/ascoltatori/docs/lib/ascoltatori.js.html)
@@ -159,8 +161,7 @@ ascoltatori.build(settings, function (ascoltatore) {
 
 ### MongoDB
 
-MongoDB uses [Capped Collections](http://docs.mongodb.org/manual/core/capped-collections/)
-to implement the pub/sub pattern.
+MongoDB uses [Capped Collections](http://docs.mongodb.org/manual/core/capped-collections/) to implement the pub/sub pattern.
 
 ```javascript
 var ascoltatori = require('ascoltatori');
@@ -244,6 +245,28 @@ ascoltatori.build(settings, function (ascoltatore) {
   // ...
 });
 ```
+
+
+### QlobberFSQ
+
+You can use any of the [QlobberFSQ constructor options](https://github.com/davedoesdev/qlobber-fsq#qlobberfsqoptions), for example:
+
+```javascript
+var ascoltatori = require('ascoltatori');
+var settings = {
+  type: 'filesystem',
+  json: false,
+  qlobber_fsq: require("qlobber-fsq"),
+  fsq_dir: "/shared/fsq"
+};
+
+ascoltatori.build(settings, function (ascoltatore) {
+  // ...
+});
+```
+
+If you don't specify `fsq_dir` then messages will be written into a directory named `fsq` in the `qlobber-fsq` module directory.
+
 
 ### Memory
 
@@ -353,7 +376,7 @@ Special thanks to the [following people](https://github.com/mcollina/ascoltatori
 
 ## LICENSE - "MIT License"
 
-Copyright (c) 2012-2013 Matteo Collina and Contributors, http://matteocollina.com
+Copyright (c) 2012-2014 Matteo Collina and Contributors, http://matteocollina.com
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
