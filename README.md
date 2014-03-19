@@ -324,7 +324,7 @@ Ascoltatori supports the [debug](https://github.com/visionmedia/debug) package
 and triggers the logs based on an external enviroment variable.
 
 ```
-$ DEBUG=ascoltatori:mqtt node exaples/mqtt_topic_bridge.js
+$ DEBUG=ascoltatori:mqtt node examples/mqtt_topic_bridge.js
 ```
 
 The following debug flags are supported:
