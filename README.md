@@ -335,6 +335,7 @@ The following debug flags are supported:
 * `ascoltatori:redis`
 * `ascoltatori:zmq`
 * `ascoltatori:ee2`
+* `ascoltatori:filesystem`
 
 
 ## Reliability
