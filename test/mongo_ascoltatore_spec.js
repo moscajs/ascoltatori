@@ -44,8 +44,7 @@ describe("ascoltatori.MongoAscoltatore", function() {
     }.bind(this));
   });
 
-  // skipped as Travis is too slow
-  it.skip("should publish 2000 messages without skipping one", function(done) {
+  it("should publish 2000 messages without skipping one", function(done) {
     var that = this;
     var count = 0;
     var max = 2000;
