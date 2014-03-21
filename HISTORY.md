@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.13.1
+
+* Bumped amqp dependency to 0.2.0.
+
 ## 0.13.0
 
 * Removed support for node v0.8.
