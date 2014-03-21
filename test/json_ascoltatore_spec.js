@@ -63,4 +63,15 @@ describe("ascoltatori.JSONAscoltatore", function() {
       that.instance.pub("hello/123", false);
     });
   });
+
+  it("should not throw if a bad JSON arrives", function(done) {
+    var that = this;
+    this.instance.subscribe("/hello", function(topic, payload) {
+      done(new Error("this should never happen"));
+    }, function() {
+      that.included.publish("/hello", "not a json", function() {
+        done();
+      });
+    });
+  });
 });
