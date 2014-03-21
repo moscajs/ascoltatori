@@ -2,6 +2,18 @@
 History
 =======
 
+## 0.13.0
+
+* Removed support for node v0.8.
+* Handle badly written JSONs
+  [#79](https://github.com/mcollina/ascoltatori/pull/79).
+* Added fileystem ascoltatore
+  [#95](https://github.com/mcollina/ascoltatori/pull/95).
+* Removed `ascoltatori.use` a global instance.
+  [#93](https://github.com/mcollina/ascoltatori/pull/93).
+* Allow authentication via MQTT
+  [#91](https://github.com/mcollina/ascoltatori/pull/91).
+
 ## 0.12.3
 
 * Fixed skipped message by MongoAscoltatore
