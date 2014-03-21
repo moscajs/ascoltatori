@@ -59,6 +59,12 @@ global.trieSettings = function() {
   };
 };
 
+global.fileSystemSettings = function() {
+  return {
+    json: false
+  };
+};
+
 global.eventEmitter2Settings = function() {
   return {
     json: false
@@ -86,13 +92,7 @@ if (process.env.COVER) {
   global.ascoltatori = require("../");
 }
 
-global.behaveLikeAnAscoltatore = function (Class, type, makeSettings) {
-  describe("can be used by ascoltatori", function () {
-    global.ascoltatori.canBeUsedByAscoltatori(Class, type, makeSettings);
-  });
-
-  global.ascoltatori.behaveLikeAnAscoltatore();
-};
+global.behaveLikeAnAscoltatore = global.ascoltatori.behaveLikeAnAscoltatore;
 
 global.wrap = require("../lib/util").wrap;
 
