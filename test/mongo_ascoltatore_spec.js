@@ -67,4 +67,17 @@ describe("ascoltatori.MongoAscoltatore", function() {
       }
     });
   });
+
+  it("should publish a big payload", function(done) {
+    var that = this;
+    var payload = new Buffer(5 * 1024);
+    that.instance.sub("hello/*", function(topic, value) {
+      expect(value).to.eql(payload);
+      done();
+    }, function(err) {
+      that.instance.pub("hello/123", payload, function(err) {
+        console.log(err);
+      });
+    });
+  });
 });
