@@ -2,6 +2,11 @@
 History
 =======
 
+## 0.13.2
+
+* Fixed MongoAscoltatore support for big messages
+  [#97](https://github.com/mcollina/ascoltatori/pull/97).
+
 ## 0.13.1
 
 * Bumped amqp dependency to 0.2.0.
