@@ -1,11 +1,4 @@
-describe("ascoltatori.RedisAscoltatore", function() {
-
-  behaveLikeAnAscoltatore(ascoltatori.RedisAscoltatore, "redis", redisSettings);
-
-  beforeEach(function(done) {
-    this.instance = new ascoltatori.RedisAscoltatore(redisSettings());
-    this.instance.on("ready", done);
-  });
+describeAscoltatore("redis", function() {
 
   afterEach(function() {
     this.instance.close();

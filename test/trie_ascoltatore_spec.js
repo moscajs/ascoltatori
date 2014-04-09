@@ -1,12 +1,5 @@
-describe("ascoltatori.TrieAscoltatore", function() {
 
-  behaveLikeAnAscoltatore(ascoltatori.TrieAscoltatore, "trie", trieSettings);
-
-  beforeEach(function(done) {
-    this.instance = new ascoltatori.TrieAscoltatore();
-    this.instance.on("ready", done);
-  });
-
+describeAscoltatore("trie", function() {
   it("should publish with options", function(done) {
     var that = this;
     that.instance.subscribe("hello/*", function(topic, value, options) {
@@ -19,3 +12,4 @@ describe("ascoltatori.TrieAscoltatore", function() {
     });
   });
 });
+

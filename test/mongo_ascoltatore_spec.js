@@ -2,15 +2,7 @@
 var MongoClient = require('mongodb').MongoClient;
 var async = require('async');
 
-describe("ascoltatori.MongoAscoltatore", function() {
-
-  behaveLikeAnAscoltatore(ascoltatori.MongoAscoltatore, "mongo", mongoSettings);
-
-  beforeEach(function(done) {
-    this.instance = new ascoltatori.MongoAscoltatore(mongoSettings());
-    this.instance.on("ready", done);
-  });
-
+describeAscoltatore("mongo", function() {
   afterEach(function(done) {
     this.instance.close(done);
   });

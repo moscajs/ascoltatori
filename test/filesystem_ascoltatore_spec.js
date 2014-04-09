@@ -1,12 +1,5 @@
-describe("ascoltatori.FileSystemAscoltatore", function() {
 
-  behaveLikeAnAscoltatore(ascoltatori.FileSystemAscoltatore, "filesystem", fileSystemSettings);
-
-  beforeEach(function(done) {
-    this.instance = new ascoltatori.FileSystemAscoltatore();
-    this.instance.on("ready", done);
-  });
-
+describeAscoltatore("fileSystem", function () {
   afterEach(function(done) {
     this.instance.close(done);
   });
