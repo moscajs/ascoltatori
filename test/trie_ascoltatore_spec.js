@@ -11,5 +11,7 @@ describeAscoltatore("trie", function() {
       that.instance.publish("hello/123", "42", { qos: 1, messageId: 5 });
     });
   });
+
+  check_no_topic_transform();
 });
 

@@ -110,29 +110,45 @@ global.wrap = require("../lib/util").wrap;
 
 global.chai.use(require("sinon-chai"));
 
-function intercept(instance)
+global.check_no_topic_transform = function () {
+  it("should not transform topics", function () {
+    global.expect(this.instance._reInSeparator).not.to.exist;
+    global.expect(this.instance._reOutSeparator).not.to.exist;
+    global.expect(this.instance._reInWildcardOne).not.to.exist;
+    global.expect(this.instance._reInWildcardSome).not.to.exist;
+
+    var s = '';
+    for (var i = 0; i < 256; i += 1) {
+      s += String.fromCharCode(i);
+    }
+
+    global.expect(this.instance._subTopic(s)).to.equal(s);
+    global.expect(this.instance._recvTopic(s)).to.equal(s);
+    global.expect(this.instance._pubTopic(s)).to.equal(s);
+  });
+};
+
+function intercept(instance, separator, wildcardOne, wildcardSome)
 {
+  var replace_sep = function(topic) {
+    return topic.replace(/\//g, separator);
+  };
+  var replace_all = function(topic) {
+    return replace_sep(topic)
+           .replace(/\+/g, wildcardOne)
+           .replace(/\*/g, wildcardSome);
+  };
   var subscribe = instance.subscribe;
   var unsubscribe = instance.unsubscribe;
   var publish = instance.publish;
   instance.subscribe = function(topic, callback, done) {
-    subscribe.call(this,
-                   topic.replace(/\//g, '|')
-                        .replace(/\+/g, '!')
-                        .replace(/\*/g, '$'),
-                   callback,
-                   done);
+    subscribe.call(this, replace_all(topic), callback, done);
   };
   instance.unsubscribe = function(topic, callback, done) {
-    unsubscribe.call(this,
-                     topic.replace(/\//g, '|')
-                          .replace(/\+/g, '!')
-                          .replace(/\*/g, '$'),
-                     callback,
-                     done);
+    unsubscribe.call(this, replace_all(topic), callback, done);
   };
   instance.publish = function(topic, message, options, done) {
-    publish.call(this, topic.replace(/\//g, '|'), message, options, done);
+    publish.call(this, replace_sep(topic), message, options, done);
   };
   instance.sub = instance.subscribe;
   instance.unsub = instance.unsubscribe;
@@ -143,40 +159,41 @@ global.describeAscoltatore = function(type, f) {
   var typeCap = type[0].toUpperCase() + type.slice(1) + "Ascoltatore",
       makeSettings = global[type + "Settings"];
 
-  describe("ascoltatori." + typeCap, function () {
-    beforeEach(function(done) {
-      this.separator = "/";
-      var settings = makeSettings.call(this),
-          args = settings.args || [];
-      if (settings.WrappedAscoltatore) {
-        settings = this.wrapped = new settings.WrappedAscoltatore(settings);
-      }
-      args.push(settings);
-      this.instance = new global.ascoltatori[typeCap](args[0], args[1]);
-      this.instance.on("ready", done);
+  var test = function(custom, separator, wildcardOne, wildcardSome, f2) {
+    describe("ascoltatori." + typeCap + (custom || ""), function () {
+      beforeEach(function(done) {
+        this.separator = separator || "/";
+        var settings = makeSettings.call(this),
+            args = settings.args || [];
+        if (custom) {
+          settings.separator = separator;
+          settings.wildcardOne = wildcardOne;
+          settings.wildcardSome = wildcardSome;
+        }
+        if (settings.WrappedAscoltatore) {
+          this.wrapped = settings = new settings.WrappedAscoltatore(settings);
+          if (custom) {
+            intercept(this.wrapped, separator, wildcardOne, wildcardSome);
+          }
+        }
+        args.push(settings);
+        this.instance = new global.ascoltatori[typeCap](args[0], args[1]);
+        if (custom) {
+          intercept(this.instance, separator, wildcardOne, wildcardSome);
+        }
+        this.instance.on("ready", done);
+      });
+      global.ascoltatori.behaveLikeAnAscoltatore();
+      if (f) { f(); }
+      if (f2) { f2(); }
     });
-    global.ascoltatori.behaveLikeAnAscoltatore();
-    if (f) { f(); }
-  });
+  };
 
-  describe("ascoltatori." + typeCap + "WildcardAndSeparator", function() {
-    beforeEach(function(done) {
-      this.separator = "|";
-      var settings = makeSettings.call(this),
-          args = settings.args || [];
-      settings.separator = this.separator;
-      settings.wildcardOne = "!";
-      settings.wildcardSome = "$";
-      if (settings.WrappedAscoltatore) {
-        this.wrapped = settings = new settings.WrappedAscoltatore(settings);
-        intercept(this.wrapped);
-      }
-      args.push(settings);
-      this.instance = new global.ascoltatori[typeCap](args[0], args[1]);
-      intercept(this.instance);
-      this.instance.on("ready", done);
-    });
-    global.ascoltatori.behaveLikeAnAscoltatore();
-    if (f) { f(); }
+  test();
+  test("DifferentWildcardAndSeparator", "|", "!", "$");
+  test("MQTTWildcardAndSeparator", "/", "+", "#", function () {
+    if (type === "MQTT") {
+      global.check_no_topic_transform();
+    }
   });
 };
