@@ -1,16 +1,4 @@
-describe("ascoltatori.JSONAscoltatore", function() {
-
-  behaveLikeAnAscoltatore(ascoltatori.JSONAscoltatore,
-                          null,
-                          function () {
-                            return new ascoltatori.TrieAscoltatore();
-                          });
-
-  beforeEach(function(done) {
-    this.included = new ascoltatori.TrieAscoltatore();
-    this.instance = new ascoltatori.JSONAscoltatore(this.included);
-    this.instance.on("ready", done);
-  });
+describeAscoltatore("JSON", function() {
 
   it("should transfer nulls as false", function(done) {
     var that = this;
@@ -44,7 +32,7 @@ describe("ascoltatori.JSONAscoltatore", function() {
 
   it("should publish messages on the parent encoding them as JSON", function(done) {
     var that = this;
-    this.included.subscribe("/hello", function(topic, payload) {
+    this.wrapped.subscribe("/hello", function(topic, payload) {
       expect(payload).to.be.equal('{"key":"world"}');
       done();
     }, function() {
@@ -69,7 +57,7 @@ describe("ascoltatori.JSONAscoltatore", function() {
     this.instance.subscribe("/hello", function(topic, payload) {
       done(new Error("this should never happen"));
     }, function() {
-      that.included.publish("/hello", "not a json", function() {
+      that.wrapped.publish("/hello", "not a json", function() {
         done();
       });
     });

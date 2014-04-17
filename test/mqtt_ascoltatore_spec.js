@@ -1,11 +1,4 @@
-describe("ascoltatori.MQTTAscoltatore", function() {
-
-  behaveLikeAnAscoltatore(ascoltatori.MQTTAscoltatore, "mqtt", mqttSettings);
-
-  beforeEach(function(done) {
-    this.instance = new ascoltatori.MQTTAscoltatore(mqttSettings());
-    this.instance.on("ready", done);
-  });
+describeAscoltatore("MQTT", function() {
 
   afterEach(function(done) {
     this.instance.close(function() {
@@ -15,7 +8,7 @@ describe("ascoltatori.MQTTAscoltatore", function() {
   });
 
   it("should sync two instances", function(done) {
-    var other = new ascoltatori.MQTTAscoltatore(mqttSettings());
+    var other = new ascoltatori.MQTTAscoltatore(MQTTSettings());
     var that = this;
     async.series([
 
@@ -36,15 +29,13 @@ describe("ascoltatori.MQTTAscoltatore", function() {
       }
     ]);
   });
-  
+
   it("should publish with options", function(done) {
     var that = this;
-    that.instance.subscribe("hello/*", function(topic, value, options) {
-      expect(value).to.equal("42");
-      expect(options.qos).to.equal(0);
+    mqttServer.once('published', function(packet) {
+      expect(packet.qos).to.eql(0);
       done();
-    }, function () {
-      that.instance.publish("hello/123", "42", { qos: 0 });
     });
+    that.instance.publish("hello/123", "42", { qos: 0 });
   });
 });

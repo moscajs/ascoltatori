@@ -1,14 +1,4 @@
-describe("ascoltatori.EventEmitter2Ascoltatore", function() {
-
-  behaveLikeAnAscoltatore(ascoltatori.EventEmitter2Ascoltatore,
-                          "eventemitter2",
-                          eventEmitter2Settings);
-
-  beforeEach(function(done) {
-    this.instance = new ascoltatori.EventEmitter2Ascoltatore();
-    this.instance.on("ready", done);
-  });
-
+describeAscoltatore("eventEmitter2", function() {
   it("should publish with options", function(done) {
     var that = this;
     that.instance.subscribe("hello/*", function(topic, value, options) {

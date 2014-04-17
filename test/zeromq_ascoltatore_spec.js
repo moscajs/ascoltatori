@@ -1,12 +1,8 @@
-describe("ascoltatori.ZeromqAscoltatore", function() {
-
-  behaveLikeAnAscoltatore(ascoltatori.ZeromqAscoltatore, "zmq", zeromqSettings);
+describeAscoltatore("zeromq", function() {
 
   var toClose = null;
 
-  beforeEach(function(done) {
-    this.instance = new ascoltatori.ZeromqAscoltatore(zeromqSettings());
-    this.instance.on("ready", done);
+  beforeEach(function() {
     toClose = [this.instance];
   });
 
