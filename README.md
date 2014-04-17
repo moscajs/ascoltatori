@@ -151,6 +151,7 @@ var settings = {
   redis: require('redis'),
   db: 12,
   port: 6379,
+  return_buffers: true, // to handle binary payloads
   host: localhost
 };
 

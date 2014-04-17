@@ -1,3 +1,5 @@
+var fs = require("fs");
+
 describe("ascoltatori.RedisAscoltatore", function() {
 
   behaveLikeAnAscoltatore(ascoltatori.RedisAscoltatore, "redis", redisSettings);
@@ -9,6 +11,24 @@ describe("ascoltatori.RedisAscoltatore", function() {
 
   afterEach(function() {
     this.instance.close();
+  });
+
+  it("should publish a binary payload", function(done) {
+    this.instance.close();
+
+    var settings = redisSettings();
+    settings.return_buffers = true;
+
+    this.instance = new ascoltatori.RedisAscoltatore(settings);
+
+    var that = this;
+    var expected = fs.readFileSync(__dirname + "/image.png");
+    that.instance.sub("image", function(topic, value) {
+      expect(value).to.eql(expected);
+      done();
+    }, function() {
+      that.instance.pub("image", expected);
+    });
   });
 
   it("should sync two instances", function(done) {
