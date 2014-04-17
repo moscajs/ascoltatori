@@ -95,6 +95,7 @@ var mosca = require("mosca");
 
 global.mqttServer = new mosca.Server({
   port: 5883,
+  stats: false,
   logger: {
     level: "fatal"
   }
