@@ -2,6 +2,12 @@
 History
 =======
 
+## 0.14.0
+
+* Rewrite topics only if needed
+  [#96](https://github.com/mcollina/ascoltatori/pull/96).
+* Removed support for node v0.8.x.
+
 ## 0.13.2
 
 * Fixed MongoAscoltatore support for big messages
