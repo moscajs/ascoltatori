@@ -2,6 +2,12 @@
 History
 =======
 
+## 0.14.1
+
+* Fixed a non-compliant handling of 'some' wildcard with RedisAscoltatore.
+* Pass options through JSONAscoltatore
+  [#101](https://github.com/mcollina/ascoltatori/pull/101).
+
 ## 0.14.0
 
 * Rewrite topics only if needed
