@@ -2,6 +2,11 @@
 History
 =======
 
+## 0.15.0
+
+* Added options handling for RedisAscoltatore and MongoAscoltatore.
+* RedisAscoltatore now publish json.
+
 ## 0.14.1
 
 * Fixed a non-compliant handling of 'some' wildcard with RedisAscoltatore.
