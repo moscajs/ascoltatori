@@ -45,8 +45,8 @@
     "David Halls <dave@davedoesdev.com>"
   ],
   "devDependencies": {
-    "mocha": "~1.12.0",
-    "chai": "~1.7.0",
+    "mocha": "~1.18.2",
+    "chai": "~1.9.1",
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0",
     "optimist": "~0.6.0",
@@ -54,8 +54,8 @@
     "dox-foundation": "0.5.4",
     "mosca": "git://github.com/mcollina/mosca.git",
     "jshint": "~2.4.4",
-    "istanbul": "~0.1.40",
-    "coveralls": "~2.0.16",
+    "istanbul": "~0.2.8",
+    "coveralls": "~2.10.0",
     "pre-commit": "0.0.4"
   },
   "dependencies": {

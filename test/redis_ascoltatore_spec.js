@@ -17,7 +17,7 @@ describeAscoltatore("redis", function() {
     var that = this;
     var expected = fs.readFileSync(__dirname + "/image.png");
     that.instance.sub("image", function(topic, value) {
-      expect(value).to.eql(expected);
+      expect(value).to.be.deep.equal(expected);
       done();
     }, function() {
       that.instance.pub("image", expected);
@@ -62,6 +62,18 @@ describeAscoltatore("redis", function() {
     that.instance = new ascoltatori.RedisAscoltatore(opts);
     that.instance.subscribe("hello", wrap(done), function() {
       that.instance.publish("hello");
+    });
+  });
+
+  it("should publish with options", function(done) {
+    var that = this;
+    that.instance.subscribe("hello/*", function(topic, value, options) {
+      expect(value).to.equal("42");
+      expect(options.qos).to.equal(1);
+      expect(options.messageId).to.equal(5);
+      done();
+    }, function() {
+      that.instance.publish("hello/123", "42", { qos: 1, messageId: 5 });
     });
   });
 });
