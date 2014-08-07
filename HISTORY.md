@@ -2,6 +2,10 @@
 History
 =======
 
+## 0.16.0
+
+* Updated dependencies.
+
 ## 0.15.0
 
 * Added options handling for RedisAscoltatore and MongoAscoltatore.
