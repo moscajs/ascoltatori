@@ -66,9 +66,7 @@ describeAscoltatore("mongo", function() {
       expect(value).to.eql(payload);
       done();
     }, function(err) {
-      that.instance.pub("hello/123", payload, function(err) {
-        console.log(err);
-      });
+      that.instance.pub("hello/123", payload);
     });
   });
 
