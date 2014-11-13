@@ -81,4 +81,38 @@ describeAscoltatore("mongo", function() {
       that.instance.publish("hello/123", "42", { qos: 1, messageId: 5 });
     });
   });
+
+  it("should not suffer from mongo interruptions", function (done) {
+    this.instance.close(function () {
+      MongoClient.connect('mongodb://127.0.0.1/ascoltatoriTest4', {}, function (err, db) {
+        db.on('error', function (dontCare) {
+          // I don't care
+        });
+        this.instance = new ascoltatori.MongoAscoltatore({ db: db });
+        this.instance.on('error', function (dontCare) {
+          // I don't care
+        });
+        this.instance.on('ready', function () {
+          _test(this);
+        }.bind(this));
+      }.bind(this));
+    }.bind(this));
+
+    function _test(that) {
+      that.instance.subscribe("hello/*", function (topic, value, options) {
+        if (value === "42") {
+          done();
+        }
+      }, function () {
+        that.instance.publish("hello/123", "21");
+        var admin = that.instance.db.admin();
+        admin.command({closeAllDatabases: 1}, {}, function (err, res) {
+          if (err) {
+            throw(err);
+          }
+          that.instance.publish("hello/456", "42");
+        });
+      });
+    }
+  });
 });
