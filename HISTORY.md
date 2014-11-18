@@ -2,6 +2,17 @@
 History
 =======
 
+## 0.18.0
+
+* Mongo: Try to reopen the tailable cursor on pubsub if cursor is lost
+  [#107](https://github.com/mcollina/ascoltatori/pull/107).
+* Updated zmq to 2.8.0.
+* Updated dev dependencies.
+
+## 0.17.0
+
+* Do not run 'convertToCapped' as it breaks Ascoltatore-Ascoltatore interop.
+
 ## 0.16.0
 
 * Updated dependencies.
