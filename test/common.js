@@ -14,7 +14,7 @@ global.redisSettings = function() {
   };
 };
 
-var portCounter = 9042;
+var portCounter = 7042;
 global.nextPort = function() {
   return ++portCounter;
 };
