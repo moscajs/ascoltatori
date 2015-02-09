@@ -50,7 +50,7 @@
     "sinon": "^1.10.3",
     "sinon-chai": "^2.6.0",
     "optimist": "~0.6.0",
-    "async_bench": "~0.3.0",
+    "async_bench": "~0.4.0",
     "dox-foundation": "0.5.4",
     "mosca": "git://github.com/mcollina/mosca.git",
     "jshint": "~2.5.2",
@@ -72,6 +72,6 @@
     "mqtt": "~1.0.0",
     "mongodb": "~1.4.8",
     "eventemitter2": "~0.4.14",
-    "qlobber-fsq": "~0.1.1"
+    "qlobber-fsq": "~0.3.0"
   }
 }

@@ -41,10 +41,8 @@ describeAscoltatore("mongo", function() {
     var count = 0;
     var max = 2000;
 
-    function doPub() {
-      async.setImmediate(function() {
-        that.instance.pub("hello/123", "abcde");
-      });
+    function doPub(n, next) {
+      that.instance.pub("hello/123", "abcde " + n, {}, next);
     }
 
     that.instance.sub("hello/*", function(topic, value) {
@@ -53,9 +51,7 @@ describeAscoltatore("mongo", function() {
         done();
       }
     }, function() {
-      for (var i = 0; i < max; i++) {
-        doPub();
-      }
+      async.times(max, doPub);
     });
   });
 

@@ -20,3 +20,4 @@ docs
 .DS_Store
 coverage/
 
+db/

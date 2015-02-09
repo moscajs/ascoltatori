@@ -8,6 +8,7 @@ after_success:
   - npm run publish-coverage
 language: node_js
 node_js:
+  - 0.12
   - 0.10
 services:
   - rabbitmq
