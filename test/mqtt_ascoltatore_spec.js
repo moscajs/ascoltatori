@@ -1,69 +1,3 @@
-it("should re-subscribe to topics", function(done) {
-  this.timeout(3000); // Set the test timeout to 3s
-
-  var that = this;
-  var mosca = require("mosca");
-  var msgReceived = false;
-  
-  var moscaOpts = {
-    port: 6884,
-    stats: false,
-    logger: {
-      level: "fatal"
-    }
-  };
-  
-  var clientOpts = {
-    json: false,
-    mqtt: require("mqtt"),
-    host: "127.0.0.1",
-    port: 6884
-  };
-  
-  var mqttTestServer = new mosca.Server(moscaOpts);
-  var newClient = new ascoltatori.MQTTAscoltatore(clientOpts);
-  
-  async.series([
-    function(cb) {
-      newClient.once('ready',cb);  
-    },
-    
-    function(cb) {
-      // Subscribe to topic for test
-      newClient.subscribe('reconnect/test', function() {
-        newClient.emit('success');
-      }, cb);
-    },
-    
-    // Stop the MQTT server
-    function(cb) {
-      mqttTestServer.close(cb);
-    },
-    
-    // Start the MQTT server
-    function(cb) {
-      mqttTestServer = new mosca.Server(moscaOpts, cb);
-    },
-    
-    // Setup listener and send message
-    function(cb) {
-      newClient.once('success', function() {
-        msgReceived = true;
-        cb();
-      });
-      
-      newClient.once('ready', function(){
-        newClient.publish('reconnect/test', 'blah');   
-      });
-    },
-    
-  ], function() {
-    if (msgReceived) {
-      done();
-    }
-  });
-
-});
 
 describeAscoltatore("MQTT", function() {
 
@@ -107,3 +41,72 @@ describeAscoltatore("MQTT", function() {
   });
 
 });
+
+describe("MQTT Reconnect Test", function() {
+  it("should re-subscribe to topics", function(done) {
+    this.timeout(3000); // Set the test timeout to 3s
+
+    var that = this;
+    var mosca = require("mosca");
+    var msgReceived = false;
+  
+    var moscaOpts = {
+      port: 6884,
+      stats: false,
+      logger: {
+        level: "fatal"
+      }
+    };
+  
+    var clientOpts = {
+      json: false,
+      mqtt: require("mqtt"),
+      host: "127.0.0.1",
+      port: 6884
+    };
+  
+    var mqttTestServer = new mosca.Server(moscaOpts);
+    var newClient = new ascoltatori.MQTTAscoltatore(clientOpts);
+  
+    async.series([
+      function(cb) {
+        newClient.once('ready',cb);  
+      },
+    
+      function(cb) {
+        // Subscribe to topic for test
+        newClient.subscribe('reconnect/test', function() {
+          newClient.emit('success');
+        }, cb);
+      },
+    
+      // Stop the MQTT server
+      function(cb) {
+        mqttTestServer.close(cb);
+      },
+    
+      // Start the MQTT server
+      function(cb) {
+        mqttTestServer = new mosca.Server(moscaOpts, cb);
+      },
+    
+      // Setup listener and send message
+      function(cb) {
+        newClient.once('success', function() {
+          msgReceived = true;
+          cb();
+        });
+      
+        newClient.once('ready', function(){
+          newClient.publish('reconnect/test', 'blah');   
+        });
+      },
+    
+    ], function() {
+      if (msgReceived) {
+        done();
+      }
+    });
+
+  });
+})
