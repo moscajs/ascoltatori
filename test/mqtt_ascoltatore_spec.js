@@ -109,4 +109,4 @@ describe("MQTT Reconnect Test", function() {
     });
 
   });
-})
+});
