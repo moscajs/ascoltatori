@@ -1,3 +1,4 @@
 *~
 *.rdb
+db
 redis.conf

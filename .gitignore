@@ -21,3 +21,4 @@ docs
 coverage/
 
 db/
+dump.rdb
