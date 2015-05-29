@@ -50,7 +50,7 @@
     "sinon": "^1.10.3",
     "sinon-chai": "^2.6.0",
     "optimist": "~0.6.0",
-    "async_bench": "~0.4.0",
+    "async_bench": "~0.5.0",
     "dox-foundation": "0.5.4",
     "mosca": "git://github.com/mcollina/mosca.git",
     "jshint": "~2.5.2",
@@ -62,15 +62,15 @@
     "async": "~0.9.0",
     "debug": "^2.0.0",
     "node-uuid": "~1.4.0",
-    "qlobber": "~0.3.0"
+    "qlobber": "~0.5.0"
   },
   "optionalDependencies": {
     "nan": "~1.8.4",
     "redis": "~0.12.1",
-    "hiredis": "^0.3.0",
+    "hiredis": "^0.4.0",
     "zmq": "~2.11.0",
     "amqp": "~0.2.4",
-    "mqtt": "~1.0.0",
+    "mqtt": "^1.0.0",
     "mongodb": "~2.0.33",
     "eventemitter2": "~0.4.14",
     "qlobber-fsq": "~0.3.0"
