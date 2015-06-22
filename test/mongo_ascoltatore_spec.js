@@ -78,16 +78,12 @@ describeAscoltatore("mongo", function() {
     });
   });
 
-  it("should not suffer from mongo interruptions", function (done) {
+  it.only("should not suffer from mongo interruptions", function (done) {
     this.instance.close(function () {
       MongoClient.connect('mongodb://127.0.0.1/ascoltatoriTest4', {}, function (err, db) {
-        db.on('error', function (dontCare) {
-          // I don't care
-        });
+        db.on('error', done);
         this.instance = new ascoltatori.MongoAscoltatore({ db: db });
-        this.instance.on('error', function (dontCare) {
-          // I don't care
-        });
+        this.instance.on('error', done);
         this.instance.on('ready', function () {
           _test(this);
         }.bind(this));
@@ -101,8 +97,7 @@ describeAscoltatore("mongo", function() {
         }
       }, function () {
         that.instance.publish("hello/123", "21");
-        var admin = that.instance.db.admin();
-        admin.command({closeAllDatabases: 1}, {}, function (err, res) {
+        that.instance.db.logout({}, function (err, res) {
           if (err) {
             throw(err);
           }
