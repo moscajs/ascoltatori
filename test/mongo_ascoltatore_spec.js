@@ -78,7 +78,7 @@ describeAscoltatore("mongo", function() {
     });
   });
 
-  it.only("should not suffer from mongo interruptions", function (done) {
+  it("should not suffer from mongo interruptions", function (done) {
     this.instance.close(function () {
       MongoClient.connect('mongodb://127.0.0.1/ascoltatoriTest4', {}, function (err, db) {
         db.on('error', done);
@@ -105,5 +105,21 @@ describeAscoltatore("mongo", function() {
         });
       });
     }
+  });
+
+  it("should not duplicate messages", function(done) {
+    this.timeout(5000);
+
+    var that = this;
+    var called = 0;
+    that.instance.sub("hello", function(topic, value) {
+      called++;
+      expect(called).to.be.lessThan(3);
+      expect(value).to.eql(new Buffer("42"));
+    }, function() {
+      that.instance.pub("hello", new Buffer("42"));
+      that.instance.pub("hello", new Buffer("42"));
+      setTimeout(done, 3000);
+    });
   });
 });
