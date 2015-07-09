@@ -8,9 +8,30 @@ Do not forget to provide specs to your contribution.
 Running specs
 -------------
 
-* Fork and clone the repository
-* Run `npm install`
-* Run `npm test`
+### Prerequisites
+
+- [RabbitMQ](https://www.rabbitmq.com)
+- [MongoDB](https://www.mongodb.org)
+- [Redis](http://redis.io)
+- [ZeroMQ](http://zeromq.org)
+
+#### MacOS Notes
+
+All dependencies can be installed with [Homebrew](http://brew.sh).  After installing Homebrew, execute:
+
+```shell
+$ brew install zmq rabbitmq redis mongodb
+```
+
+After installation of each server, Homebrew should print further instructions. 
+
+### Steps
+
+- Install prerequisites
+- Ensure all servers are running on the default port of `localhost`
+- Fork and clone the repository
+- Run `npm install`
+- Run `npm test`
 
 
 Coding guidelines
