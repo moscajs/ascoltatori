@@ -45,7 +45,7 @@ supported brokes. Here a simple example using Redis.
 ```javascript
 var ascoltatori = require('ascoltatori');
 
-ascoltatori.build(function (ascoltatore) {
+ascoltatori.build(function (err, ascoltatore) {
 
   // subscribes to a topic
   ascoltatore.subscribe('hello', function() {
@@ -77,12 +77,12 @@ ascoltatori.build(function (err, ascoltatore) {
 
   ascoltatore.subscribe("hello/+/world", function() {
     // this will print { '0': "hello/there/world", '1': "a message" }
-    console.log(arguments); 
+    console.log(arguments);
   });
 
   ascoltatore.subscribe("hello/+", function() {
     // this will not be called
-    console.log(arguments); 
+    console.log(arguments);
   });
 
   ascoltatore.publish("hello/there/world", "a message", function() {
@@ -100,17 +100,17 @@ ascoltatori.build(function (err, ascoltatore) {
 
   ascoltatore.subscribe("hello/*", function() {
     // this will print { '0': "hello/there/world", '1': "a message" }
-    console.log(arguments); 
+    console.log(arguments);
   });
 
   ascoltatore.subscribe("*", function() {
     // this will print { '0': "hello/there/world", '1': "a message" }
-    console.log(arguments); 
+    console.log(arguments);
   });
 
   ascoltatore.subscribe("hello/there/world/*", function() {
     // this will print { '0': "hello/there/world", '1': "a message" }
-    console.log(arguments); 
+    console.log(arguments);
   });
 
   ascoltatore.publish("hello/there/world", "a message", function() {
@@ -128,7 +128,7 @@ ascoltatori.build(function (err, ascoltatore) {
 
   ascoltatore.subscribe("hello/+/world/*", function() {
     // this will print { '0': "hello/foo/world/bar/42", '1': "a message" }
-    console.log(arguments); 
+    console.log(arguments);
   });
 
   ascoltatore.publish("hello/foo/world/bar/42", "a message", function() {
