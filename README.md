@@ -73,7 +73,7 @@ The wildcard character `+` matches exactly one word:
 ```javascript
 var ascoltatori = require('ascoltatori');
 
-ascoltatori.build(function (ascoltatore) {
+ascoltatori.build(function (err, ascoltatore) {
 
   ascoltatore.subscribe("hello/+/world", function() {
     // this will print { '0': "hello/there/world", '1': "a message" }
@@ -96,7 +96,7 @@ The wildcard character `*` matches zero or more words:
 ```javascript
 var ascoltatori = require('ascoltatori');
 
-ascoltatori.build(function (ascoltatore) {
+ascoltatori.build(function (err, ascoltatore) {
 
   ascoltatore.subscribe("hello/*", function() {
     // this will print { '0': "hello/there/world", '1': "a message" }
@@ -124,7 +124,7 @@ Of course, you can mix `*` and `+` in the same subscription:
 ```javascript
 var ascoltatori = require('ascoltatori');
 
-ascoltatori.build(function (ascoltatore) {
+ascoltatori.build(function (err, ascoltatore) {
 
   ascoltatore.subscribe("hello/+/world/*", function() {
     // this will print { '0': "hello/foo/world/bar/42", '1': "a message" }
@@ -155,7 +155,7 @@ var settings = {
   host: localhost
 };
 
-ascoltatori.build(settings, function (ascoltatore) {
+ascoltatori.build(settings, function (err, ascoltatore) {
   // ...
 });
 ```
@@ -173,7 +173,7 @@ var settings = {
   mongo: {} // mongo specific options
 };
 
-ascoltatori.build(settings, function (ascoltatore) {
+ascoltatori.build(settings, function (err, ascoltatore) {
   // ...
 });
 ```
@@ -190,7 +190,7 @@ MongoClient.connect('mongodb://127.0.0.1/ascoltatori', {}, function (err, db) {
     db: db,
     pubsubCollection: 'ascoltatori'
   };
-  ascoltatori.build(settings, function (ascoltatore) {
+  ascoltatori.build(settings, function (err, ascoltatore) {
     // ...
   });
 })
@@ -207,7 +207,7 @@ settings = {
   url: 'mqtt://127.0.0.1:1883'
 };
 
-ascoltatori.build(settings, function (ascoltatore) {
+ascoltatori.build(settings, function (err, ascoltatore) {
   // ...
 });
 ```
@@ -223,7 +223,7 @@ var settings = {
   exchange: 'ascolatore5672'
 };
 
-ascoltatori.build(settings, function (ascoltatore) {
+ascoltatori.build(settings, function (err, ascoltatore) {
   // ...
 });
 ```
@@ -241,7 +241,7 @@ var settings = {
   delay: 10
 };
 
-ascoltatori.build(settings, function (ascoltatore) {
+ascoltatori.build(settings, function (err, ascoltatore) {
   // ...
 });
 ```
@@ -260,7 +260,7 @@ var settings = {
   fsq_dir: "/shared/fsq"
 };
 
-ascoltatori.build(settings, function (ascoltatore) {
+ascoltatori.build(settings, function (err, ascoltatore) {
   // ...
 });
 ```
@@ -272,7 +272,7 @@ If you don't specify `fsq_dir` then messages will be written into a directory na
 
 ```javascript
 var ascoltatori = require('ascoltatori');
-ascoltatori.build(function (ascoltatore) {
+ascoltatori.build(function (err, ascoltatore) {
   // ...
 });
 ```
@@ -284,7 +284,7 @@ published message in a JSON format. This behaviour can be triggered off by
 passing the `{ json: false }` option.
 
 ```javascript
-require('ascoltatori').build({ json: false }, function(a) {
+require('ascoltatori').build({ json: false }, function(err, a) {
   // ...
 });
 ```
@@ -304,7 +304,7 @@ d.on('error', function() {
   console.log(arguments);
 });
 
-ascoltatori.build(function (ascoltatore) {
+ascoltatori.build(function (err, ascoltatore) {
   ascoltatore.registerDomain(d);
 
   ascoltatore.subscribe('hello/*', function() {
