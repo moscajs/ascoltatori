@@ -377,7 +377,7 @@ Special thanks to the [following people](https://github.com/mcollina/ascoltatori
 
 ## LICENSE - "MIT License"
 
-Copyright (c) 2012-2014 Matteo Collina and Contributors, http://matteocollina.com
+Copyright (c) 2012-2015 Matteo Collina and Contributors, http://matteocollina.com
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
