@@ -15,9 +15,17 @@ Running specs
 - [Redis](http://redis.io)
 - [ZeroMQ](http://zeromq.org)
 
+### Steps (Testing Locally)
+
+1. Install prerequisites
+2. Ensure all servers are running on the default port of `localhost`
+3. Fork and clone the repository; enter the repository directory
+4. Run `npm install`
+5. Run `npm test` (repeat as necessary)
+
 #### MacOS Notes
 
-All dependencies can be installed with [Homebrew](http://brew.sh).  After installing Homebrew, execute:
+All prerequisites can be installed with [Homebrew](http://brew.sh).  After installing Homebrew, execute:
 
 ```shell
 $ brew install zmq rabbitmq redis mongodb
@@ -25,14 +33,16 @@ $ brew install zmq rabbitmq redis mongodb
 
 After installation of each server, Homebrew should print further instructions. 
 
-### Steps
+### Steps (Testing with Vagrant)
 
-- Install prerequisites
-- Ensure all servers are running on the default port of `localhost`
-- Fork and clone the repository
-- Run `npm install`
-- Run `npm test`
+A Vagrant installation will provide a virtual machine with all prerequisites installed for you.  If you are having trouble installing the prerequisites locally (or do not wish to), try this method instead.
 
+1. Install [Vagrant](https://www.vagrantup.com/downloads.html)
+2. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+3. Fork and clone the repository; enter the repository directory.  Do *not* run `npm install`.
+4. Run `vagrant up`.  Wait.
+5. Run `vagrant ssh -c 'cd /vagrant && npm install`
+6. Run `vagrant ssh -c 'cd /vagrant && npm test` (repeat as necessary)
 
 Coding guidelines
 ----------------
