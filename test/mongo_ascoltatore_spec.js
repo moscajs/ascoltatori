@@ -122,4 +122,30 @@ describeAscoltatore("mongo", function() {
       setTimeout(done, 3000);
     });
   });
+
+  it("should not duplicate messages when sending messages sequentially", function(done) {
+    this.timeout(5000);
+
+    var that = this;
+    var called = 0;
+    that.instance.sub("hello", function(topic, value) {
+      called++;
+      expect(called).to.be.lessThan(7);
+      expect(value).to.eql(new Buffer("42"));
+    }, function() {
+      setTimeout(function(){
+        that.instance.pub("hello", new Buffer("42"));
+        that.instance.pub("hello", new Buffer("42"));
+        setTimeout(function(){
+          that.instance.pub("hello", new Buffer("42"));
+          that.instance.pub("hello", new Buffer("42"));
+          setTimeout(function(){
+            that.instance.pub("hello", new Buffer("42"));
+            that.instance.pub("hello", new Buffer("42"));
+          },100);
+        },100);
+      },100);
+      setTimeout(done, 3000);
+    });
+  });
 });
