@@ -24,6 +24,8 @@ after_success:
   - npm run publish-coverage
 language: node_js
 node_js:
+  - 0.4
+  - iojs-v3
   - iojs-v2
   - iojs-v1
   - 0.12
