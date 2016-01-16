@@ -35,10 +35,6 @@ after_success:
 language: node_js
 
 node_js:
-  - 5.0
-  - 4.2
-  - 4.0
-  - iojs-v3
   - iojs-v2
   - iojs-v1
   - 0.12
@@ -50,9 +46,3 @@ services:
 
 matrix:
   fast_finish: true
-  allow_failures:
-    - env: MONGODB_VERSION="3.2*"
-    - node_js: 5.0
-    - node_js: 4.2
-    - node_js: 4.0
-    - node_js: iojs-v3

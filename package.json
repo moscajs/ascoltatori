@@ -4,7 +4,7 @@
   "description": "The pub/sub library for node backed by Redis, MongoDB, AMQP (RabbitMQ), ZeroMQ, MQTT (Mosquitto) or just plain node!",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --bail --reporter spec test",
+    "test": "mocha --recursive --bail --reporter spec test --globals Promise",
     "ci": "mocha --recursive --bail --watch test",
     "coverage": "rm -rf coverage; istanbul cover _mocha -- --reporter spec --bail --globals Promise",
     "publish-coverage": "(cat coverage/lcov.info | coveralls)",
@@ -52,7 +52,7 @@
     "optimist": "^0.6.1",
     "async_bench": "^0.5.1",
     "dox-foundation": "^0.5.6",
-    "mosca": "cybusio/mosca.git#node4",
+    "mosca": "~0.32.1",
     "jshint": "^2.8.0",
     "istanbul": "^0.4.0",
     "coveralls": "^2.11.4",
