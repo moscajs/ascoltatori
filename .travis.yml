@@ -34,11 +34,12 @@ after_success:
 
 language: node_js
 
+sudo: false
+
 node_js:
   - iojs-v2
   - iojs-v1
   - 0.12
-  - 0.10
 
 services:
   - rabbitmq
