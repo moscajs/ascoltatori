@@ -52,7 +52,7 @@
     "optimist": "^0.6.1",
     "async_bench": "^0.5.1",
     "dox-foundation": "^0.5.6",
-    "mosca": "~0.32.1",
+    "mosca": "1.0.0-pre1",
     "jshint": "^2.8.0",
     "istanbul": "^0.4.0",
     "coveralls": "^2.11.4",
