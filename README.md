@@ -12,6 +12,7 @@ Ascoltatori is a simple publish/subscribe library supporting the following broke
 * [RabbitMQ](http://www.rabbitmq.com/) and all implementations of the [AMQP](http://www.amqp.org/) protocol.
 * [ZeroMQ](http://www.zeromq.org/) to use Ascoltatori in a P2P fashion.
 * [QlobberFSQ](https://github.com/davedoesdev/qlobber-fsq), a shared file system queue.
+* [Apache Kafka](http://kafka.apache.org), a high-throughput distributed messaging system.
 * Memory-only routing, using [Qlobber](https://github.com/davedoesdev/qlobber).
 
 Find out more about Ascoltatori reading the
@@ -289,6 +290,30 @@ require('ascoltatori').build({ json: false }, function(err, a) {
 });
 ```
 
+### Apache Kafka
+
+```javascript
+var ascoltatori = require('ascoltatori');
+var settings = {
+  type: 'kafka',
+  json: false,
+  kafka: require("kafka-node"),
+  connectString: "localhost:2181",
+  clientId: "ascoltatori",
+  groupId: "ascoltatori",
+  topics: [
+    "hello",
+    "hello_42_there",
+    {topic: "hello_42", encoding: "utf8"},
+    {topic: "image", encoding: "buffer"}
+  ]
+};
+
+ascoltatori.build(settings, function (err, ascoltatore) {
+  // ...
+});
+```
+
 ## Domain support
 
 Ascoltatori supports the [node.js domain API](http://nodejs.org/api/domain.html).
@@ -336,6 +361,7 @@ The following debug flags are supported:
 * `ascoltatori:zmq`
 * `ascoltatori:ee2`
 * `ascoltatori:filesystem`
+* `ascoltatori:kafka`
 
 
 ## Reliability
@@ -362,6 +388,7 @@ Use the [issue tracker](http://github.com/mcollina/ascoltatori/issues) for bugs.
 * [Mosquitto](http://mosquitto.org/)
 * [RabbitMQ](http://www.rabbitmq.com/)
 * [ZeroMQ](http://www.zeromq.org/)
+* [Apache Kafka](http://kafka.apache.org/)
 
 
 ## Authors

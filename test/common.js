@@ -29,6 +29,31 @@ global.zeromqSettings = function(remote_ports) {
   };
 };
 
+global.kafkaSettings = function() {
+  return {
+    json: false,
+    kafka: require("kafka-node"),
+    connectionString: "localhost:2181",
+    clientId: "test",
+    groupId: "test",
+    topics: [
+      "42_hello",
+      "42_there_hello",
+      "a_b",
+      {topic:"hello"},
+      "hello_123",
+      {topic:"hello_42", encoding: "utf8"},
+      "hello_42_43_there",
+      "hello_42_end",
+      "hello_42_there",
+      "hello_foo_there_bar_42_end",
+      "hello_there_42",
+      "hello_there_42_end",
+      {topic: "image", encoding: "buffer"}
+    ]
+  };
+};
+
 global.AMQPSettings = function() {
   return {
     json: false,
