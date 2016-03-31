@@ -301,18 +301,20 @@ var settings = {
   connectString: "localhost:2181",
   clientId: "ascoltatori",
   groupId: "ascoltatori",
-  topics: [
-    "hello",
-    "hello_42_there",
-    {topic: "hello_42", encoding: "utf8"},
-    {topic: "image", encoding: "buffer"}
-  ]
+  defaultEncoding: "utf8",
+  encodings: {
+      image: "buffer"
+  }
 };
 
 ascoltatori.build(settings, function (err, ascoltatore) {
   // ...
 });
 ```
+
+If you publish to a kafka topic that doesn't exist, that topic will be created using the default settings.
+
+If you subscribe to a kafka topic that doesn't exist, that subscription will take affect only when something is published to the kafka topic through this ascoltatori.
 
 ## Domain support
 
