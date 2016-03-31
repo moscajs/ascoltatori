@@ -40,7 +40,6 @@ describeAscoltatore("kafka", function() {
   it("should publish a utf8 payload", function(done) {
     var that = this;
     that.instance.sub("hello",function(topic, value) {
-console.log("this is my sub callback function");
       expect(value).to.eql("€99");
       util.wrap(done)();
     }, function() {
