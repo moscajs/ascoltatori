@@ -41,7 +41,7 @@ after_success:
 language: node_js
 
 node_js:
-  - 0.12
+  - 0.12.12
   - 4
   - 5
 
