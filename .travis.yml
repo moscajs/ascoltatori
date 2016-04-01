@@ -4,8 +4,9 @@ env:
   - MONGODB_VERSION="3.2*"
 
 before_install:
-  # GCC-4.8
+  # GCC-5
   - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test
   - sudo apt-get update -qq
   - sudo apt-get install -y gcc-5 g++-5
   # MongoDB
