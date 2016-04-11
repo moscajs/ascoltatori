@@ -303,7 +303,7 @@ var settings = {
   groupId: "ascoltatori",
   defaultEncoding: "utf8",
   encodings: {
-      image: "buffer"
+    image: "buffer"
   }
 };
 
