@@ -50,7 +50,6 @@
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
     "optimist": "^0.6.1",
-    "async_bench": "^0.5.1",
     "dox-foundation": "^0.5.6",
     "mosca": "1.0.1",
     "jshint": "^2.8.0",
