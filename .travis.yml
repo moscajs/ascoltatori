@@ -13,9 +13,9 @@ services:
   - rabbitmq
   - redis-server
 env:
-  - MONGODB_VERSION="3.2.5"
-  - MONGODB_VERSION="3.0.11"
-  - MONGODB_VERSION="2.6.12"
+  - CC=gcc-4.8 CXX=g++-4.8 MONGODB_VERSION="3.2.5"
+  - CC=gcc-4.8 CXX=g++-4.8 MONGODB_VERSION="3.0.11"
+  - CC=gcc-4.8 CXX=g++-4.8 MONGODB_VERSION="2.6.12"
 before_install:
   - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$MONGODB_VERSION.tgz
   - tar xfz mongodb-linux-x86_64-$MONGODB_VERSION.tgz
@@ -23,3 +23,10 @@ before_install:
   - mkdir -p data/db
   - mongod --dbpath=data/db > /dev/null &
   - sleep 5
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.8
+      - g++-4.8
