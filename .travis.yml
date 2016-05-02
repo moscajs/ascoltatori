@@ -30,3 +30,4 @@ addons:
     packages:
       - gcc-4.8
       - g++-4.8
+      - libzmq3-dev
