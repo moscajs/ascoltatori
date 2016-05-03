@@ -1,7 +1,7 @@
 {
   "name": "ascoltatori",
   "version": "2.0.1",
-  "description": "The pub/sub library for node backed by Redis, MongoDB, AMQP (RabbitMQ), ZeroMQ, MQTT (Mosquitto) or just plain node!",
+  "description": "The pub/sub library for node backed by Redis, MongoDB, AMQP (RabbitMQ), ZeroMQ, Kafka, MQTT (Mosquitto) or just plain node!",
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive --bail --reporter spec test --globals Promise",
@@ -35,6 +35,7 @@
     "mosquitto",
     "mongodb",
     "mongo",
+    "kafka",
     "pub",
     "sub"
   ],
@@ -60,6 +61,7 @@
   "dependencies": {
     "async": "^1.5.0",
     "debug": "^2.2.0",
+    "nan": "2.1.0",
     "node-uuid": "~1.4.3",
     "qlobber": "~0.7.0"
   },
@@ -73,6 +75,7 @@
     "mongodb": "^2.1.18",
     "kerberos": "~0.0",
     "eventemitter2": "^1.0.3",
-    "qlobber-fsq": "~1.0.0"
+    "qlobber-fsq": "~1.0.0",
+    "kafka-node": "~0.3.2"
   }
 }
