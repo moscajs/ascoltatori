@@ -36,7 +36,7 @@ describeAscoltatore("mongo", function() {
     }.bind(this));
   });
 
-  it("should publish 2000 messages without skipping one", function(done) {
+  it.skip("should publish 2000 messages without skipping one", function(done) {
     var that = this;
     var count = 0;
     var max = 2000;
