@@ -75,7 +75,7 @@
     "mongodb": "^2.1.18",
     "kerberos": "~0.0",
     "eventemitter2": "^1.0.3",
-    "qlobber-fsq": "~1.0.0",
+    "qlobber-fsq": "~2.0.0",
     "kafka-node": "~0.3.2"
   }
 }
