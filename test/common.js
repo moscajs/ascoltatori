@@ -74,6 +74,7 @@ global.trieSettings = function() {
 
 global.fileSystemSettings = function() {
   return {
+    single: false,
     json: false
   };
 };

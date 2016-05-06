@@ -61,7 +61,6 @@
   "dependencies": {
     "async": "^1.5.0",
     "debug": "^2.2.0",
-    "nan": "2.1.0",
     "node-uuid": "~1.4.3",
     "qlobber": "~0.7.0"
   },
