@@ -316,34 +316,6 @@ If you publish to a kafka topic that doesn't exist, that topic will be created u
 
 If you subscribe to a kafka topic that doesn't exist, that subscription will take affect only when something is published to the kafka topic through this ascoltatori.
 
-## Domain support
-
-Ascoltatori supports the [node.js domain API](http://nodejs.org/api/domain.html).
-Use it calling the `registerDomain` function on your Ascoltatore and it will take
-care of routing the exceptions to the given domain. Look at this example:
-
-```javascript
-var ascoltatori = require('ascoltatori');
-var domain = require('domain');
-
-var d = domain.create();
-d.on('error', function() {
-  console.log(arguments);
-});
-
-ascoltatori.build(function (err, ascoltatore) {
-  ascoltatore.registerDomain(d);
-
-  ascoltatore.subscribe('hello/*', function() {
-    throw new Error();
-  });
-
-  ascoltatore.publish('hello/42', 'a message', function() {
-    console.log('message published');
-  });
-});
-```
-
 
 ## Debugging
 
