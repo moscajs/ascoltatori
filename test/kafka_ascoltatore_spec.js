@@ -1,5 +1,6 @@
 var fs = require("fs");
 var util = require("../lib/util");
+var steed = require('steed')();
 
 describeAscoltatore("kafka", function() {
 
@@ -11,7 +12,7 @@ describeAscoltatore("kafka", function() {
   it("should sync two instances", function(done) {
     var other = new ascoltatori.KafkaAscoltatore(kafkaSettings());
     var that = this;
-    async.series([
+    steed.series([
 
       function(cb) {
         other.on("ready", cb);

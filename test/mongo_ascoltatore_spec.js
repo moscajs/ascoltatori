@@ -1,6 +1,6 @@
 
 var MongoClient = require('mongodb').MongoClient;
-var async = require('async');
+var steed = require('steed')();
 
 describeAscoltatore("mongo", function() {
   afterEach(function(done) {
@@ -51,7 +51,7 @@ describeAscoltatore("mongo", function() {
         done();
       }
     }, function() {
-      async.times(max, doPub);
+      steed.times(max, doPub);
     });
   });
 
