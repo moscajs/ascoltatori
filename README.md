@@ -234,7 +234,7 @@ Use with [amqplib](https://www.npmjs.com/package/amqplib)
 ```javascript
 var ascoltatori = require('ascoltatori');
 var settings = {
-  type: 'amqp',
+  type: 'amqplib',
   json: false,
   amqp: require('amqplib/callback_api'),
   exchange: 'ascolatore5672'
