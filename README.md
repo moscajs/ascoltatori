@@ -229,6 +229,22 @@ ascoltatori.build(settings, function (err, ascoltatore) {
 });
 ```
 
+Use with [amqplib](https://www.npmjs.com/package/amqplib)
+
+```javascript
+var ascoltatori = require('ascoltatori');
+var settings = {
+  type: 'amqplib',
+  json: false,
+  amqp: require('amqplib/callback_api'),
+  exchange: 'ascolatore5672'
+};
+
+ascoltatori.build(settings, function (err, ascoltatore) {
+  // ...
+});
+```
+
 ### ZeroMQ
 
 ```javascript

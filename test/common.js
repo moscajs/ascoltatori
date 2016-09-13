@@ -47,6 +47,14 @@ global.AMQPSettings = function() {
   };
 };
 
+global.AMQPLibSettings = function() {
+  return {
+    json: false,
+    amqp: require("amqplib/callback_api"),
+    exchange: "ascolatore" + global.nextPort()
+  };
+};
+
 global.MQTTSettings = function() {
   return {
     json: false,
