@@ -1,5 +1,4 @@
 "use strict";
-//process.env.DEBUG = 'kafka-node:HighLevelConsumer';
 global.sinon = require("sinon");
 global.chai = require("chai");
 global.expect = require("chai").expect;
