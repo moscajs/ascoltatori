@@ -1,5 +1,5 @@
 "use strict";
-
+//process.env.DEBUG = 'kafka-node:HighLevelConsumer';
 global.sinon = require("sinon");
 global.chai = require("chai");
 global.expect = require("chai").expect;
@@ -27,13 +27,14 @@ global.zeromqSettings = function(remote_ports) {
   };
 };
 
-global.kafkaSettings = function() {
+global.kafkaSettings = function(useHighLevelConsumer) {
   return {
     json: false,
     kafka: require("kafka-node"),
     connectionString: "localhost:2181",
     clientId: "test",
     groupId: "test",
+    useHighLevelConsumer: useHighLevelConsumer || false ,
     defaultEncoding: "utf8",
     encodings: {image: "buffer", hello_42: "utf-8"}
   };
