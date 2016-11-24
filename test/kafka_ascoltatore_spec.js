@@ -1,6 +1,7 @@
 var fs = require("fs");
 var util = require("../lib/util");
 var steed = require('steed')();
+var kafka =  require("kafka-node");
 
 describeAscoltatore("kafka", function() {
 
@@ -46,6 +47,26 @@ describeAscoltatore("kafka", function() {
     }, function() {
       that.instance.pub("hello", "€99");
     });
+  });
+  it("Use high level consumer to sync two instances", function(done) {
+      var other = new ascoltatori.KafkaAscoltatore(kafkaSettings(true));
+      var HighLevelConsumer = kafka.HighLevelConsumer;
+      var that = this;
+      steed.series([
+          function(cb) {
+              other.on("ready", cb);
+          },
+          function(cb) {
+              other.subscribe("hello", function() {}, cb);
+          },
+          function(cb) {
+              that.instance.publish("hello", null, cb);
+          },
+          function() {
+              expect(other._consumer).to.be.an.instanceof(HighLevelConsumer);
+              done();
+          }
+      ]);
   });
 
 });
