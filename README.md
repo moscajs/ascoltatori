@@ -41,7 +41,7 @@ $ npm install
 ## Getting Started
 
 Ascoltatori focuses on providing a simple and unique abstraction for all
-supported brokes. Here a simple example using Redis.
+supported brokers. Here is a simple example using Redis:
 
 ```javascript
 var ascoltatori = require('ascoltatori');
