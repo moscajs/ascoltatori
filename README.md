@@ -314,7 +314,7 @@ var settings = {
   type: 'kafka',
   json: false,
   kafka: require("kafka-node"),
-  connectString: "localhost:2181",
+  connectionString: "localhost:2181",
   clientId: "ascoltatori",
   groupId: "ascoltatori",
   defaultEncoding: "utf8",
