@@ -15,8 +15,7 @@ env:
     - CC=gcc-4.8
     - CXX=g++-4.8
   matrix:
-    - MONGODB_VERSION="3.2.5"
-    - MONGODB_VERSION="3.0.11"
+    - MONGODB_VERSION="3.4.1"
 before_install:
   - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$MONGODB_VERSION.tgz
   - tar xfz mongodb-linux-x86_64-$MONGODB_VERSION.tgz
