@@ -82,4 +82,61 @@ describeAscoltatore("zeromq", function() {
       }
     ]);
   });
+
+  it("should have one sub connection per instance", function(done) {
+    var instance = this.instance;
+    var other = new ascoltatori.ZeromqAscoltatore(zeromqSettings());
+    var other2 = new ascoltatori.ZeromqAscoltatore(zeromqSettings());
+
+    var count = 5;
+    var donner = function(data) {
+      if (--count === 0) {
+        instance._control_conn.removeListener("message", donner);
+
+        var subs = {}
+        instance._sub_conns.forEach(function(c) {
+          subs[c.port] = true;
+        });
+        expect(instance._sub_conns.length).to.equal(3);
+        expect(Object.keys(subs).length).to.equal(3);
+
+        subs = {}
+        other._sub_conns.forEach(function(c) {
+          subs[c.port] = true;
+        });
+        expect(other._sub_conns.length).to.equal(3);
+        expect(Object.keys(subs).length).to.equal(3);
+
+        subs = {}
+        other2._sub_conns.forEach(function(c) {
+          subs[c.port] = true;
+        });
+        expect(other2._sub_conns.length).to.equal(3);
+        expect(Object.keys(subs).length).to.equal(3);
+
+        done();
+      }
+    };
+
+    steed.series([
+      function(cb) {
+        other.on("ready", cb);
+      },
+
+      function(cb) {
+        toClose.push(other);
+        other2.on("ready", cb);
+      },
+
+      function(cb) {
+        toClose.push(other2);
+        other.connect(instance._opts.controlPort);
+        other2.connect(instance._opts.controlPort);
+        instance.connect(other._opts.controlPort);
+        instance.connect(other2._opts.controlPort);
+        instance._control_conn.on("message", donner);
+        cb()
+      }
+    ]);
+  });
 });
