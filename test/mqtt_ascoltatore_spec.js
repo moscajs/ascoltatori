@@ -36,9 +36,10 @@ describeAscoltatore("MQTT", function() {
     var that = this;
     mqttServer.once('published', function(packet) {
       expect(packet.qos).to.eql(0);
+      expect(packet.retain).to.eql(true);
       done();
     });
-    that.instance.publish("hello/123", "42", { qos: 0 });
+    that.instance.publish("hello/123", "42", { qos: 0, retain: true });
   });
 
 });
