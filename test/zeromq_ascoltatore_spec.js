@@ -93,21 +93,21 @@ describeAscoltatore("zeromq", function() {
       if (--count === 0) {
         instance._control_conn.removeListener("message", donner);
 
-        var subs = {}
+        var subs = {};
         instance._sub_conns.forEach(function(c) {
           subs[c.port] = true;
         });
         expect(instance._sub_conns.length).to.equal(3);
         expect(Object.keys(subs).length).to.equal(3);
 
-        subs = {}
+        subs = {};
         other._sub_conns.forEach(function(c) {
           subs[c.port] = true;
         });
         expect(other._sub_conns.length).to.equal(3);
         expect(Object.keys(subs).length).to.equal(3);
 
-        subs = {}
+        subs = {};
         other2._sub_conns.forEach(function(c) {
           subs[c.port] = true;
         });
@@ -135,7 +135,7 @@ describeAscoltatore("zeromq", function() {
         instance.connect(other._opts.controlPort);
         instance.connect(other2._opts.controlPort);
         instance._control_conn.on("message", donner);
-        cb()
+        cb();
       }
     ]);
   });
