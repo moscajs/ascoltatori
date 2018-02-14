@@ -237,7 +237,9 @@ var settings = {
   type: 'amqplib',
   json: false,
   amqp: require('amqplib/callback_api'),
-  exchange: 'ascolatore5672'
+  exchange: 'ascolatore5672',
+  queue: 'queueName',
+  durableQueue: true
 };
 
 ascoltatori.build(settings, function (err, ascoltatore) {
