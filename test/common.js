@@ -19,7 +19,7 @@ global.nextPort = function() {
 global.zeromqSettings = function(remote_ports) {
   return {
     json: false,
-    zmq: require("zmq"),
+    zmq: require("zeromq"),
     port: "tcp://127.0.0.1:" + global.nextPort(),
     controlPort: "tcp://127.0.0.1:" + global.nextPort(),
     delay: 10

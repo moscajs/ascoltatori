@@ -67,7 +67,7 @@
   "optionalDependencies": {
     "ioredis": "^2.3.0",
     "msgpack-lite": "^0.1.20",
-    "zmq": "^2.14.0",
+    "zeromq": "*",
     "amqp": "~0.2.4",
     "amqplib": "~0.5.1",
     "mqtt": "^2.3.0",
