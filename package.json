@@ -75,6 +75,6 @@
     "kerberos": "~0.0",
     "eventemitter2": "^2.1.3",
     "qlobber-fsq": "^6.1.0",
-    "kafka-node": "~0.5.8"
+    "kafka-node": "^2.6.0"
   }
 }
