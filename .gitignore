@@ -22,3 +22,5 @@ coverage/
 
 db/
 dump.rdb
+
+package-lock.json
