@@ -60,14 +60,15 @@
   },
   "dependencies": {
     "debug": "^2.2.0",
-    "uuid": "^3.0.0",
     "qlobber": "~0.7.0",
-    "steed": "^1.1.3"
+    "steed": "^1.1.3",
+    "uuid": "^3.3.2"
   },
   "optionalDependencies": {
     "ioredis": "^2.3.0",
     "msgpack-lite": "^0.1.20",
-    "zmq": "^2.14.0",
+    "zmq": "*",
+    "zeromq": "*",
     "amqp": "~0.2.4",
     "amqplib": "~0.5.1",
     "mqtt": "^2.3.0",

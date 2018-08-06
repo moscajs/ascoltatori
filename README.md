@@ -254,7 +254,7 @@ var ascoltatori = require('ascoltatori');
 var settings = {
   type: 'zmq',
   json: false,
-  zmq: require("zmq"),
+  zmq: require("zeromq"),
   port: "tcp://127.0.0.1:33333",
   controlPort: "tcp://127.0.0.1:33334",
   delay: 10
